@@ -48,14 +48,16 @@ CREATE TABLE `users`(
 
 CREATE TABLE minutes_of_meetings(
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `writer_id` INT NOT NULL,
+  `created_by` INT NOT NULL,
+  `updated_by` INT NULL,
   `meeting_date` DATE NOT NULL,
   `meeting_time` TIME NOT NULL,
   `meeting_room` VARCHAR(255) NOT NULL,
   `title` VARCHAR(255) NOT NULL,
-  `body` VARCHAR(255) NOT NULL,
+  `body` LONGTEXT NOT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME DEFAULT NULL,
 
-  FOREIGN KEY(`writer_id`) REFERENCES `users`(`id`)
+  FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
+  FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
 );

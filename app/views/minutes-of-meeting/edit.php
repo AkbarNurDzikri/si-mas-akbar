@@ -1,14 +1,29 @@
 <div class="row">
-  <div class="col-12 col-md-6" id="colForm">
+  <div class="col-12 col-md-12" id="colForm">
     <div class="card">
       <div class="card-header">
-        <a href="<?= BASEURL ?>/categories" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+        <a href="<?= BASEURL ?>/mom" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
       </div>
       <div class="card-body">
         <form id="formEdit">
-          <input type="hidden" name="id" value="<?= $data['category']['id'] ?>">
-          <label for="category_name" class="form-label">Nama Kategori</label>
-          <input type="text" class="form-control mb-3" id="category_name" name="category_name" value="<?= $data['category']['category_name'] ?>" autocomplete="off" required>
+          <input type="hidden" name="id" value="<?= $data['mom']['id'] ?>" id="id">
+          
+          <label for="meeting_date" class="form-label">Tanggal Rapat</label>
+          <input type="date" class="form-control mb-3" id="meeting_date" name="meeting_date" value="<?= $data['mom']['meeting_date'] ?>">
+
+          <label for="meeting_time" class="form-label">Waktu Rapat</label>
+          <input type="time" class="form-control mb-3" id="meeting_time" name="meeting_time" value="<?= $data['mom']['meeting_time'] ?>">
+
+          <label for="meeting_room" class="form-label">Tempat Rapat</label>
+          <input type="text" class="form-control mb-3" id="meeting_room" name="meeting_room" autocomplete="off" value="<?= $data['mom']['meeting_room'] ?>">
+
+          <label for="title" class="form-label">Judul Rapat</label>
+          <input type="text" class="form-control mb-3" id="title" name="title" autocomplete="off" value="<?= $data['mom']['title'] ?>">
+
+          <label for="body" class="form-label">Isi Rapat</label>
+          <div id="quillEditor" class="mb-3" required>
+            <?= $data['mom']['body'] ?>
+          </div>
 
           <button type="submit" class="btn btn-primary btn-sm float-end">Update</button>
         </form>
@@ -18,46 +33,40 @@
 </div>
 
 <script>
-  $('#category_name').on('keyup', () => {
-    $.ajax({
-      url: '<?= BASEURL . "/categories/checkDuplicate" ?>',
-      type: 'POST',
-      data: $('#formEdit').serialize(),
-      success: function(res) {
-        if(res) {
-          Swal.fire({
-            icon: 'error',
-            title: $('#category_name').val() + ' sudah terdaftar !',
-            showConfirmButton: true,
-          });
-          $('.btn').prop('disabled', true);
-        } else {
-          $('.btn').prop('disabled', false);
-        }
-      }
-    });
+  const quill = new Quill('#quillEditor', {
+    theme: 'snow',
   });
   
   $('#formEdit').on('submit', (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append('id', $('#id').val());
+    formData.append('meeting_date', $('#meeting_date').val());
+    formData.append('meeting_time', $('#meeting_time').val());
+    formData.append('meeting_room', $('#meeting_room').val());
+    formData.append('title', $('#title').val());
+    formData.append('body', quill.root.innerHTML);
+
     $.ajax({
-      url: '<?= BASEURL . '/categories/update/' ?>',
+      url: '<?= BASEURL . '/mom/update/' ?>',
       type: 'POST',
-      data: $('#formEdit').serialize(),
+      contentType: false,
+      processData: false,
+      data: formData,
       success: function(res) {
         if(res == 'success') {
           Swal.fire({
             icon: 'success',
-            title: 'Berhasil merubah category',
+            title: 'Berhasil merubah notulen',
             showConfirmButton: true,
           }).then(() => {
-            window.location = '<?= BASEURL . "/categories" ?>'
+            window.location = '<?= BASEURL . "/mom" ?>'
           });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Gagal merubah category ',
+            title: 'Gagal merubah notulen !',
             text: res,
             showConfirmButton: true,
           })

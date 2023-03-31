@@ -9,15 +9,21 @@ class Mom_model
 	}
 
 	public function getMoms() {
-		$this->db->query("SELECT * FROM minutes_of_meetings");
+		$this->db->query("SELECT mom.*, creator.username AS creator, editor.username AS editor FROM minutes_of_meetings AS mom INNER JOIN users AS creator ON creator.id = mom.created_by LEFT JOIN users AS editor ON editor.id = mom.updated_by ORDER BY created_at DESC");
 		return $this->db->resultSet();
 	}
 
 	public function create($data) {
-		$query = "INSERT INTO postcategories VALUES ('', :category_name, :created_at, :updated_at)";
+		$query = "INSERT INTO minutes_of_meetings VALUES ('', :created_by, :updated_by, :meeting_date, :meeting_time, :meeting_room, :title, :body, :created_at, :updated_at)";
 
 		$this->db->query($query);
-		$this->db->bind('category_name', $data['category_name']);
+		$this->db->bind('created_by',  $_SESSION['userInfo']['id']);
+		$this->db->bind('updated_by',  NULL);
+		$this->db->bind('meeting_date', $data['meeting_date']);
+		$this->db->bind('meeting_time', $data['meeting_time']);
+		$this->db->bind('meeting_room', $data['meeting_room']);
+		$this->db->bind('title', $data['title']);
+		$this->db->bind('body', $data['body']);
 		$this->db->bind('created_at', date('Y-m-d H:i:s'));
 		$this->db->bind('updated_at', NULL);
 
@@ -27,20 +33,30 @@ class Mom_model
 	}
 
 	public function getDataById($id) {
-		$this->db->query("SELECT * FROM postcategories WHERE id = :id");
+		$this->db->query("SELECT * FROM minutes_of_meetings WHERE id = :id");
 		$this->db->bind('id', $id);
 		return $this->db->single();
 	}
 
 	public function update($data) {
-		$query = "UPDATE postcategories SET
-				category_name = :category_name,
+		$query = "UPDATE minutes_of_meetings SET
+				updated_by = :updated_by,
+				meeting_date = :meeting_date,
+				meeting_time = :meeting_time,
+				meeting_room = :meeting_room,
+				title = :title,
+				body = :body,
 				updated_at = :updated_at
 		WHERE id = :id
 		";
 
 		$this->db->query($query);
-		$this->db->bind('category_name', $data['category_name']);
+		$this->db->bind('updated_by', $_SESSION['userInfo']['id']);
+		$this->db->bind('meeting_date', $data['meeting_date']);
+		$this->db->bind('meeting_time', $data['meeting_time']);
+		$this->db->bind('meeting_room', $data['meeting_room']);
+		$this->db->bind('title', $data['title']);
+		$this->db->bind('body', $data['body']);
 		$this->db->bind('updated_at', date('Y-m-d H:i:s'));
 		$this->db->bind('id', $data['id']);
 
@@ -50,18 +66,12 @@ class Mom_model
 	}
 
 	public function delete($id) {
-		$query = "DELETE FROM postcategories WHERE id = :id";
+		$query = "DELETE FROM minutes_of_meetings WHERE id = :id";
 		$this->db->query($query);
 		$this->db->bind('id', $id);
 
 		$this->db->execute();
 
 		return $this->db->rowCount();
-	}
-
-	public function getDuplicate($keyword) {
-		$this->db->query("SELECT * FROM postcategories WHERE category_name = :category_name");
-		$this->db->bind('category_name', $keyword);
-		return $this->db->single();
 	}
 }

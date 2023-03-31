@@ -24,7 +24,7 @@ class Mom extends Controller {
 
   public function create() {
     try {
-      $result  = $this->model('categories_model')->create($_POST);
+      $result  = $this->model('mom_model')->create($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -36,17 +36,17 @@ class Mom extends Controller {
   public function edit($id) {
     $data = [
       'title' => 'Edit Category',
-      'category' => $this->model('categories_model')->getDataById($id),
+      'mom' => $this->model('mom_model')->getDataById($id),
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('blog/categories/edit', $data);
+    $this->view('minutes-of-meeting/edit', $data);
     $this->view('layouts/dashboard/footer');
   }
 
   public function update() {
     try {
-      $result  = $this->model('categories_model')->update($_POST);
+      $result  = $this->model('mom_model')->update($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -57,19 +57,12 @@ class Mom extends Controller {
 
   public function delete() {
     try {
-      $result  = $this->model('categories_model')->delete($_POST['id']);
+      $result  = $this->model('mom_model')->delete($_POST['id']);
       if($result > 0) {
         echo 'success';
       }
     } catch(Exception $e) {
       echo $e->getMessage();
-    }
-  }
-
-  public function checkDuplicate() {
-    $result = $this->model('categories_model')->getDuplicate($_POST['category_name']);
-    if($result) {
-      echo $result;
     }
   }
 }

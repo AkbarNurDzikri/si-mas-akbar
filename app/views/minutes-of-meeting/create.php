@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-12 col-md-6" id="colForm">
+  <div class="col-12 col-md-12" id="colForm">
     <div class="card">
       <div class="card-header">
         <a href="<?= BASEURL ?>/mom" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
@@ -7,19 +7,19 @@
       <div class="card-body">
         <form id="myForm">
           <label for="meeting_date" class="form-label">Tanggal Rapat</label>
-          <input type="date" class="form-control mb-3" id="meeting_date" name="meeting_date">
+          <input type="date" class="form-control mb-3" id="meeting_date" name="meeting_date" required>
 
           <label for="meeting_time" class="form-label">Waktu Rapat</label>
-          <input type="time" class="form-control mb-3" id="meeting_time" name="meeting_time">
+          <input type="time" class="form-control mb-3" id="meeting_time" name="meeting_time" required>
 
           <label for="meeting_room" class="form-label">Tempat Rapat</label>
-          <input type="text" class="form-control mb-3" id="meeting_room" name="meeting_room">
+          <input type="text" class="form-control mb-3" id="meeting_room" name="meeting_room" autocomplete="off" required>
 
           <label for="title" class="form-label">Judul Rapat</label>
-          <input type="text" class="form-control mb-3" id="title" name="title">
+          <input type="text" class="form-control mb-3" id="title" name="title" autocomplete="off" required>
 
           <label for="body" class="form-label">Isi Rapat</label>
-          <div id="quillEditor" class="mb-3">
+          <div id="quillEditor" class="mb-3" required>
             <!-- user write here -->
           </div>
 
@@ -35,53 +35,40 @@
     theme: 'snow',
   });
 
-  // console.log(quill)
+  $('#myForm').on('submit', (e) => {
+    e.preventDefault();
 
-  $('#category_name').on('keyup', () => {
+    const formData = new FormData();
+    formData.append('meeting_date', $('#meeting_date').val());
+    formData.append('meeting_time', $('#meeting_time').val());
+    formData.append('meeting_room', $('#meeting_room').val());
+    formData.append('title', $('#title').val());
+    formData.append('body', quill.root.innerHTML);
+    
     $.ajax({
-      url: '<?= BASEURL . "/categories/checkDuplicate" ?>',
+      url: '<?= BASEURL . "/mom/create" ?>',
       type: 'POST',
-      data: $('#myForm').serialize(),
+      contentType: false,
+      processData: false,
+      data: formData,
       success: function(res) {
-        if(res) {
+        if(res == 'success') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil menambahkan notulen baru',
+            showConfirmButton: true,
+          }).then(() => {
+            window.location = '<?= BASEURL . "/mom" ?>'
+          });
+        } else {
           Swal.fire({
             icon: 'error',
-            title: $('#category_name').val() + ' sudah terdaftar !',
+            title: 'Gagal menambahkan notulen baru !',
+            text: res,
             showConfirmButton: true,
-          });
-          $('.btn').prop('disabled', true);
-        } else {
-          $('.btn').prop('disabled', false);
+          })
         }
       }
     });
-  });
-
-  $('#myForm').on('submit', (e) => {
-    e.preventDefault();
-    // $.ajax({
-    //   url: '<?= BASEURL . "/categories/create" ?>',
-    //   type: 'POST',
-    //   data: $('#myForm').serialize(),
-    //   success: function(res) {
-    //     if(res == 'success') {
-    //       Swal.fire({
-    //         icon: 'success',
-    //         title: 'Berhasil menambahkan category baru',
-    //         showConfirmButton: true,
-    //       }).then(() => {
-    //         window.location = '<?= BASEURL . "/categories" ?>'
-    //       });
-    //     } else {
-    //       Swal.fire({
-    //         icon: 'error',
-    //         title: 'Gagal menambahkan category baru !',
-    //         text: res,
-    //         showConfirmButton: true,
-    //       })
-    //     }
-    //   }
-    // });
-    console.log(quill.container.innerHTML);
   });
 </script>

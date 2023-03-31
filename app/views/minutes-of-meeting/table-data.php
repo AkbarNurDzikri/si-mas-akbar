@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-12 col-md-12" id="colDataTable">
     <div class="card">
+      <!-- <?php var_dump($data['moms'])?> -->
       <div class="card-header">
         <a href="<?= BASEURL ?>/mom/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle"></i> Notulen</a>
       </div>
@@ -9,19 +10,28 @@
           <thead>
             <tr>
               <th class="text-center">No</th>
-              <th class="text-center">Judul Notulen</th>
+              <th class="text-center">Notulis</th>
+              <th class="text-center">Tanggal Rapat</th>
+              <th class="text-center">Jam Rapat</th>
+              <th class="text-center">Tempat Rapat</th>
+              <th class="text-center">Judul Rapat</th>
               <th class="text-center">Opsi</th>
             </tr>
           </thead>
           <tbody>
             <?php $i = 1; ?>
-            <?php foreach($data['categories'] as $category) : ?>
+            <?php foreach($data['moms'] as $mom) : ?>
               <tr>
                 <td class="text-center"><?= $i++ ?></td>
-                <td class="text-center"><?= $category['category_name'] ?></td>
+                <td class="text-center"><?= $mom['creator'] ?> <?= $mom['updated_by'] != NULL ? '(updated by <b>' . $mom['editor'] . '</b>)'  : '' ?></td>
+                <td class="text-center"><?= date('d M y', strtotime($mom['meeting_date'])) ?></td>
+                <td class="text-center"><?= $mom['meeting_time'] ?></td>
+                <td class="text-center"><?= $mom['meeting_room'] ?></td>
+                <td class="text-center"><?= $mom['title'] ?></td>
                 <td class="text-center">
-                  <a href="<?= BASEURL . "/categories/edit/" . $category['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
-                  <button class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete" data-id="<?= $category['id'] ?>" data-name="<?= $category['category_name'] ?>"><i class="bi bi-trash3"></i></a>
+                  <a href="<?= BASEURL . "/mom/print/" . $mom['id'] ?>" class="btn btn-sm btn-primary mb-1"><i class="bi bi-filetype-pdf"></i></a>
+                  <a href="<?= BASEURL . "/mom/edit/" . $mom['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
+                  <button class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete" data-id="<?= $mom['id'] ?>" data-title="<?= $mom['title'] ?>"><i class="bi bi-trash3"></i></a>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -58,7 +68,7 @@
   const btnDelete = document.getElementsByClassName('btnDelete');
   for(let i = 0; i < btnDelete.length; i ++) {
     btnDelete[i].addEventListener('click', () => {
-      $('#confirmText').html('Yakin hapus <span class="text-danger">' + btnDelete[i].getAttribute('data-name') + '</span> ?');
+      $('#confirmText').html('Yakin hapus Notulen <span class="text-danger">' + btnDelete[i].getAttribute('data-title') + '</span> ?');
       $('#inputId').val(btnDelete[i].getAttribute('data-id'));
     });
   };
@@ -67,22 +77,22 @@
     e.preventDefault();
 
     $.ajax({
-      url: '<?= BASEURL . '/categories/delete' ?>',
+      url: '<?= BASEURL . '/mom/delete' ?>',
       type: 'POST',
       data: $('#formDelete').serialize(),
       success: function(res) {
         if(res == 'success') {
           Swal.fire({
             icon: 'success',
-            title: 'Berhasil menghapus category',
+            title: 'Berhasil menghapus notulen',
             showConfirmButton: true,
           }).then(() => {
-            window.location = '<?= BASEURL . "/categories" ?>'
+            window.location = '<?= BASEURL . "/mom" ?>'
           });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Gagal menghapus category ',
+            title: 'Gagal menghapus notulen !',
             text: res,
             showConfirmButton: true,
           })
