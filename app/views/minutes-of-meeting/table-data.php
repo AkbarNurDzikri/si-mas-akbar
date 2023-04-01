@@ -15,6 +15,7 @@
               <th class="text-center">Jam Rapat</th>
               <th class="text-center">Tempat Rapat</th>
               <th class="text-center">Judul Rapat</th>
+              <th class="text-center">Anggota Rapat</th>
               <th class="text-center">Opsi</th>
             </tr>
           </thead>
@@ -27,9 +28,9 @@
                 <td class="text-center"><?= date('d M y', strtotime($mom['meeting_date'])) ?></td>
                 <td class="text-center"><?= $mom['meeting_time'] ?></td>
                 <td class="text-center"><?= $mom['meeting_room'] ?></td>
+                <td class="text-center"><?= $mom['meeting_participants'] ?></td>
                 <td class="text-center"><?= $mom['title'] ?></td>
                 <td class="text-center">
-                  <a href="<?= BASEURL . "/mom/print/" . $mom['id'] ?>" class="btn btn-sm btn-primary mb-1"><i class="bi bi-filetype-pdf"></i></a>
                   <a href="<?= BASEURL . "/mom/edit/" . $mom['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
                   <button class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete" data-id="<?= $mom['id'] ?>" data-title="<?= $mom['title'] ?>"><i class="bi bi-trash3"></i></a>
                 </td>

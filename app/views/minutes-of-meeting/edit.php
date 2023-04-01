@@ -3,6 +3,7 @@
     <div class="card">
       <div class="card-header">
         <a href="<?= BASEURL ?>/mom" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+        <a href="<?= BASEURL ?>/mom/pdf/<?= $data['mom']['id'] ?>" class="btn btn-danger btn-sm"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
       </div>
       <div class="card-body">
         <form id="formEdit">
@@ -16,6 +17,9 @@
 
           <label for="meeting_room" class="form-label">Tempat Rapat</label>
           <input type="text" class="form-control mb-3" id="meeting_room" name="meeting_room" autocomplete="off" value="<?= $data['mom']['meeting_room'] ?>">
+
+          <label for="meeting_participants" class="form-label">Anggota Rapat</label>
+          <textarea class="form-control mb-3" name="meeting_participants" id="meeting_participants" required><?= $data['mom']['meeting_participants'] ?></textarea>
 
           <label for="title" class="form-label">Judul Rapat</label>
           <input type="text" class="form-control mb-3" id="title" name="title" autocomplete="off" value="<?= $data['mom']['title'] ?>">
@@ -45,6 +49,7 @@
     formData.append('meeting_date', $('#meeting_date').val());
     formData.append('meeting_time', $('#meeting_time').val());
     formData.append('meeting_room', $('#meeting_room').val());
+    formData.append('meeting_participants', $('#meeting_participants').val());
     formData.append('title', $('#title').val());
     formData.append('body', quill.root.innerHTML);
 

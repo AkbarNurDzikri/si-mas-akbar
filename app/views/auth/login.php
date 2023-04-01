@@ -48,8 +48,8 @@
               </div>
                 <div class="card-body">
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">LOGIN ACCOUNT</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
+                    <h5 class="card-title text-center pb-0 fs-4">SI MAS AKBAR</h5>
+                    <p class="text-center small">Sistem Informasi Masjid Al-Akbar</p>
                   </div>
 
                   <form class="row g-3 needs-validation" id="myForm">

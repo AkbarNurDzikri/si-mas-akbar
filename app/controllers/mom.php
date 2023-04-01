@@ -65,4 +65,12 @@ class Mom extends Controller {
       echo $e->getMessage();
     }
   }
+
+  public function pdf($id) {
+    $data = [
+      'notulen'  => $this->model('mom_model')->getDataById($id),
+    ];
+
+    $this->view('minutes-of-meeting/export-pdf', $data);
+  }
 }

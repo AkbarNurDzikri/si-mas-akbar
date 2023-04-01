@@ -53,6 +53,7 @@ CREATE TABLE minutes_of_meetings(
   `meeting_date` DATE NOT NULL,
   `meeting_time` TIME NOT NULL,
   `meeting_room` VARCHAR(255) NOT NULL,
+  `meeting_participants` VARCHAR(255) NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `body` LONGTEXT NOT NULL,
   `created_at` DATETIME NOT NULL,

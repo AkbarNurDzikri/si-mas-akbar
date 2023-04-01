@@ -14,7 +14,7 @@ class Mom_model
 	}
 
 	public function create($data) {
-		$query = "INSERT INTO minutes_of_meetings VALUES ('', :created_by, :updated_by, :meeting_date, :meeting_time, :meeting_room, :title, :body, :created_at, :updated_at)";
+		$query = "INSERT INTO minutes_of_meetings VALUES ('', :created_by, :updated_by, :meeting_date, :meeting_time, :meeting_room, :meeting_participants, :title, :body, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('created_by',  $_SESSION['userInfo']['id']);
@@ -22,6 +22,7 @@ class Mom_model
 		$this->db->bind('meeting_date', $data['meeting_date']);
 		$this->db->bind('meeting_time', $data['meeting_time']);
 		$this->db->bind('meeting_room', $data['meeting_room']);
+		$this->db->bind('meeting_participants', $data['meeting_participants']);
 		$this->db->bind('title', $data['title']);
 		$this->db->bind('body', $data['body']);
 		$this->db->bind('created_at', date('Y-m-d H:i:s'));
@@ -44,6 +45,7 @@ class Mom_model
 				meeting_date = :meeting_date,
 				meeting_time = :meeting_time,
 				meeting_room = :meeting_room,
+				meeting_participants = :meeting_participants,
 				title = :title,
 				body = :body,
 				updated_at = :updated_at
@@ -55,6 +57,7 @@ class Mom_model
 		$this->db->bind('meeting_date', $data['meeting_date']);
 		$this->db->bind('meeting_time', $data['meeting_time']);
 		$this->db->bind('meeting_room', $data['meeting_room']);
+		$this->db->bind('meeting_participants', $data['meeting_participants']);
 		$this->db->bind('title', $data['title']);
 		$this->db->bind('body', $data['body']);
 		$this->db->bind('updated_at', date('Y-m-d H:i:s'));

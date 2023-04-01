@@ -13,10 +13,13 @@
           <input type="time" class="form-control mb-3" id="meeting_time" name="meeting_time" required>
 
           <label for="meeting_room" class="form-label">Tempat Rapat</label>
-          <input type="text" class="form-control mb-3" id="meeting_room" name="meeting_room" autocomplete="off" required>
+          <input type="text" class="form-control mb-3" id="meeting_room" name="meeting_room" placeholder="Halaman Masjid" autocomplete="off" required>
+
+          <label for="meeting_participants" class="form-label">Anggota Rapat</label>
+          <textarea class="form-control mb-3" name="meeting_participants" id="meeting_participants" placeholder="Bapak Fulan, Ibu Fulan ..." required></textarea>
 
           <label for="title" class="form-label">Judul Rapat</label>
-          <input type="text" class="form-control mb-3" id="title" name="title" autocomplete="off" required>
+          <input type="text" class="form-control mb-3" id="title" name="title" placeholder="Pembentukan panitia isra mi'raj" autocomplete="off" required>
 
           <label for="body" class="form-label">Isi Rapat</label>
           <div id="quillEditor" class="mb-3" required>
@@ -42,6 +45,7 @@
     formData.append('meeting_date', $('#meeting_date').val());
     formData.append('meeting_time', $('#meeting_time').val());
     formData.append('meeting_room', $('#meeting_room').val());
+    formData.append('meeting_participants', $('#meeting_participants').val());
     formData.append('title', $('#title').val());
     formData.append('body', quill.root.innerHTML);
     
