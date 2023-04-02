@@ -3,36 +3,38 @@
     <div class="card">
       <!-- <?php var_dump($data['moms'])?> -->
       <div class="card-header">
-        <a href="<?= BASEURL ?>/mom/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle"></i> Notulen</a>
+        <a href="<?= BASEURL ?>/events/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle"></i> Agenda</a>
       </div>
       <div class="card-body table-responsive mt-3">
         <table class="table table-striped display" id="myTable">
           <thead>
             <tr>
               <th class="text-center">No</th>
-              <th class="text-center">Notulis</th>
-              <th class="text-center">Tanggal Rapat</th>
-              <th class="text-center">Jam Rapat</th>
-              <th class="text-center">Tempat Rapat</th>
-              <th class="text-center">Judul Rapat</th>
-              <th class="text-center">Anggota Rapat</th>
+              <th class="text-center">Nama Acara</th>
+              <!-- <th class="text-center">Rujukan Rapat</th> -->
+              <th class="text-center">Tanggal Acara</th>
+              <th class="text-center">Waktu Acara</th>
+              <th class="text-center">Lokasi Acara</th>
+              <th class="text-center">Keterangan</th>
+              <th class="text-center">Dibuat Oleh</th>
               <th class="text-center">Opsi</th>
             </tr>
           </thead>
           <tbody>
             <?php $i = 1; ?>
-            <?php foreach($data['moms'] as $mom) : ?>
+            <?php foreach($data['events'] as $event) : ?>
               <tr>
                 <td class="text-center  align-middle align-middle"><?= $i++ ?></td>
-                <td class="text-center  align-middle"><?= $mom['creator'] ?> <?= $mom['updated_by'] != NULL ? '(updated by <b>' . $mom['editor'] . '</b>)'  : '' ?></td>
-                <td class="text-center  align-middle"><?= date('d M y', strtotime($mom['meeting_date'])) ?></td>
-                <td class="text-center  align-middle"><?= $mom['meeting_time'] ?></td>
-                <td class="text-center  align-middle"><?= $mom['meeting_room'] ?></td>
-                <td class="text-center  align-middle"><?= $mom['title'] ?></td>
-                <td class="text-center  align-middle"><?= $mom['meeting_participants'] ?></td>
+                <td class="text-center  align-middle"><?= $event['event_name'] ?></td>
+                <!-- <td class="text-center  align-middle"><?= $event['ref_meeting_title'] ?></td> -->
+                <td class="text-center  align-middle"><?= date('d M y', strtotime($event['event_date'])) ?></td>
+                <td class="text-center  align-middle"><?= $event['event_time'] ?></td>
+                <td class="text-center  align-middle"><?= $event['event_location'] ?></td>
+                <td class="text-center  align-middle"><?= $event['remarks'] ?></td>
+                <td class="text-center  align-middle"><?= $event['creator'] ?> <?= $event['updated_by'] != NULL ? '(updated by <b>' . $event['editor'] . '</b>)'  : '' ?></td>
                 <td class="text-center  align-middle">
-                  <a href="<?= BASEURL . "/mom/edit/" . $mom['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
-                  <button class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete" data-id="<?= $mom['id'] ?>" data-title="<?= $mom['title'] ?>"><i class="bi bi-trash3"></i></a>
+                  <a href="<?= BASEURL . "/events/edit/" . $event['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
+                  <button class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete" data-id="<?= $event['id'] ?>" data-name="<?= $event['event_name'] ?>"><i class="bi bi-trash3"></i></a>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -69,7 +71,7 @@
   const btnDelete = document.getElementsByClassName('btnDelete');
   for(let i = 0; i < btnDelete.length; i ++) {
     btnDelete[i].addEventListener('click', () => {
-      $('#confirmText').html('Yakin hapus Notulen <span class="text-danger">' + btnDelete[i].getAttribute('data-title') + '</span> ?');
+      $('#confirmText').html('Yakin hapus agenda <span class="text-danger">' + btnDelete[i].getAttribute('data-name') + '</span> ?');
       $('#inputId').val(btnDelete[i].getAttribute('data-id'));
     });
   };
@@ -78,22 +80,22 @@
     e.preventDefault();
 
     $.ajax({
-      url: '<?= BASEURL . '/mom/delete' ?>',
+      url: '<?= BASEURL . '/events/delete' ?>',
       type: 'POST',
       data: $('#formDelete').serialize(),
       success: function(res) {
         if(res == 'success') {
           Swal.fire({
             icon: 'success',
-            title: 'Berhasil menghapus notulen',
+            title: 'Berhasil menghapus agenda',
             showConfirmButton: true,
           }).then(() => {
-            window.location = '<?= BASEURL . "/mom" ?>'
+            window.location = '<?= BASEURL . "/events" ?>'
           });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Gagal menghapus notulen !',
+            title: 'Gagal menghapus agenda !',
             text: res,
             showConfirmButton: true,
           })

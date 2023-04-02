@@ -1,30 +1,31 @@
 <?php
 
-class Mom extends Controller {
+class Events extends Controller {
   public function index() {
     $data = [
-      'title' => 'Minutes of Meetings',
-      'moms' => $this->model('mom_model')->getMoms(),
+      'title' => 'Daftar Acara',
+      'events' => $this->model('events_model')->getEvents(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('minutes-of-meeting/table-data', $data);
+    $this->view('events/table-data', $data);
     $this->view('layouts/dashboard/footer');
   }
 
   public function new() {
     $data = [
-      'title' => 'Create Notes',
+      'title' => 'Create Event',
+      'ref_meeting' => $this->model('mom_model')->getMoms(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('minutes-of-meeting/create');
+    $this->view('events/create', $data);
     $this->view('layouts/dashboard/footer');
   }
 
   public function create() {
     try {
-      $result  = $this->model('mom_model')->create($_POST);
+      $result  = $this->model('events_model')->create($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -35,18 +36,19 @@ class Mom extends Controller {
 
   public function edit($id) {
     $data = [
-      'title' => 'Edit Notulen',
-      'mom' => $this->model('mom_model')->getDataById($id),
+      'title' => 'Edit Event',
+      'event' => $this->model('events_model')->getDataById($id),
+      'ref_meeting' => $this->model('mom_model')->getMoms(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('minutes-of-meeting/edit', $data);
+    $this->view('events/edit', $data);
     $this->view('layouts/dashboard/footer');
   }
 
   public function update() {
     try {
-      $result  = $this->model('mom_model')->update($_POST);
+      $result  = $this->model('events_model')->update($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -57,7 +59,7 @@ class Mom extends Controller {
 
   public function delete() {
     try {
-      $result  = $this->model('mom_model')->delete($_POST['id']);
+      $result  = $this->model('events_model')->delete($_POST['id']);
       if($result > 0) {
         echo 'success';
       }
@@ -66,11 +68,11 @@ class Mom extends Controller {
     }
   }
 
-  public function pdf($id) {
-    $data = [
-      'notulen'  => $this->model('mom_model')->getDataById($id),
-    ];
+  // public function pdf($id) {
+  //   $data = [
+  //     'notulen'  => $this->model('events_model')->getDataById($id),
+  //   ];
 
-    $this->view('minutes-of-meeting/export-pdf', $data);
-  }
+  //   $this->view('events/export-pdf', $data);
+  // }
 }

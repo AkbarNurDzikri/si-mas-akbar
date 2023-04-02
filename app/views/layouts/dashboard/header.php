@@ -289,6 +289,36 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link <?= $data['title'] == 'Minutes of Meetings' ? '' : 'collapsed' ?>" href="<?= BASEURL . '/mom' ?>">
+          <i class="bi bi-grid"></i>
+          <span>Notulen</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Anggaran Biaya' ? '' : 'collapsed' ?>" data-bs-target="#agenda-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Agenda</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="agenda-nav" class="nav-content collapse <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Anggaran Biaya' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="<?= BASEURL . '/events' ?>" class="<?= $data['title'] == 'Daftar Acara' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Daftar Acara</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= BASEURL . '/committees' ?>" class="<?= $data['title'] == 'Kepanitiaan' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Kepanitiaan</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= BASEURL . '/budgeting' ?>" class="<?= $data['title'] == 'Budgeting' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Anggaran Biaya</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Organizational Structure' || $data['title'] == 'List of DKM Members' ? '' : 'collapsed' ?>" data-bs-target="#dkm-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>DKM</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -297,11 +327,11 @@
             <a href="<?= BASEURL . '/members' ?>" class="<?= $data['title'] == 'List of DKM Members' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Members</span>
             </a>
+          </li>
           <li>
             <a href="<?= BASEURL . '/structure' ?>" class="<?= $data['title'] == 'Organizational Structure' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Structure</span>
             </a>
-          </li>
           </li>
         </ul>
       </li>

@@ -62,3 +62,19 @@ CREATE TABLE minutes_of_meetings(
   FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
   FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
 );
+
+CREATE TABLE events(
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `ref_meeting` INT NULL,
+  `created_by` INT NOT NULL,
+  `updated_by` INT NULL,
+  `event_name` VARCHAR(255) NOT NULL,
+  `event_date` DATE NOT NULL,
+  `event_time` TIME NOT NULL,
+  `event_location` VARCHAR(255) NOT NULL,
+  `remarks` VARCHAR(255) NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  
+  FOREIGN KEY(`ref_meeting`) REFERENCES `minutes_of_meetings`(`id`)
+);
