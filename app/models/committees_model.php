@@ -9,7 +9,7 @@ class Committees_model
 	}
 
 	public function getCommittees() {
-		$this->db->query("SELECT ec.*, c.username AS creator, ed.username AS editor, ev.event_name, ev.event_date, ev.event_location FROM event_committees AS ec INNER JOIN users AS c ON c.id = ec.created_by LEFT JOIN users AS ed ON ed.id = ec.updated_by INNER JOIN events AS ev ON ev.id = ec.event_id GROUP BY ec.event_id ORDER BY ev.event_name ASC"); // di set where = ketua agar yang muncul hanya 1 acara saja
+		$this->db->query("SELECT ec.*, c.username AS creator, ed.username AS editor, ev.event_name, ev.event_date, ev.event_location FROM event_committees AS ec INNER JOIN users AS c ON c.id = ec.created_by LEFT JOIN users AS ed ON ed.id = ec.updated_by INNER JOIN events AS ev ON ev.id = ec.event_id GROUP BY ec.event_id ORDER BY ev.event_name ASC");
 		return $this->db->resultSet();
 	}
 

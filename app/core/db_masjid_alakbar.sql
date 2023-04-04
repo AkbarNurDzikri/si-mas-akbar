@@ -96,3 +96,19 @@ CREATE TABLE event_committees(
   FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
   FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
 );
+
+CREATE TABLE event_budgeting(
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `event_id` INT NOT NULL,
+  `created_by` INT NOT NULL,
+  `updated_by` INT NULL,
+  `budget_name` VARCHAR(255) NOT NULL,
+  `budget_price` INT NOT NULL,
+  `remarks` VARCHAR(255) NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+
+  FOREIGN KEY(`event_id`) REFERENCES `events`(`id`),
+  FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
+  FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
+);
