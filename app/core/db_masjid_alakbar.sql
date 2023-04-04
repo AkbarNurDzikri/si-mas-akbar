@@ -65,7 +65,7 @@ CREATE TABLE minutes_of_meetings(
 
 CREATE TABLE events(
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `ref_meeting` INT NULL,
+  `ref_meeting` INT NOT NULL,
   `created_by` INT NOT NULL,
   `updated_by` INT NULL,
   `event_name` VARCHAR(255) NOT NULL,
@@ -77,4 +77,20 @@ CREATE TABLE events(
   `updated_at` DATETIME DEFAULT NULL,
   
   FOREIGN KEY(`ref_meeting`) REFERENCES `minutes_of_meetings`(`id`)
+);
+
+CREATE TABLE event_committees(
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `event_id` INT NOT NULL,
+  `created_by` INT NOT NULL,
+  `updated_by` INT NULL,
+  `person_name` VARCHAR(255) NOT NULL,
+  `position` VARCHAR(255) NOT NULL,
+  `main_duties_and_functions` TEXT NOT NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+
+  FOREIGN KEY(`event_id`) REFERENCES `events`(`id`),
+  FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
+  FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
 );

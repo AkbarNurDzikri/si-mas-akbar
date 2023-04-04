@@ -10,7 +10,6 @@ $html = '<!DOCTYPE html>
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Print Notulen [ ' . $data['notulen']['title'] . ' ]</title>
-            <link rel="stylesheet" media="print" href="'. BASEURL . "/assets/css/css-for-pdf/style-pdf.css" .'" />
           </head>
           <body>
             <table style="margin-left: auto; margin-right: auto;">
@@ -56,5 +55,4 @@ $html = '<!DOCTYPE html>
         </html>';
 $mpdf->WriteHTML($html);
 $mpdf->Output('Notulen Rapat ' . date('d-M-Y', strtotime($data['notulen']['meeting_date'])) . ' (' . $data['notulen']['title'] . ').pdf', 'I');
-// var_dump($data);
 ?>
