@@ -8,6 +8,12 @@
       <div class="card-body">
         <form id="formEdit">
           <input type="hidden" name="id" value="<?= $data['mom']['id'] ?>" id="id">
+
+          <label for="status" class="form-label mt-3">Status</label>
+          <select name="status" id="status" class="form-select mb-3">
+            <option value="<?= $data['mom']['status'] ?>"><?= strtoupper($data['mom']['status']) ?></option>
+            <option value="<?= $data['mom']['status'] == 'open' ? 'closed' : 'open' ?>"><?= $data['mom']['status'] == 'open' ? 'CLOSED' : 'OPEN' ?></option>
+          </select>
           
           <label for="meeting_date" class="form-label">Tanggal Rapat</label>
           <input type="date" class="form-control mb-3" id="meeting_date" name="meeting_date" value="<?= $data['mom']['meeting_date'] ?>">
@@ -52,6 +58,7 @@
     formData.append('meeting_participants', $('#meeting_participants').val());
     formData.append('title', $('#title').val());
     formData.append('body', quill.root.innerHTML);
+    formData.append('status', $('#status').val());
 
     $.ajax({
       url: '<?= BASEURL . '/mom/update/' ?>',

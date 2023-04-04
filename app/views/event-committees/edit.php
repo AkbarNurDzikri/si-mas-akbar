@@ -14,14 +14,17 @@
             <?php $no = 1; $titlePanitia = 1; $textTitlePanitia = 1;?>
             <?php foreach($data['committee'] as $comm) : ?>
               <h6 class="text-muted d-inline" id="titlePanitia<?= $titlePanitia++ ?>">Panitia #<?= $textTitlePanitia++ ?></h6> | 
-              <a href="#" class="text-primary updatePanitia" data-id="<?= $comm['id'] ?>" data-event-id="<?= $comm['event_id'] ?>"><i class="bi bi-send-check"></i> Update</a> | 
-              <a href="#" class="text-danger confirmDeleteCommittee" data-bs-toggle="modal" data-bs-target="#modalDeleteCommittee" data-id="<?= $comm['id'] ?>" data-name="<?= $comm['person_name'] ?>"><i class="bi bi-trash3"></i> Hapus</a> <br>
+              <a href="#" class="text-primary updatePanitia" data-id="<?= $comm['id'] ?>" data-event-id="<?= $comm['event_id'] ?>"><b><i class="bi bi-send-check"></i> Update</b></a> | 
+              <a href="#" class="text-danger confirmDeleteCommittee" data-bs-toggle="modal" data-bs-target="#modalDeleteCommittee" data-id="<?= $comm['id'] ?>" data-name="<?= $comm['person_name'] ?>"><b><i class="bi bi-trash3"></i> Hapus</b></a> <br>
 
               <label for="personName" class="form-label" id="labelpersonName">Nama Panitia</label>
               <input type="text" class="form-control mb-3 personNames" name="person_name" value="<?= $comm['person_name'] ?>" placeholder="Syaipul Nur" autocomplete="off" required>
               
               <label for="position" class="form-label" id="labelposition">Jabatan</label>
               <input type="text" class="form-control mb-3 positions" name="position" value="<?= $comm['position'] ?>" placeholder="Ketua" autocomplete="off" required>
+
+              <label for="duties" class="form-label" id="labelduties">Tupoksi</label>
+              <textarea class="form-control mb-3 duties" name="main_duties_and_functions" placeholder="Melaporkan progress tanggung jawab kepada ketua .." required><?= $comm['main_duties_and_functions'] ?></textarea>
             <?php endforeach; ?>
           </div>
         </div>
@@ -36,6 +39,7 @@
   <input type="hidden" name="id" id="inputIdUpdate">
   <input type="hidden" name="person_name" id="inputPanitiaName">
   <input type="hidden" name="position" id="inputPanitiaPosition">
+  <input type="hidden" name="main_duties_and_functions" id="inputPanitiaTupoksi">
 </form>
 
 <!-- Modal Confirm Delete -->
@@ -67,9 +71,11 @@
       $('#inputIdUpdate').val(btnUpdate[i].getAttribute('data-id'));
       const inputPanitiaName = $('.personNames');
       const inputPanitiaPosition = $('.positions');
+      const inputPanitiaDuties = $('.duties');
       $('#inputEventId').val(btnUpdate[i].getAttribute('data-event-id'));
       $('#inputPanitiaName').val(inputPanitiaName[i].value);
       $('#inputPanitiaPosition').val(inputPanitiaPosition[i].value);
+      $('#inputPanitiaTupoksi').val(inputPanitiaDuties[i].value);
       $('#formUpdate').submit();
     });
   }

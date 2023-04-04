@@ -16,6 +16,7 @@
               <th class="text-center">Tempat Rapat</th>
               <th class="text-center">Judul Rapat</th>
               <th class="text-center">Anggota Rapat</th>
+              <th>Status</th>
               <th class="text-center">Opsi</th>
             </tr>
           </thead>
@@ -30,6 +31,7 @@
                 <td class="text-center  align-middle"><?= $mom['meeting_room'] ?></td>
                 <td class="text-center  align-middle"><?= $mom['title'] ?></td>
                 <td class="text-center  align-middle"><?= $mom['meeting_participants'] ?></td>
+                <td class="text-center  align-middle"><?= $mom['status'] ?></td>
                 <td class="text-center  align-middle">
                   <a href="<?= BASEURL . "/mom/edit/" . $mom['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
                   <button class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete" data-id="<?= $mom['id'] ?>" data-title="<?= $mom['title'] ?>"><i class="bi bi-trash3"></i></a>

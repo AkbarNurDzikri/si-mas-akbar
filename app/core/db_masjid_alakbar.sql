@@ -56,6 +56,7 @@ CREATE TABLE minutes_of_meetings(
   `meeting_participants` VARCHAR(255) NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `body` LONGTEXT NOT NULL,
+  `status` ENUM('open', 'closed'),
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME DEFAULT NULL,
 
@@ -73,6 +74,7 @@ CREATE TABLE events(
   `event_time` TIME NOT NULL,
   `event_location` VARCHAR(255) NOT NULL,
   `remarks` VARCHAR(255) NULL,
+  `status` ENUM('open', 'closed'),
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME DEFAULT NULL,
   

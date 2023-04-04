@@ -13,8 +13,13 @@ class Events_model
 		return $this->db->resultSet();
 	}
 
+	public function getEventsOpen() {
+		$this->db->query("SELECT e.*, c.username AS creator, ed.username AS editor, m.title AS ref_meeting_title FROM events AS e INNER JOIN users AS c ON c.id = e.created_by LEFT JOIN users AS ed ON ed.id = e.updated_by INNER JOIN minutes_of_meetings AS m ON m.id = e.ref_meeting WHERE e.status = 'open' ORDER BY e.created_at DESC");
+		return $this->db->resultSet();
+	}
+
 	public function create($data) {
-		$query = "INSERT INTO events VALUES ('', :ref_meeting, :created_by, :updated_by, :event_name, :event_date, :event_time, :event_location, :remarks, :created_at, :updated_at)";
+		$query = "INSERT INTO events VALUES ('', :ref_meeting, :created_by, :updated_by, :event_name, :event_date, :event_time, :event_location, :remarks, :status, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('ref_meeting', $data['ref_meeting']);
@@ -25,6 +30,7 @@ class Events_model
 		$this->db->bind('event_time', $data['event_time']);
 		$this->db->bind('event_location', $data['event_location']);
 		$this->db->bind('remarks', $data['remarks']);
+		$this->db->bind('status', 'open'); // pertama kali buat event statusnya harus open karena belum dilaksanakan
 		$this->db->bind('created_at', date('Y-m-d H:i:s'));
 		$this->db->bind('updated_at', NULL);
 
@@ -48,6 +54,7 @@ class Events_model
 				event_time = :event_time,
 				event_location = :event_location,
 				remarks = :remarks,
+				status = :status,
 				updated_at = :updated_at
 		WHERE id = :id
 		";
@@ -60,6 +67,7 @@ class Events_model
 		$this->db->bind('event_time', $data['event_time']);
 		$this->db->bind('event_location', $data['event_location']);
 		$this->db->bind('remarks', $data['remarks']);
+		$this->db->bind('status', $data['status']);
 		$this->db->bind('updated_at', date('Y-m-d H:i:s'));
 		$this->db->bind('id', $data['id']);
 

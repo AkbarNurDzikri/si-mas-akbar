@@ -15,7 +15,7 @@ class Events extends Controller {
   public function new() {
     $data = [
       'title' => 'Create Event',
-      'ref_meeting' => $this->model('mom_model')->getMoms(),
+      'ref_meeting' => $this->model('mom_model')->getMomsOpen(),
     ];
 
     $this->view('layouts/dashboard/header', $data);

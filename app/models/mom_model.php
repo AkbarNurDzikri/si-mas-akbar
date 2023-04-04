@@ -13,8 +13,13 @@ class Mom_model
 		return $this->db->resultSet();
 	}
 
+	public function getMomsOpen() {
+		$this->db->query("SELECT mom.*, creator.username AS creator, editor.username AS editor FROM minutes_of_meetings AS mom INNER JOIN users AS creator ON creator.id = mom.created_by LEFT JOIN users AS editor ON editor.id = mom.updated_by WHERE mom.status = 'open' ORDER BY created_at DESC");
+		return $this->db->resultSet();
+	}
+
 	public function create($data) {
-		$query = "INSERT INTO minutes_of_meetings VALUES ('', :created_by, :updated_by, :meeting_date, :meeting_time, :meeting_room, :meeting_participants, :title, :body, :created_at, :updated_at)";
+		$query = "INSERT INTO minutes_of_meetings VALUES ('', :created_by, :updated_by, :meeting_date, :meeting_time, :meeting_room, :meeting_participants, :title, :body, :status, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('created_by',  $_SESSION['userInfo']['id']);
@@ -25,6 +30,7 @@ class Mom_model
 		$this->db->bind('meeting_participants', $data['meeting_participants']);
 		$this->db->bind('title', $data['title']);
 		$this->db->bind('body', $data['body']);
+		$this->db->bind('status', 'open'); // pertama create notulen harus di set open karena belum ada event dilaksanakan yang refer kesini
 		$this->db->bind('created_at', date('Y-m-d H:i:s'));
 		$this->db->bind('updated_at', NULL);
 
@@ -48,6 +54,7 @@ class Mom_model
 				meeting_participants = :meeting_participants,
 				title = :title,
 				body = :body,
+				status = :status,
 				updated_at = :updated_at
 		WHERE id = :id
 		";
@@ -60,6 +67,7 @@ class Mom_model
 		$this->db->bind('meeting_participants', $data['meeting_participants']);
 		$this->db->bind('title', $data['title']);
 		$this->db->bind('body', $data['body']);
+		$this->db->bind('status', $data['status']);
 		$this->db->bind('updated_at', date('Y-m-d H:i:s'));
 		$this->db->bind('id', $data['id']);
 

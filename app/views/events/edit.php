@@ -3,11 +3,16 @@
     <div class="card">
       <div class="card-header">
         <a href="<?= BASEURL ?>/events" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
-        <!-- <a href="<?= BASEURL ?>/mom/pdf/<?= $data['mom']['id'] ?>" class="btn btn-danger btn-sm"><i class="bi bi-file-earmark-pdf"></i> PDF</a> -->
       </div>
       <div class="card-body">
         <form id="formEdit">
           <input type="hidden" name="id" value="<?= $data['event']['id'] ?>" id="id">
+
+          <label for="status" class="form-label mt-3">Status</label>
+          <select name="status" id="status" class="form-select mb-3">
+            <option value="<?= $data['event']['status'] ?>"><?= strtoupper($data['event']['status']) ?></option>
+            <option value="<?= $data['event']['status'] == 'open' ? 'closed' : 'open' ?>"><?= $data['event']['status'] == 'open' ? 'CLOSED' : 'OPEN' ?></option>
+          </select>
           
           <label for="ref_meeting" class="form-label">Rujukan Rapat</label>
           <select name="ref_meeting" id="ref_meeting" class="form-select mb-3" required>

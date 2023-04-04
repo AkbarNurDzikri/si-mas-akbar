@@ -5,7 +5,7 @@ class Committees extends Controller {
     $data = [
       'title' => 'Event Committees',
       'committees' => $this->model('committees_model')->getCommittees(),
-      'events' => $this->model('events_model')->getEvents(),
+      'events' => $this->model('events_model')->getEventsOpen(),
     ];
 
     $this->view('layouts/dashboard/header', $data);

@@ -6,7 +6,7 @@
       </div>
       <div class="card-body">
         <form id="myForm">
-          <label for="meeting_date" class="form-label">Tanggal Rapat</label>
+          <label for="meeting_date" class="form-label mt-3">Tanggal Rapat</label>
           <input type="date" class="form-control mb-3" id="meeting_date" name="meeting_date" required>
 
           <label for="meeting_time" class="form-label">Waktu Rapat</label>

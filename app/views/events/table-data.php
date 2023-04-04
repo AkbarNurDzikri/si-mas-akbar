@@ -11,12 +11,12 @@
             <tr>
               <th class="text-center">No</th>
               <th class="text-center">Nama Acara</th>
-              <!-- <th class="text-center">Rujukan Rapat</th> -->
               <th class="text-center">Tanggal Acara</th>
               <th class="text-center">Waktu Acara</th>
               <th class="text-center">Lokasi Acara</th>
               <th class="text-center">Keterangan</th>
               <th class="text-center">Dibuat Oleh</th>
+              <th class="text-center">Status</th>
               <th class="text-center">Opsi</th>
             </tr>
           </thead>
@@ -26,12 +26,12 @@
               <tr>
                 <td class="text-center  align-middle align-middle"><?= $i++ ?></td>
                 <td class="text-center  align-middle"><?= $event['event_name'] ?></td>
-                <!-- <td class="text-center  align-middle"><?= $event['ref_meeting_title'] ?></td> -->
                 <td class="text-center  align-middle"><?= date('d M y', strtotime($event['event_date'])) ?></td>
                 <td class="text-center  align-middle"><?= $event['event_time'] ?></td>
                 <td class="text-center  align-middle"><?= $event['event_location'] ?></td>
                 <td class="text-center  align-middle"><?= $event['remarks'] ?></td>
                 <td class="text-center  align-middle"><?= $event['creator'] ?> <?= $event['updated_by'] != NULL ? '(updated by <b>' . $event['editor'] . '</b>)'  : '' ?></td>
+                <td class="text-center  align-middle"><?= $event['status'] ?></td>
                 <td class="text-center  align-middle">
                   <a href="<?= BASEURL . "/events/edit/" . $event['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
                   <button class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete" data-id="<?= $event['id'] ?>" data-name="<?= $event['event_name'] ?>"><i class="bi bi-trash3"></i></a>

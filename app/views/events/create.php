@@ -21,7 +21,7 @@
           <label for="event_date" class="form-label">Tanggal Acara</label>
           <input type="date" class="form-control mb-3" id="event_date" name="event_date" required>
           
-          <label for="event_time" class="form-label">Tanggal Acara</label>
+          <label for="event_time" class="form-label">Waktu Acara</label>
           <input type="time" class="form-control mb-3" id="event_time" name="event_time" required>
 
           <label for="event_location" class="form-label">Lokasi Acara</label>
