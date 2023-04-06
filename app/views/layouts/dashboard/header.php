@@ -289,29 +289,29 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link <?= $data['title'] == 'Minutes of Meetings' ? '' : 'collapsed' ?>" href="<?= BASEURL . '/mom' ?>">
+        <a class="nav-link <?= $data['title'] == 'Daftar Notulen' || $data['title'] == 'Buat Notulen' ? '' : 'collapsed' ?>" href="<?= BASEURL . '/mom' ?>">
           <i class="bi bi-grid"></i>
           <span>Notulen</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Event Budgeting' ? '' : 'collapsed' ?>" data-bs-target="#agenda-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Agenda</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? '' : 'collapsed' ?>" data-bs-target="#agenda-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Acara</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="agenda-nav" class="nav-content collapse <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Event Committees' || $data['title'] == 'Event Budgeting' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+        <ul id="agenda-nav" class="nav-content collapse <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<?= BASEURL . '/events' ?>" class="<?= $data['title'] == 'Daftar Acara' ? 'active' : '' ?>">
+            <a href="<?= BASEURL . '/events' ?>" class="<?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Daftar Acara</span>
             </a>
           </li>
           <li>
-            <a href="<?= BASEURL . '/committees' ?>" class="<?= $data['title'] == 'Event Committees' ? 'active' : '' ?>">
+            <a href="<?= BASEURL . '/committees' ?>" class="<?= $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Kepanitiaan</span>
             </a>
           </li>
           <li>
-            <a href="<?= BASEURL . '/budgeting' ?>" class="<?= $data['title'] == 'Event Budgeting' ? 'active' : '' ?>">
+            <a href="<?= BASEURL . '/budgeting' ?>" class="<?= $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Anggaran Biaya</span>
             </a>
           </li>
@@ -319,18 +319,18 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link <?= $data['title'] == 'Organizational Structure' || $data['title'] == 'List of DKM Members' ? '' : 'collapsed' ?>" data-bs-target="#dkm-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link <?= $data['title'] == 'Struktur Organisasi DKM' || $data['title'] == 'Buat Struktur Organisasi DKM' || $data['title'] == 'Daftar Anggota DKM' || $data['title'] == 'Buat Anggota DKM' ? '' : 'collapsed' ?>" data-bs-target="#dkm-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>DKM</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="dkm-nav" class="nav-content collapse <?= $data['title'] == 'Organizational Structure' || $data['title'] == 'List of DKM Members' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+        <ul id="dkm-nav" class="nav-content collapse <?= $data['title'] == 'Struktur Organisasi DKM' || $data['title'] == 'Buat Struktur Organisasi DKM' || $data['title'] == 'Daftar Anggota DKM' || $data['title'] == 'Buat Anggota DKM' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<?= BASEURL . '/members' ?>" class="<?= $data['title'] == 'List of DKM Members' ? 'active' : '' ?>">
-              <i class="bi bi-circle"></i><span>Members</span>
+            <a href="<?= BASEURL . '/members' ?>" class="<?= $data['title'] == 'Daftar Anggota DKM' || $data['title'] == 'Buat Anggota DKM' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Daftar Anggota</span>
             </a>
           </li>
           <li>
-            <a href="<?= BASEURL . '/structure' ?>" class="<?= $data['title'] == 'Organizational Structure' ? 'active' : '' ?>">
-              <i class="bi bi-circle"></i><span>Structure</span>
+            <a href="<?= BASEURL . '/structure' ?>" class="<?= $data['title'] == 'Struktur Organisasi DKM' || $data['title'] == 'Buat Struktur Organisasi DKM' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Struktur DKM</span>
             </a>
           </li>
         </ul>

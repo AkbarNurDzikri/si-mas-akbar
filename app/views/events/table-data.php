@@ -2,7 +2,7 @@
   <div class="col-12 col-md-12" id="colDataTable">
     <div class="card">
       <div class="card-header">
-        <a href="<?= BASEURL ?>/events/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle"></i> Agenda</a>
+        <a href="<?= BASEURL ?>/events/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle"></i> Acara</a>
       </div>
       <div class="card-body table-responsive mt-3">
         <table class="table table-striped display" id="myTable">
@@ -87,7 +87,7 @@
         if(res == 'success') {
           Swal.fire({
             icon: 'success',
-            title: 'Berhasil menghapus agenda',
+            title: 'Berhasil menghapus acara',
             showConfirmButton: true,
           }).then(() => {
             window.location = '<?= BASEURL . "/events" ?>'
@@ -95,7 +95,7 @@
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Gagal menghapus agenda !',
+            title: 'Gagal menghapus acara !',
             text: res,
             showConfirmButton: true,
           })

@@ -14,7 +14,7 @@ class Events extends Controller {
 
   public function new() {
     $data = [
-      'title' => 'Create Event',
+      'title' => 'Buat Acara',
       'ref_meeting' => $this->model('mom_model')->getMomsOpen(),
     ];
 
@@ -36,7 +36,7 @@ class Events extends Controller {
 
   public function edit($id) {
     $data = [
-      'title' => 'Edit Event',
+      'title' => 'Edit Acara',
       'event' => $this->model('events_model')->getDataById($id),
       'ref_meeting' => $this->model('mom_model')->getMoms(),
     ];

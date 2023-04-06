@@ -3,7 +3,7 @@
 class Mom extends Controller {
   public function index() {
     $data = [
-      'title' => 'Minutes of Meetings',
+      'title' => 'Daftar Notulen',
       'moms' => $this->model('mom_model')->getMoms(),
     ];
 
@@ -14,7 +14,7 @@ class Mom extends Controller {
 
   public function new() {
     $data = [
-      'title' => 'Create Notes',
+      'title' => 'Buat Notulen',
     ];
 
     $this->view('layouts/dashboard/header', $data);

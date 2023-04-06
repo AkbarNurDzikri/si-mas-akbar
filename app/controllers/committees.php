@@ -3,7 +3,7 @@
 class Committees extends Controller {
   public function index() {
     $data = [
-      'title' => 'Event Committees',
+      'title' => 'Kepanitiaan',
       'committees' => $this->model('committees_model')->getCommittees(),
       'events' => $this->model('events_model')->getEventsOpen(),
     ];
@@ -15,7 +15,7 @@ class Committees extends Controller {
 
   public function new($eventId) {
     $data = [
-      'title' => 'Create Event Committee',
+      'title' => 'Buat Panitia Acara',
       'eventId' => $eventId,
     ];
 
@@ -37,7 +37,7 @@ class Committees extends Controller {
 
   public function edit($eventId) {
     $data = [
-      'title' => 'Edit Committee',
+      'title' => 'Edit Panitia Acara',
       'committee' => $this->model('committees_model')->getDataById($eventId),
     ];
 

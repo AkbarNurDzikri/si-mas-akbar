@@ -3,7 +3,7 @@
 class Budgeting extends Controller {
   public function index() {
     $data = [
-      'title' => 'Event Budgeting',
+      'title' => 'Anggaran Biaya',
       'budgets' => $this->model('budgeting_model')->getBadgets(),
       'events' => $this->model('events_model')->getEventsOpen(),
     ];
@@ -15,7 +15,7 @@ class Budgeting extends Controller {
 
   public function new($eventId) {
     $data = [
-      'title' => 'Create Event Budget',
+      'title' => 'Buat Anggaran Acara',
       'eventId' => $eventId,
     ];
 
@@ -37,7 +37,7 @@ class Budgeting extends Controller {
 
   public function edit($eventId) {
     $data = [
-      'title' => 'Edit Budget',
+      'title' => 'Edit Anggaran Acara',
       'budgets' => $this->model('budgeting_model')->getDataById($eventId),
     ];
 

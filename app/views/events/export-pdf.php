@@ -25,8 +25,7 @@ $html = '<!DOCTYPE html>
               </tr>
             </table>
 
-            <hr>
-            <hr style="margin-top: -11px;">
+            <hr> <hr style="margin-top: -11px;">
             
             <h4 style="text-align: center;"><u>KONSEP ACARA</u></h4>
             <h4 style="text-align: center; padding-top: -12px;"><u>'. strtoupper($data['event']['title']) .'</u></h4>
@@ -48,15 +47,18 @@ $html = '<!DOCTYPE html>
               <li><b>Susunan Panitia</b></li>';
               $x = 1;
               foreach($data['committee'] as $comm) {
-                $html .= '<p style="margin-bottom: 0px;"><b>'. $x++ . '. ' . $comm['position'] . ' - ' . $comm['person_name'] .'</b></p>';
-                $html .= '<span>Tupoksi : '. $comm['main_duties_and_functions'] .'</span>';
+                $html .= '<p style="margin-bottom: 0px;">'. $x++ . '. ' . $comm['position'] . ' - ' . $comm['person_name'] .'</p>';
+                $html .= '<span>Tugas & Tanggung Jawab : '. $comm['main_duties_and_functions'] .'</span>';
               }
+              $totalBudget = 0;
               $y = 1;
     $html .= '<li style="padding-top: 15px;"><b>Anggaran Dana</b></li>';
               foreach($data['budget'] as $budg) {
-                $html .= '<p style="margin-bottom: 0px;"><b>'. $y++ . '. ' . $budg['budget_name'] . ' - Rp. ' . number_format($budg['budget_price'], 2, ',', '.') .'</b></p>';
+                $html .= '<p style="margin-bottom: 0px;">'. $y++ . '. ' . $budg['budget_name'] . ' - Rp. ' . number_format($budg['budget_price'], 2, ',', '.') .'</p>';
                 $html .= '<span>Keterangan : '. $budg['remarks'] .'</span>';
+                $totalBudget += $budg['budget_price'];
               }
+    $html .= '<h4><b>Total Anggaran : Rp. '. number_format($totalBudget, 2, ',', '.') .'</b></h4>';
   $html .= '</ul>';
 
   $html .= '<p style="text-align: right; color:grey;">Tanggal download : '. date('d-M-Y H:i') .' WIB</p>

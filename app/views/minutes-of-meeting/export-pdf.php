@@ -11,7 +11,7 @@ $html = '<!DOCTYPE html>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Print Notulen [ ' . $data['notulen']['title'] . ' ]</title>
           </head>
-          <body>
+          <body style="text-align: justify; text-justify: inter-word;">
             <table style="margin-left: auto; margin-right: auto;">
               <tr>
                 <td rowspan="3"><img src="'. BASEURL . '/assets/images/icons/Foto Masjid Depan.jpeg' .'" style="width: 80px; margin-left: -70px; margin-right: 30px;"></td>
@@ -25,25 +25,25 @@ $html = '<!DOCTYPE html>
               </tr>
             </table>
 
-            <hr>
+            <hr> <hr style="margin-top: -11px;">
             
-            <h3 style="text-align: center;"><u>NOTULEN RAPAT</u></h3>
+            <h4 style="text-align: center;"><u>NOTULEN RAPAT</u></h4>
 
             <table border="0" style="border-collapse: collapse; margin-left: auto; margin-right: auto; margin-top: 20px; width: 700px;">
               <tr>
-                <td style="border-bottom: 1px dotted black;">Tempat, tanggal & waktu rapat</td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">'.$data['notulen']['meeting_room'] . ', ' . date('d-M-Y', strtotime($data['notulen']['meeting_date'])) . ' - ' . $data['notulen']['meeting_time'] .' WIB</td>
+                <td>Tempat, tanggal & waktu rapat</td>
+                <td>: </td>
+                <td>'.$data['notulen']['meeting_room'] . ', ' . date('d-M-Y', strtotime($data['notulen']['meeting_date'])) . ' - ' . $data['notulen']['meeting_time'] .' WIB</td>
               </tr>
               <tr>
-                <td style="border-bottom: 1px dotted black;">Judul rapat</td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">'.$data['notulen']['title'].'</td>
+                <td>Judul rapat</td>
+                <td>: </td>
+                <td>'.$data['notulen']['title'].'</td>
               </tr>
               <tr>
-                <td style="border-bottom: 1px dotted black;">Anggota rapat</td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">'.$data['notulen']['meeting_participants'].'</td>
+                <td>Anggota rapat</td>
+                <td>: </td>
+                <td>'.$data['notulen']['meeting_participants'].'</td>
               </tr>
             </table>
 

@@ -3,7 +3,7 @@
 class Members extends Controller {  
   public function index() {
     $data = [
-      'title' => 'List of DKM Members',
+      'title' => 'Daftar Anggota DKM',
       'members' => $this->model('members_model')->getMembers(),
     ];
 
@@ -14,7 +14,7 @@ class Members extends Controller {
 
   public function new() {
     $data = [
-      'title' => 'Create Member',
+      'title' => 'Buat Anggota DKM',
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -39,7 +39,7 @@ class Members extends Controller {
 
   public function edit($id) {
     $data = [
-      'title' => 'Edit Member',
+      'title' => 'Edit Anggota DKM',
       'member' => $this->model('members_model')->getDataById($id),
     ];
 

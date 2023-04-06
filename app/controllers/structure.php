@@ -3,7 +3,7 @@
 class Structure extends Controller {  
   public function index() {
     $data = [
-      'title' => 'Organizational Structure',
+      'title' => 'Struktur Organisasi DKM',
       'members' => $this->model('structure_model')->getStructure(),
     ];
 
@@ -14,7 +14,7 @@ class Structure extends Controller {
 
   public function new() {
     $data = [
-      'title' => 'Create Structure',
+      'title' => 'Buat Struktur Organisasi DKM',
       'members' => $this->model('members_model')->getMembers(),
     ];
 
@@ -37,7 +37,7 @@ class Structure extends Controller {
 
   public function edit($id) {
     $data = [
-      'title' => 'Edit Structure',
+      'title' => 'Edit Struktur Organisasi DKM',
       'member' => $this->model('structure_model')->getDataById($id),
       'members' => $this->model('members_model')->getMembers(),
     ];

@@ -25,31 +25,34 @@ $html = '<!DOCTYPE html>
               </tr>
             </table>
 
-            <hr>
+            <hr> <hr style="margin-top: -11px;">
             
-            <h3 style="text-align: center;"><u>ANGGARAN DANA ACARA</u></h3>
-            <h3 style="text-align: center; padding-top: -10px; padding-bottom: -10px;"><u>' . strtoupper($data['budgets'][0]['event_name']) . '</u></h3>
+            <h4 style="text-align: center;"><u>ANGGARAN DANA ACARA</u></h4>
+            <h4 style="text-align: center; padding-top: -10px; padding-bottom: -10px;"><u>' . strtoupper($data['budgets'][0]['event_name']) . '</u></h4>
 
-            <table border="0" style="border-collapse: collapse; margin-top: 30px; margin-bottom: 50px;">
+            <table border="0" style="border-collapse: collapse; margin: 30px 0 30px 0;">
               <tr>
-                <td style="border-bottom: 1px dotted black;"><b>Dasar</b></td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">Hasil rapat tanggal ' . date('d-M-Y', strtotime($data['budgets'][0]['meeting_date'])) . ' - ' . $data['budgets'][0]['meeting_time'] .' WIB @ ' . $data['budgets'][0]['meeting_room'] . '</td>
+                <td>Dasar</td>
+                <td>: </td>
+                <td>Hasil rapat tanggal ' . date('d-M-Y', strtotime($data['budgets'][0]['meeting_date'])) . ' - ' . $data['budgets'][0]['meeting_time'] .' WIB @ ' . $data['budgets'][0]['meeting_room'] . '</td>
               </tr>
               <tr>
-                <td style="border-bottom: 1px dotted black;"><b>Anggota rapat</b></td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">'.$data['budgets'][0]['meeting_participants'].'</td>
+                <td>Anggota rapat</td>
+                <td>: </td>
+                <td>'.$data['budgets'][0]['meeting_participants'].'</td>
               </tr>
             </table>';
+
+            $totalBudget = 0;
             foreach($data['budgets'] as $budget) {
+              $totalBudget += $budget['budget_price'];
               $html .= '<ul>
-                <li>
-                  <b>'. $budget['budget_name'] . ' - Rp. ' . number_format($budget['budget_price'], '2', ',', '.') . '</b> <br>
-                  <i><u>Keterangan</u></i> : <br>' . $budget['remarks'] .
+                <li>'. $budget['budget_name'] . ' : Rp. ' . number_format($budget['budget_price'], '2', ',', '.') . ' <br>
+                  Keterangan : ' . $budget['remarks'] .
                 '</li>
               </ul>';
             };
+            $html .= '<ul><h4 style="margin-top: 0;">Total Anggaran : Rp. '. number_format($totalBudget, 2, ',', '.') .'</h4></ul>';
 
 
   $html .= '<p style="text-align: right; color:grey; margin-top: 50px;">Tanggal download : '. date('d-M-Y H:i') .' WIB</p>

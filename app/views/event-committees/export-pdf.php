@@ -25,28 +25,28 @@ $html = '<!DOCTYPE html>
               </tr>
             </table>
 
-            <hr>
+            <hr> <hr style="margin-top: -11px;">
             
-            <h3 style="text-align: center;"><u>SUSUNAN PANITIA ACARA</u></h3>
-            <h3 style="text-align: center; padding-top: -10px; padding-bottom: -10px;"><u>' . strtoupper($data['committees'][0]['event_name']) . '</u></h3>
+            <h4 style="text-align: center;"><u>SUSUNAN PANITIA ACARA</u></h4>
+            <h4 style="text-align: center; padding-top: -10px; padding-bottom: -10px;"><u>' . strtoupper($data['committees'][0]['event_name']) . '</u></h4>
 
-            <table border="0" style="border-collapse: collapse; margin-top: 30px; margin-bottom: 50px;">
+            <table border="0" style="border-collapse: collapse; margin: 30px 0 30px 0;">
               <tr>
-                <td style="border-bottom: 1px dotted black;"><b>Dasar</b></td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">Hasil rapat tanggal ' . date('d-M-Y', strtotime($data['committees'][0]['meeting_date'])) . ' - ' . $data['committees'][0]['meeting_time'] .' WIB @ ' . $data['committees'][0]['meeting_room'] . '</td>
+                <td>Dasar</td>
+                <td>: </td>
+                <td>Hasil rapat tanggal ' . date('d-M-Y', strtotime($data['committees'][0]['meeting_date'])) . ' - ' . $data['committees'][0]['meeting_time'] .' WIB @ ' . $data['committees'][0]['meeting_room'] . '</td>
               </tr>
               <tr>
-                <td style="border-bottom: 1px dotted black;"><b>Anggota rapat</b></td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">'.$data['committees'][0]['meeting_participants'].'</td>
+                <td>Anggota rapat</td>
+                <td>: </td>
+                <td>'.$data['committees'][0]['meeting_participants'].'</td>
               </tr>
             </table>';
             foreach($data['committees'] as $committe) {
               $html .= '<ul>
                 <li>
-                  <b>'. $committe['position'] . ' - ' . $committe['person_name'] . '</b> <br>
-                  <i><u>Tugas pokok dan fungsi</u></i> : <br>' . $committe['main_duties_and_functions'] .
+                  <b>'. $committe['position'] . ' : ' . $committe['person_name'] . '</b> <br>
+                  Tugas & Tanggung Jawab : ' . $committe['main_duties_and_functions'] .
                 '</li>
               </ul>';
             };
