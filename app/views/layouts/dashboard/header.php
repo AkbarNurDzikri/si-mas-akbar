@@ -218,13 +218,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?= $_SESSION['userInfo']['username'] ?></span>
+            <img src="<?= BASEURL . '/assets/images/dkm/members/' . $_SESSION['userInfo']['member_image'] ?>" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?= $_SESSION['userInfo']['member_name'] ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?= $_SESSION['userInfo']['username'] ?></h6>
+              <h6><?= $_SESSION['userInfo']['member_name'] ?></h6>
               <span><?= $_SESSION['userInfo']['role_name'] ?></span>
             </li>
             <li>
@@ -313,6 +313,29 @@
           <li>
             <a href="<?= BASEURL . '/budgeting' ?>" class="<?= $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Anggaran Biaya</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link <?= $data['title'] == 'Zakat' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? '' : 'collapsed' ?>" data-bs-target="#zis-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Z.I.S</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="zis-nav" class="nav-content collapse <?= $data['title'] == 'Zakat' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="<?= BASEURL . '/zakat' ?>" class="<?= $data['title'] == 'Zakat' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Zakat</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= BASEURL . '/infaq' ?>" class="<?= $data['title'] == 'Infaq' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Infaq</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= BASEURL . '/shadaqah' ?>" class="<?= $data['title'] == 'Shadaqah' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Shadaqah</span>
             </a>
           </li>
         </ul>

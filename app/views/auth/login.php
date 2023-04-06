@@ -104,7 +104,7 @@
               title: 'Berhasil login ..',
               showConfirmButton: true,
             }).then(() => {
-              window.location = '<?= BASEURL . "/users" ?>'
+              window.location = '<?= BASEURL . "/zakat" ?>'
             });
           } else {
             Swal.fire({

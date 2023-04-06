@@ -8,6 +8,15 @@
         <form id="formEdit">
           <input type="hidden" name="id" value="<?= $data['user']['id'] ?>">
           
+          <label for="member_id" class="form-label mt-3">Anggota DKM</label>
+          <select name="member_id" id="member_id" class="form-select mb-3">
+            <option value="<?= $data['user']['member_id'] ?>"><?= $data['user']['member_name'] ?></option>
+            <option value="" disabled>Pilih Anggota</option>
+            <?php foreach($data['members'] as $member) : ?>
+              <option value="<?= $member['id'] ?>"><?= $member['member_name'] ?></option>
+            <?php endforeach; ?>
+          </select>
+          
           <label for="username" class="form-label">Username</label>
           <input type="text" class="form-control mb-3" id="username" name="username" value="<?= $data['user']['username'] ?>" autocomplete="off">
 

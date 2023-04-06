@@ -1,6 +1,6 @@
 <?php
 
-define('BASEURL', 'http://localhost/masjid-alakbar');
+define('BASEURL', 'http://192.168.1.107/masjid-alakbar');
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');

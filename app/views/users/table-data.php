@@ -9,6 +9,7 @@
           <thead>
             <tr>
               <th class="text-center">No</th>
+              <th class="text-center">Full Name</th>
               <th class="text-center">Username</th>
               <th class="text-center">Email</th>
               <th class="text-center">Hak Akses</th>
@@ -20,6 +21,7 @@
             <?php foreach($data['users'] as $user) : ?>
               <tr>
                 <td class="text-center"><?= $i++ ?></td>
+                <td class="text-center"><?= $user['member_name'] ?></td>
                 <td class="text-center"><?= $user['username'] ?></td>
                 <td class="text-center"><?= $user['email'] ?></td>
                 <td class="text-center"><?= $user['role_name'] ?></td>

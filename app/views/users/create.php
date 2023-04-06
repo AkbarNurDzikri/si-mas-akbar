@@ -6,14 +6,22 @@
       </div>
       <div class="card-body">
         <form id="myForm">
+          <label for="member_id" class="form-label mt-3">Anggota DKM</label>
+          <select name="member_id" id="member_id" class="form-select mb-3">
+            <option value="" disabled selected>Pilih Anggota</option>
+            <?php foreach($data['members'] as $member) : ?>
+              <option value="<?= $member['id'] ?>"><?= $member['member_name'] ?></option>
+            <?php endforeach; ?>
+          </select>
+
           <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control mb-3" id="username" name="username" autocomplete="off">
+          <input type="text" class="form-control mb-3" id="username" name="username" autocomplete="off" required>
 
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control mb-3" id="email" name="email" autocomplete="off">
+          <input type="email" class="form-control mb-3" id="email" name="email" autocomplete="off" required>
 
           <label for="role_id" class="form-label">Hak Akses</label>
-          <select name="role_id" id="role_id" class="form-select mb-3">
+          <select name="role_id" id="role_id" class="form-select mb-3" required>
             <option value="" disabled selected>Pilih Hak Akses</option>
             <?php foreach($data['roles'] as $role) : ?>
               <option value="<?= $role['id'] ?>"><?= $role['role_name'] ?></option>
@@ -21,10 +29,10 @@
           </select>
 
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control mb-3" id="password" name="password">
+          <input type="password" class="form-control mb-3" id="password" name="password" required>
 
           <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
-          <input type="password" class="form-control mb-3" id="confirmPassword" name="confirmPassword">
+          <input type="password" class="form-control mb-3" id="confirmPassword" name="confirmPassword" required>
 
           <button type="submit" class="btn btn-primary btn-sm float-end btnSave">Save</button>
         </form>

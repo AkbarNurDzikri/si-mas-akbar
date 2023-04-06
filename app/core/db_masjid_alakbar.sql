@@ -37,12 +37,14 @@ CREATE TABLE `roles`(
 CREATE TABLE `users`(
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `role_id` INT NOT NULL,
+  `member_id` INT NOT NULL,
   `username` VARCHAR(255),
   `email` VARCHAR(255),
   `password` VARCHAR(255),
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME DEFAULT NULL,
 
+  FOREIGN KEY(`member_id`) REFERENCES `dkm_members`(`id`),
   FOREIGN KEY(`role_id`) REFERENCES `roles`(`id`)
 );
 
@@ -109,6 +111,24 @@ CREATE TABLE event_budgeting(
   `updated_at` DATETIME DEFAULT NULL,
 
   FOREIGN KEY(`event_id`) REFERENCES `events`(`id`),
+  FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
+  FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
+);
+
+CREATE TABLE zakat_fitrah(
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `created_by` INT NOT NULL,
+  `updated_by` INT NULL,
+  `person_name` VARCHAR(255) NOT NULL,
+  `person_address` VARCHAR(255) NOT NULL,
+  `person_status` ENUM('Muzakki', 'Fakir', 'Miskin', 'Amil', 'Mualaf', 'Riqab', 'Gharimin', 'Fisabilillah', 'Ibnu Sabil'),
+  `zakat_type` ENUM('Uang', 'Beras'),
+  `qty_in` DECIMAL(10,2) NULL,
+  `qty_out` DECIMAL(10,2) NULL,
+  `remarks` VARCHAR(255) NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+
   FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
   FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
 );

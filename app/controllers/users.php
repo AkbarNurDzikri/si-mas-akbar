@@ -14,8 +14,9 @@ class Users extends Controller {
 
   public function new() {
     $data = [
-      'title' => 'Create Structure',
+      'title' => 'Create User',
       'roles' => $this->model('roles_model')->getRoles(),
+      'members' => $this->model('members_model')->getMembers(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -40,6 +41,7 @@ class Users extends Controller {
       'title' => 'Edit User',
       'user' => $this->model('users_model')->getDataById($id),
       'roles' => $this->model('roles_model')->getRoles(),
+      'members' => $this->model('members_model')->getMembers(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -48,14 +50,15 @@ class Users extends Controller {
   }
 
   public function update() {
-    try {
-      $result  = $this->model('users_model')->update($_POST);
-      if($result > 0) {
-        echo 'success';
-      }
-    } catch(Exception $e) {
-      echo $e->getMessage();
-    }
+    var_dump($_POST);
+    // try {
+    //   $result  = $this->model('users_model')->update($_POST);
+    //   if($result > 0) {
+    //     echo 'success';
+    //   }
+    // } catch(Exception $e) {
+    //   echo $e->getMessage();
+    // }
   }
 
   public function delete() {
