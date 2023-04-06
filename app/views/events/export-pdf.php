@@ -9,8 +9,7 @@ $html = '<!DOCTYPE html>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Print Notulen [ ' . $data['notulen']['title'] . ' ]</title>
-            <link rel="stylesheet" media="print" href="'. BASEURL . "/assets/css/css-for-pdf/style-pdf.css" .'" />
+            <title>Print Acara [ ' . $data['event']['title'] . ' ]</title>
           </head>
           <body>
             <table style="margin-left: auto; margin-right: auto;">
@@ -27,34 +26,42 @@ $html = '<!DOCTYPE html>
             </table>
 
             <hr>
+            <hr style="margin-top: -11px;">
             
-            <h3 style="text-align: center;"><u>NOTULEN RAPAT</u></h3>
+            <h4 style="text-align: center;"><u>KONSEP ACARA</u></h4>
+            <h4 style="text-align: center; padding-top: -12px;"><u>'. strtoupper($data['event']['title']) .'</u></h4>
 
-            <table border="0" style="border-collapse: collapse; margin-left: auto; margin-right: auto; margin-top: 20px; width: 700px;">
+            <table border="0" style="border-collapse: collapse; margin-left: auto; margin-right: auto; margin: 20px 0 30px 0; width: 700px;">
               <tr>
-                <td style="border-bottom: 1px dotted black;">Tempat, tanggal & waktu rapat</td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">'.$data['notulen']['meeting_room'] . ', ' . date('d-M-Y', strtotime($data['notulen']['meeting_date'])) . ' - ' . $data['notulen']['meeting_time'] .' WIB</td>
+                <td>Dasar</td>
+                <td>: </td>
+                <td>Hasil rapat tanggal ' . date('d-M-Y', strtotime($data['committee'][0]['meeting_date'])) . ' - ' . $data['committee'][0]['meeting_time'] .' WIB @ ' . $data['committee'][0]['meeting_room'] . '</td>
               </tr>
               <tr>
-                <td style="border-bottom: 1px dotted black;">Judul rapat</td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">'.$data['notulen']['title'].'</td>
-              </tr>
-              <tr>
-                <td style="border-bottom: 1px dotted black;">Anggota rapat</td>
-                <td style="border-bottom: 1px dotted black;">: </td>
-                <td style="border-bottom: 1px dotted black;">'.$data['notulen']['meeting_participants'].'</td>
+                <td>Anggota rapat</td>
+                <td>: </td>
+                <td>'.$data['committee'][0]['meeting_participants'].'</td>
               </tr>
             </table>
 
-            <p>Isi rapat :</p>
-            <p style="padding-top: -25px;">'. $data['notulen']['body'] .'</p>
+            <ul>
+              <li><b>Susunan Panitia</b></li>';
+              $x = 1;
+              foreach($data['committee'] as $comm) {
+                $html .= '<p style="margin-bottom: 0px;"><b>'. $x++ . '. ' . $comm['position'] . ' - ' . $comm['person_name'] .'</b></p>';
+                $html .= '<span>Tupoksi : '. $comm['main_duties_and_functions'] .'</span>';
+              }
+              $y = 1;
+    $html .= '<li style="padding-top: 15px;"><b>Anggaran Dana</b></li>';
+              foreach($data['budget'] as $budg) {
+                $html .= '<p style="margin-bottom: 0px;"><b>'. $y++ . '. ' . $budg['budget_name'] . ' - Rp. ' . number_format($budg['budget_price'], 2, ',', '.') .'</b></p>';
+                $html .= '<span>Keterangan : '. $budg['remarks'] .'</span>';
+              }
+  $html .= '</ul>';
 
-            <p style="text-align: right; color:grey;">Tanggal download : '. date('d-M-Y H:i') .' WIB</p>
+  $html .= '<p style="text-align: right; color:grey;">Tanggal download : '. date('d-M-Y H:i') .' WIB</p>
           </body>
         </html>';
 $mpdf->WriteHTML($html);
-$mpdf->Output('Notulen Rapat ' . date('d-M-Y', strtotime($data['notulen']['meeting_date'])) . ' (' . $data['notulen']['title'] . ').pdf', 'I');
-// var_dump($data);
+$mpdf->Output('Print Konsep Acara ' . $data['event']['title'] . '.pdf', 'I');
 ?>

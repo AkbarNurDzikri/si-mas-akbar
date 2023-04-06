@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-12 col-md-12" id="colDataTable">
     <div class="card">
-      <!-- <?php var_dump($data['moms'])?> -->
       <div class="card-header">
         <a href="<?= BASEURL ?>/events/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle"></i> Agenda</a>
       </div>
@@ -34,6 +33,7 @@
                 <td class="text-center  align-middle"><?= $event['status'] ?></td>
                 <td class="text-center  align-middle">
                   <a href="<?= BASEURL . "/events/edit/" . $event['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
+                  <a href="<?= BASEURL . "/events/pdf/" . $event['id'] ?>" class="btn btn-sm btn-warning mb-1"><i class="bi bi-filetype-pdf"></i></a>
                   <button class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete" data-id="<?= $event['id'] ?>" data-name="<?= $event['event_name'] ?>"><i class="bi bi-trash3"></i></a>
                 </td>
               </tr>

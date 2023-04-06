@@ -85,4 +85,11 @@ class Events_model
 
 		return $this->db->rowCount();
 	}
+
+	public function getExport($id) {
+		$this->db->query("SELECT e.*, mom.title, mom.meeting_date, mom.meeting_time, mom.meeting_room, mom.meeting_participants, eb.budget_name, eb.budget_price, eb.remarks, ec.person_name, ec.position, ec.main_duties_and_functions AS duties FROM events AS e INNER JOIN minutes_of_meetings AS mom ON mom.id = e.ref_meeting INNER JOIN event_budgeting AS eb ON eb.event_id = e.id INNER JOIN event_committees AS ec ON ec.event_id = e.id WHERE e.id = :id GROUP BY e.event_name, ec.position, eb.budget_name");
+
+		$this->db->bind('id', $id);
+		return $this->db->resultSet();
+	}
 }

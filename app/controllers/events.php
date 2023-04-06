@@ -68,11 +68,13 @@ class Events extends Controller {
     }
   }
 
-  // public function pdf($id) {
-  //   $data = [
-  //     'notulen'  => $this->model('events_model')->getDataById($id),
-  //   ];
+  public function pdf($id) {
+    $data = [
+      'event'  => $this->model('events_model')->getDataById($id),
+      'committee'  => $this->model('committees_model')->getDataById($id),
+      'budget'  => $this->model('budgeting_model')->getDataById($id),
+    ];
 
-  //   $this->view('events/export-pdf', $data);
-  // }
+    $this->view('events/export-pdf', $data);
+  }
 }

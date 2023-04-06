@@ -6,7 +6,7 @@
       </div>
       <div class="card-body">
         <form id="myForm">
-          <label for="ref_meeting" class="form-label">Rujukan Rapat</label>
+          <label for="ref_meeting" class="form-label mt-3">Rujukan Rapat</label>
           <select name="ref_meeting" id="ref_meeting" class="form-select mb-3" required>
             <option value="" disabled selected>Pilih Rapat</option>
             <!-- <option value="NULL">Tanpa Rapat</option> Disiapkan tanpa rapat karena kemungkinan ada acara tanpa rapat terlebih dahulu. Ini dinonaktifkan sementara (asumsi selalu ada rapat). Jika benar-benar ada acara tanpa rapat sebelumnya, harus dibuat minutes_of_meetings dengan judul anonim untuk mengisi acara tanpa rapat. -->
