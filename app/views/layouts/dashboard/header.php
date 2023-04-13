@@ -319,12 +319,12 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link <?= $data['title'] == 'Zakat' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? '' : 'collapsed' ?>" data-bs-target="#zis-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link <?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? '' : 'collapsed' ?>" data-bs-target="#zis-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Z.I.S</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="zis-nav" class="nav-content collapse <?= $data['title'] == 'Zakat' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+        <ul id="zis-nav" class="nav-content collapse <?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<?= BASEURL . '/zakat' ?>" class="<?= $data['title'] == 'Zakat' ? 'active' : '' ?>">
+            <a href="<?= BASEURL . '/zakat_fitrah/uang' ?>" class="<?= $data['title'] == 'Zakat Fitrah | Uang Masuk' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Zakat</span>
             </a>
           </li>

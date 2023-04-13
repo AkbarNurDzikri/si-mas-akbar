@@ -104,7 +104,7 @@
               title: 'Berhasil login ..',
               showConfirmButton: true,
             }).then(() => {
-              window.location = '<?= BASEURL . "/zakat" ?>'
+              window.location = '<?= BASEURL . "/zakat_fitrah/uang" ?>'
             });
           } else {
             Swal.fire({
