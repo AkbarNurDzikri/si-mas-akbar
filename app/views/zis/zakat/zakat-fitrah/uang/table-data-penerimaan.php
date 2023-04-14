@@ -22,8 +22,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-slack"></i> Beras</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Penerimaan</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-upload"></i> Pengeluaran</a></li>
+            <li><a class="dropdown-item" href="<?= BASEURL . '/zakat_fitrah/beras' ?>"><i class="bi bi-download"></i> Penerimaan</a></li>
+            <li><a class="dropdown-item" href="<?= BASEURL . '/zakat_fitrah/beras_keluar' ?>"><i class="bi bi-upload"></i> Pengeluaran</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#"><i class="bi bi-filetype-pdf"></i> Laporan</a></li>
           </ul>

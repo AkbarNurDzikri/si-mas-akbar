@@ -8,13 +8,14 @@ class Zakat_model
 		$this->db = new Database;
 	}
 
+	// Zakat Uang
 	public function getUangMasuk() {
-		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL ORDER BY created_at DESC");
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL AND zakat_type = 'Uang' ORDER BY created_at DESC");
 		return $this->db->resultSet();
 	}
 
 	public function getUangMasukBetweenDate($params) {
-		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.created_at BETWEEN :start_date AND :end_date AND z.qty_out IS NULL ORDER BY created_at DESC");
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.created_at BETWEEN :start_date AND :end_date AND z.qty_out IS NULL AND zakat_type = 'Uang' ORDER BY created_at DESC");
 		
 		$this->db->bind('start_date', $params['start_date'] . ' 0:00:00');
 		$this->db->bind('end_date', $params['end_date'] . ' 23:59:59');
@@ -22,19 +23,19 @@ class Zakat_model
 	}
 
 	public function getUangKeluar() {
-		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_in IS NULL ORDER BY created_at DESC");
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_in IS NULL AND zakat_type = 'Uang' ORDER BY created_at DESC");
 		return $this->db->resultSet();
 	}
 
 	public function getUangKeluarBetweenDate($params) {
-		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.created_at BETWEEN :start_date AND :end_date AND z.qty_in IS NULL ORDER BY created_at DESC");
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.created_at BETWEEN :start_date AND :end_date AND z.qty_in IS NULL AND zakat_type = 'Uang' ORDER BY created_at DESC");
 		
 		$this->db->bind('start_date', $params['start_date'] . ' 0:00:00');
 		$this->db->bind('end_date', $params['end_date'] . ' 23:59:59');
 		return $this->db->resultSet();
 	}
 
-	public function createZakatUang($data) {
+	public function createZakat($data) {
 		$query = "INSERT INTO zakat_fitrah VALUES ('', :created_by, :updated_by, :person_name, :person_address, :person_status, :zakat_type, :qty_in, :qty_out, :remarks, :created_at, :updated_at)";
 
 		$this->db->query($query);
@@ -62,7 +63,7 @@ class Zakat_model
 		return $this->db->resultSet();
 	}
 
-	public function updateZakatUang($data) {
+	public function updateZakat($data) {
 		$query = "UPDATE zakat_fitrah SET
 				updated_by = :updated_by,
 				person_name = :person_name,
@@ -89,7 +90,7 @@ class Zakat_model
 		return $this->db->rowCount();
 	}
 
-	public function deleteZakatUang($id) {
+	public function deleteZakat($id) {
 		$query = "DELETE FROM zakat_fitrah WHERE id = :id";
 		$this->db->query($query);
 		$this->db->bind('id', $id);
@@ -97,5 +98,33 @@ class Zakat_model
 		$this->db->execute();
 
 		return $this->db->rowCount();
+	}
+	// Zakat Uang
+
+	// Zakat Beras
+	public function getBerasMasuk() {
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL AND zakat_type = 'Beras' ORDER BY created_at DESC");
+		return $this->db->resultSet();
+	}
+
+	public function getBerasMasukBetweenDate($params) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.created_at BETWEEN :start_date AND :end_date AND z.qty_out IS NULL AND zakat_type = 'Beras' ORDER BY created_at DESC");
+		
+		$this->db->bind('start_date', $params['start_date'] . ' 0:00:00');
+		$this->db->bind('end_date', $params['end_date'] . ' 23:59:59');
+		return $this->db->resultSet();
+	}
+
+	public function getBerasKeluar() {
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_in IS NULL AND zakat_type = 'Beras' ORDER BY created_at DESC");
+		return $this->db->resultSet();
+	}
+
+	public function getBerasKeluarBetweenDate($params) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.created_at BETWEEN :start_date AND :end_date AND z.qty_in IS NULL AND zakat_type = 'Beras' ORDER BY created_at DESC");
+		
+		$this->db->bind('start_date', $params['start_date'] . ' 0:00:00');
+		$this->db->bind('end_date', $params['end_date'] . ' 23:59:59');
+		return $this->db->resultSet();
 	}
 }

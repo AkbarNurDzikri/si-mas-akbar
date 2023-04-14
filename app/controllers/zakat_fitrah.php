@@ -1,6 +1,7 @@
 <?php
 
 class Zakat_fitrah extends Controller {
+  // Zakat Uang
   public function uang() {
     $data = [
       'title' => 'Zakat Fitrah | Uang Masuk',
@@ -24,7 +25,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_masuk_store() {
     try {
-      $result  = $this->model('zakat_model')->createZakatUang($_POST);
+      $result  = $this->model('zakat_model')->createZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -46,7 +47,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_masuk_update() {
     try {
-      $result  = $this->model('zakat_model')->updateZakatUang($_POST);
+      $result  = $this->model('zakat_model')->updateZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -57,7 +58,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_masuk_delete($id) {
     try {
-      $result  = $this->model('zakat_model')->deleteZakatUang($id);
+      $result  = $this->model('zakat_model')->deleteZakat($id);
       if($result > 0) {
         echo 'success';
       }
@@ -91,7 +92,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_keluar_store() {
     try {
-      $result  = $this->model('zakat_model')->createZakatUang($_POST);
+      $result  = $this->model('zakat_model')->createZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -115,7 +116,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_keluar_update() {
     try {
-      $result  = $this->model('zakat_model')->updateZakatUang($_POST);
+      $result  = $this->model('zakat_model')->updateZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -126,7 +127,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_keluar_delete($id) {
     try {
-      $result  = $this->model('zakat_model')->deleteZakatUang($id);
+      $result  = $this->model('zakat_model')->deleteZakat($id);
       if($result > 0) {
         echo 'success';
       }
@@ -155,5 +156,163 @@ class Zakat_fitrah extends Controller {
     ];
 
     $this->view('zis/zakat/zakat-fitrah/uang/laporan-uang-keluar-pdf', $data);
+  }
+  // Zakat Uang
+
+  // Zakat Beras
+  public function beras() {
+    $data = [
+      'title' => 'Zakat Fitrah | Beras Masuk',
+      'zakat_fitrah_beras_masuk' => $this->model('zakat_model')->getBerasMasuk(),
+    ];
+
+    $this->view('layouts/dashboard/header', $data);
+    $this->view('zis/zakat/zakat-fitrah/beras/table-data-penerimaan', $data);
+    $this->view('layouts/dashboard/footer');
+  }
+
+  public function catat_beras_masuk() {
+    $data = [
+      'title' => 'Zakat Fitrah | Input Beras Masuk',
+    ];
+
+    $this->view('layouts/dashboard/header', $data);
+    $this->view('zis/zakat/zakat-fitrah/beras/create-beras-masuk', $data);
+    $this->view('layouts/dashboard/footer');
+  }
+
+  public function beras_masuk_store() {
+    try {
+      $result  = $this->model('zakat_model')->createZakat($_POST);
+      if($result > 0) {
+        echo 'success';
+      }
+    } catch(Exception $e) {
+      echo $e->getMessage();
+    }
+  }
+
+  public function beras_masuk_edit($id) {
+    $data = [
+      'title' => 'Zakat Fitrah | Edit Beras Masuk',
+      'muzakki' => $this->model('zakat_model')->getDataById($id),
+    ];
+
+    $this->view('layouts/dashboard/header', $data);
+    $this->view('zis/zakat/zakat-fitrah/beras/edit-beras-masuk', $data);
+    $this->view('layouts/dashboard/footer');
+  }
+
+  public function beras_masuk_update() {
+    try {
+      $result  = $this->model('zakat_model')->updateZakat($_POST);
+      if($result > 0) {
+        echo 'success';
+      }
+    } catch(Exception $e) {
+      echo $e->getMessage();
+    }
+  }
+
+  public function beras_masuk_delete($id) {
+    try {
+      $result  = $this->model('zakat_model')->deleteZakat($id);
+      if($result > 0) {
+        echo 'success';
+      }
+    } catch(Exception $e) {
+      echo $e->getMessage();
+    }
+  }
+
+  public function beras_keluar() {
+    $data = [
+      'title' => 'Zakat Fitrah | Beras Keluar',
+      'zakat_fitrah_beras_keluar' => $this->model('zakat_model')->getBerasKeluar(),
+    ];
+
+    $this->view('layouts/dashboard/header', $data);
+    $this->view('zis/zakat/zakat-fitrah/beras/table-data-penyaluran', $data);
+    $this->view('layouts/dashboard/footer');
+  }
+
+  public function catat_beras_keluar() {
+    $data = [
+      'title' => 'Zakat Fitrah | Input Beras Keluar',
+      'totalBerasMasuk' => $this->model('zakat_model')->getBerasMasuk(),
+      'totalBerasKeluar' => $this->model('zakat_model')->getBerasKeluar(),
+    ];
+
+    $this->view('layouts/dashboard/header', $data);
+    $this->view('zis/zakat/zakat-fitrah/beras/create-beras-keluar', $data);
+    $this->view('layouts/dashboard/footer');
+  }
+
+  public function beras_keluar_store() {
+    try {
+      $result  = $this->model('zakat_model')->createZakat($_POST);
+      if($result > 0) {
+        echo 'success';
+      }
+    } catch(Exception $e) {
+      echo $e->getMessage();
+    }
+  }
+
+  public function beras_keluar_edit($id) {
+    $data = [
+      'title' => 'Zakat Fitrah | Edit Beras Keluar',
+      'muzakki' => $this->model('zakat_model')->getDataById($id),
+      'totalBerasMasuk' => $this->model('zakat_model')->getBerasMasuk(),
+      'totalBerasKeluar' => $this->model('zakat_model')->getBerasKeluar(),
+    ];
+
+    $this->view('layouts/dashboard/header', $data);
+    $this->view('zis/zakat/zakat-fitrah/beras/edit-beras-keluar', $data);
+    $this->view('layouts/dashboard/footer');
+  }
+
+  public function beras_keluar_update() {
+    try {
+      $result  = $this->model('zakat_model')->updateZakat($_POST);
+      if($result > 0) {
+        echo 'success';
+      }
+    } catch(Exception $e) {
+      echo $e->getMessage();
+    }
+  }
+
+  public function beras_keluar_delete($id) {
+    try {
+      $result  = $this->model('zakat_model')->deleteZakat($id);
+      if($result > 0) {
+        echo 'success';
+      }
+    } catch(Exception $e) {
+      echo $e->getMessage();
+    }
+  }
+
+  public function laporan_beras_masuk() {
+    $data = [
+      'totalBerasMasuk' => $this->model('zakat_model')->getBerasMasukBetweenDate($_POST),
+      'totalBerasKeluar' => $this->model('zakat_model')->getBerasKeluarBetweenDate($_POST),
+      'start_period' => $_POST['start_date'],
+      'end_period' => $_POST['end_date'],
+    ];
+
+    $this->view('zis/zakat/zakat-fitrah/beras/laporan-beras-masuk-pdf', $data);
+  }
+
+  public function laporan_beras_keluar() {
+    $data = [
+      'totalBerasMasuk' => $this->model('zakat_model')->getBerasMasukBetweenDate($_POST),
+      'totalBerasKeluar' => $this->model('zakat_model')->getBerasKeluarBetweenDate($_POST),
+      'start_period' => $_POST['start_date'],
+      'end_period' => $_POST['end_date'],
+    ];
+
+    $this->view('zis/zakat/zakat-fitrah/beras/laporan-beras-keluar-pdf', $data);
   }
 }

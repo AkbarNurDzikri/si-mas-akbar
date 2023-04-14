@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__, 5) . '/assets/dashboard/vendor/mpdf/autoload.php';
+require_once dirname(__DIR__, 6) . '/assets/dashboard/vendor/mpdf/autoload.php';
 
 $mpdf = new \Mpdf\Mpdf();
 $mpdf->SetFooter('{PAGENO}');
