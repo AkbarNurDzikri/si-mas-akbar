@@ -8,7 +8,7 @@ class Zakat_fitrah extends Controller {
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('zis/zakat/zakat-fitrah/table-data-penerimaan', $data);
+    $this->view('zis/zakat/zakat-fitrah/uang/table-data-penerimaan', $data);
     $this->view('layouts/dashboard/footer');
   }
 
@@ -18,7 +18,7 @@ class Zakat_fitrah extends Controller {
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('zis/zakat/zakat-fitrah/create-uang-masuk', $data);
+    $this->view('zis/zakat/zakat-fitrah/uang/create-uang-masuk', $data);
     $this->view('layouts/dashboard/footer');
   }
 
@@ -40,7 +40,7 @@ class Zakat_fitrah extends Controller {
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('zis/zakat/zakat-fitrah/edit-uang-masuk', $data);
+    $this->view('zis/zakat/zakat-fitrah/uang/edit-uang-masuk', $data);
     $this->view('layouts/dashboard/footer');
   }
 
@@ -73,7 +73,7 @@ class Zakat_fitrah extends Controller {
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('zis/zakat/zakat-fitrah/table-data-penyaluran', $data);
+    $this->view('zis/zakat/zakat-fitrah/uang/table-data-penyaluran', $data);
     $this->view('layouts/dashboard/footer');
   }
 
@@ -85,7 +85,7 @@ class Zakat_fitrah extends Controller {
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('zis/zakat/zakat-fitrah/create-uang-keluar', $data);
+    $this->view('zis/zakat/zakat-fitrah/uang/create-uang-keluar', $data);
     $this->view('layouts/dashboard/footer');
   }
 
@@ -109,7 +109,7 @@ class Zakat_fitrah extends Controller {
     ];
 
     $this->view('layouts/dashboard/header', $data);
-    $this->view('zis/zakat/zakat-fitrah/edit-uang-keluar', $data);
+    $this->view('zis/zakat/zakat-fitrah/uang/edit-uang-keluar', $data);
     $this->view('layouts/dashboard/footer');
   }
 
@@ -143,7 +143,7 @@ class Zakat_fitrah extends Controller {
       'end_period' => $_POST['end_date'],
     ];
 
-    $this->view('zis/zakat/zakat-fitrah/laporan-uang-masuk-pdf', $data);
+    $this->view('zis/zakat/zakat-fitrah/uang/laporan-uang-masuk-pdf', $data);
   }
 
   public function laporan_uang_keluar() {
@@ -154,6 +154,6 @@ class Zakat_fitrah extends Controller {
       'end_period' => $_POST['end_date'],
     ];
 
-    $this->view('zis/zakat/zakat-fitrah/laporan-uang-keluar-pdf', $data);
+    $this->view('zis/zakat/zakat-fitrah/uang/laporan-uang-keluar-pdf', $data);
   }
 }
