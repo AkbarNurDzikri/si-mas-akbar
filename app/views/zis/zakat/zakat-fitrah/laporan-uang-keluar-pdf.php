@@ -57,6 +57,11 @@ $html = '<!DOCTYPE html>
                     $html .= '<td style="text-align: center;">'. $uangKeluar['remarks'] .'</td>';
                   $html .= '</tr>';
                 endforeach;
+
+                $totalUangMasuk = 0;
+                foreach($data['totalUangMasuk'] as $uangMasuk) :
+                  $totalUangMasuk += $uangMasuk['qty_in'];
+                endforeach;
     $html .= '<tr>
                 <td colspan="5" style="border: none; border-left: 1px solid black; border-bottom: 1px solid black; text-align: center;"><b>Total</b></td>
                 <td style="border: none; border-bottom: 1px solid black; text-align: right;"><b>Rp.'. number_format($totalUangKeluar, 2, ',', '.') .'</b></td>
@@ -64,6 +69,8 @@ $html = '<!DOCTYPE html>
               </tr>
               </tbody>
             </table>
+          <p><b>Total Penerimaan : Rp. '. number_format($totalUangMasuk, 2, ',', '.') .'</b></p>
+          <p style="padding-top: -15px;"><b>Sisa Saldo :</b> <b style="color: green;">Rp. '. number_format(($totalUangMasuk - $totalUangKeluar), 2, ',', '.') .'</b></p>
           <p style="text-align: right; color:grey;">Karawang, '. date('d-M-Y H:i') .' WIB</p>
           <p style="text-align: right; color:grey;">'. $_SESSION['userInfo']['username'] . ' ('. $_SESSION['userInfo']['role_name'] .')' .'</p>
           </body>

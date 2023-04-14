@@ -138,6 +138,7 @@ class Zakat_fitrah extends Controller {
   public function laporan_uang_masuk() {
     $data = [
       'totalUangMasuk' => $this->model('zakat_model')->getUangMasukBetweenDate($_POST),
+      'totalUangKeluar' => $this->model('zakat_model')->getUangKeluarBetweenDate($_POST),
       'start_period' => $_POST['start_date'],
       'end_period' => $_POST['end_date'],
     ];
@@ -147,6 +148,7 @@ class Zakat_fitrah extends Controller {
 
   public function laporan_uang_keluar() {
     $data = [
+      'totalUangMasuk' => $this->model('zakat_model')->getUangMasukBetweenDate($_POST),
       'totalUangKeluar' => $this->model('zakat_model')->getUangKeluarBetweenDate($_POST),
       'start_period' => $_POST['start_date'],
       'end_period' => $_POST['end_date'],
