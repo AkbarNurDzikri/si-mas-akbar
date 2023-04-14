@@ -79,7 +79,9 @@ class Zakat_fitrah extends Controller {
 
   public function catat_uang_keluar() {
     $data = [
-      'title' => 'Zakat Fitrah | Input Uang Masuk',
+      'title' => 'Zakat Fitrah | Input Uang Keluar',
+      'totalUangMasuk' => $this->model('zakat_model')->getUangMasuk(),
+      'totalUangKeluar' => $this->model('zakat_model')->getUangKeluar(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -102,6 +104,8 @@ class Zakat_fitrah extends Controller {
     $data = [
       'title' => 'Zakat Fitrah | Edit Uang Keluar',
       'muzakki' => $this->model('zakat_model')->getDataById($id),
+      'totalUangMasuk' => $this->model('zakat_model')->getUangMasuk(),
+      'totalUangKeluar' => $this->model('zakat_model')->getUangKeluar(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -131,11 +135,23 @@ class Zakat_fitrah extends Controller {
     }
   }
 
-  // public function pdf($id) {
-  //   $data = [
-  //     'budgets'  => $this->model('budgeting_model')->getDataById($id),
-  //   ];
+  public function laporan_uang_masuk() {
+    $data = [
+      'totalUangMasuk' => $this->model('zakat_model')->getUangMasukBetweenDate($_POST),
+      'start_period' => $_POST['start_date'],
+      'end_period' => $_POST['end_date'],
+    ];
 
-  //   $this->view('zis/zakat/export-pdf', $data);
-  // }
+    $this->view('zis/zakat/zakat-fitrah/laporan-uang-masuk-pdf', $data);
+  }
+
+  public function laporan_uang_keluar() {
+    $data = [
+      'totalUangKeluar' => $this->model('zakat_model')->getUangKeluarBetweenDate($_POST),
+      'start_period' => $_POST['start_date'],
+      'end_period' => $_POST['end_date'],
+    ];
+
+    $this->view('zis/zakat/zakat-fitrah/laporan-uang-keluar-pdf', $data);
+  }
 }

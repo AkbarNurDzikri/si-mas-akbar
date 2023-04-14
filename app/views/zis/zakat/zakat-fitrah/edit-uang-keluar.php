@@ -1,3 +1,18 @@
+<?php
+  // define saldo
+  $totalUangMasuk = 0;
+  foreach($data['totalUangMasuk'] as $uangMasuk) :
+    $totalUangMasuk += $uangMasuk['qty_in'];
+  endforeach;
+
+  $totalUangKeluar = 0;
+  foreach($data['totalUangKeluar'] as $uangKeluar) :
+    $totalUangKeluar += $uangKeluar['qty_out'];
+  endforeach;
+
+  $saldo = $totalUangMasuk - $totalUangKeluar;
+?>
+
 <div class="row">
   <div class="col-12 col-md-12" id="colForm">
     <div class="card">
@@ -47,6 +62,21 @@
 </div>
 
 <script>
+  $('#qty_out').on('keyup', () => {
+    const saldo = <?= $saldo + $data['muzakki'][0]['qty_out'] ?>;
+    if($('#qty_out').val() > saldo) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Saldo dari uang zakat tidak cukup !',
+        html: 'Sisa saldo : <b style="color: green;">Rp. ' + saldo.toLocaleString('id-ID') + '</b>',
+        showConfirmButton: true,
+      });
+      $('.btnSave').prop('disabled', true);
+    } else {
+      $('.btnSave').prop('disabled', false);
+    }
+  });
+  
   $('#formEdit').on('submit', (e) => {
     e.preventDefault();
 

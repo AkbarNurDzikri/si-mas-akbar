@@ -16,7 +16,7 @@
             <li><a class="dropdown-item text-primary" href="<?= BASEURL . '/zakat_fitrah/uang' ?>"><i class="bi bi-download"></i> Penerimaan</a></li>
             <li><a class="dropdown-item" href="<?= BASEURL . '/zakat_fitrah/uang_keluar' ?>"><i class="bi bi-upload"></i> Pengeluaran</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-filetype-pdf"></i> Laporan</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeReport"><i class="bi bi-filetype-pdf"></i> Laporan</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -68,6 +68,31 @@
           </tbody>
         </table>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Date Range Report -->
+<div class="modal fade" id="dateRangeReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="dateRangeReportLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="dateRangeReportLabel">Laporan Penerimaan Zakat Fitrah (Uang)</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="<?= BASEURL . '/zakat_fitrah/laporan_uang_masuk' ?>" method="POST">
+          <label for="start_date" class="form-label">Mulai tanggal</label>
+          <input type="date" class="form-control mb-3" name="start_date">
+
+          <label for="end_date" class="form-label">Sampai tanggal</label>
+          <input type="date" class="form-control mb-3" name="end_date">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary"><i class="bi bi-cloud-arrow-down"></i> Download</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+      </div>
+      </form>
     </div>
   </div>
 </div>

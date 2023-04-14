@@ -1,8 +1,23 @@
+<?php
+  // define saldo
+  $totalUangMasuk = 0;
+  foreach($data['totalUangMasuk'] as $uangMasuk) :
+    $totalUangMasuk += $uangMasuk['qty_in'];
+  endforeach;
+
+  $totalUangKeluar = 0;
+  foreach($data['totalUangKeluar'] as $uangKeluar) :
+    $totalUangKeluar += $uangKeluar['qty_out'];
+  endforeach;
+
+  $saldo = $totalUangMasuk - $totalUangKeluar;
+?>
+
 <div class="row">
   <div class="col-12 col-md-12" id="colForm">
     <div class="card">
       <div class="card-header">
-        <a href="<?= BASEURL . '/zakat_fitrah/uang' ?>/" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+        <a href="<?= BASEURL . '/zakat_fitrah/uang_keluar' ?>/" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
       </div>
       <div class="card-body">
         <form id="myForm">
@@ -10,7 +25,7 @@
           <input type="text" class="form-control mb-3" name="person_name" id="person_name" autocomplete="off" required>
 
           <label for="person_status" class="form-label">Status Asnaf</label>
-          <select name="person_status" id="person_status" class="form-select mb-3">
+          <select name="person_status" id="person_status" class="form-select mb-3" required>
             <option value="" disabled selected>Pilih Status</option>
             <option value="Fakir">1. Fakir [Hampir tidak punya apa-apa]</option>
             <option value="Miskin">2. Miskin [Punya harta tapi tidak cukup untuk kebutuhan hidup]</option>
@@ -36,7 +51,7 @@
           <label for="remarks" class="form-label">Keterangan</label>
           <textarea name="remarks" id="remarks" class="form-control mb-3" placeholder="Opsional"></textarea>
 
-          <button type="submit" class="btn btn-primary btn-sm float-end">Save</button>
+          <button type="submit" class="btn btn-primary btn-sm float-end btnSave">Save</button>
         </form>
       </div>
     </div>
@@ -44,6 +59,21 @@
 </div>
 
 <script>
+  $('#qty_out').on('keyup', () => {
+    const saldo = <?= $saldo ?>;
+    if($('#qty_out').val() > saldo) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Saldo dari uang zakat tidak cukup !',
+        html: 'Sisa saldo : <b style="color: green;">Rp. ' + saldo.toLocaleString('id-ID') + '</b>',
+        showConfirmButton: true,
+      });
+      $('.btnSave').prop('disabled', true);
+    } else {
+      $('.btnSave').prop('disabled', false);
+    }
+  });
+  
   $('#myForm').on('submit', (e) => {
     e.preventDefault();
 

@@ -13,8 +13,24 @@ class Zakat_model
 		return $this->db->resultSet();
 	}
 
+	public function getUangMasukBetweenDate($params) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.created_at BETWEEN :start_date AND :end_date AND z.qty_out IS NULL ORDER BY created_at DESC");
+		
+		$this->db->bind('start_date', $params['start_date'] . ' 0:00:00');
+		$this->db->bind('end_date', $params['end_date'] . ' 23:59:59');
+		return $this->db->resultSet();
+	}
+
 	public function getUangKeluar() {
 		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_in IS NULL ORDER BY created_at DESC");
+		return $this->db->resultSet();
+	}
+
+	public function getUangKeluarBetweenDate($params) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.created_at BETWEEN :start_date AND :end_date AND z.qty_in IS NULL ORDER BY created_at DESC");
+		
+		$this->db->bind('start_date', $params['start_date'] . ' 0:00:00');
+		$this->db->bind('end_date', $params['end_date'] . ' 23:59:59');
 		return $this->db->resultSet();
 	}
 
