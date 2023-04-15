@@ -2,7 +2,7 @@
   <div class="col-12 col-md-12">
     <!-- Navigasi Zakat Fitrah Zakat Mal -->
     <a href="<?= BASEURL . '/zakat_fitrah/uang' ?>" class="btn btn-primary mb-3">Zakat Fitrah</a>
-    <a href="<?= BASEURL . '/zakat_mal/uang' ?>" class="btn btn-light mb-3">Zakat Mal</a>
+    <a href="<?= BASEURL . '/zakat_maal/uang' ?>" class="btn btn-light mb-3">Zakat Maal</a>
   </div>
 </div>
 
@@ -58,7 +58,7 @@
                 <td class="text-center align-middle"><?= $fitrah['person_name'] ?></td>
                 <td class="text-center align-middle"><?= $fitrah['person_status'] ?></td>
                 <td class="text-center align-middle"><?= $fitrah['person_address'] ?></td>
-                <td class="text-end align-middle">Rp. <?= $fitrah['qty_out'] ?> Liter</td>
+                <td class="text-end align-middle">Rp. <?= str_replace('.', ',', $fitrah['qty_out']) ?> L</td>
                 <td class="text-center align-middle"><?= $fitrah['remarks'] ?></td>
                 <td class="text-center align-middle"><?= $fitrah['username'] ?></td>
                 <td class="text-center align-middle">
@@ -100,7 +100,7 @@
 </div>
 
 <script>
-  $('#captionTable').html(`<b>Total : <?= $totalUangMasuk ?> Liter</b>`);
+  $('#captionTable').html(`<b>Total : <?= str_replace('.', ',', $totalUangMasuk) ?> Liter</b>`);
 
   function confirmDelete(id, name) {
     if(confirm(`Yakin hapus data ${name} ?`)) {

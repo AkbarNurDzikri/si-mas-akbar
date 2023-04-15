@@ -2,7 +2,7 @@
   <div class="col-12 col-md-12">
     <!-- Navigasi Zakat Fitrah Zakat Mal -->
     <a href="<?= BASEURL . '/zakat_fitrah/uang' ?>" class="btn btn-primary mb-3">Zakat Fitrah</a>
-    <a href="<?= BASEURL . '/zakat_mal/uang' ?>" class="btn btn-light mb-3">Zakat Mal</a>
+    <a href="<?= BASEURL . '/zakat_maal/uang' ?>" class="btn btn-light mb-3">Zakat Maal</a>
   </div>
 </div>
 
@@ -56,7 +56,7 @@
                 <td class="text-center align-middle"><?= date('d-M-y, H:i', strtotime($fitrah['created_at'])) ?></td>
                 <td class="text-center align-middle"><?= $fitrah['person_name'] ?></td>
                 <td class="text-center align-middle"><?= $fitrah['person_address'] ?></td>
-                <td class="text-end align-middle"><?= $fitrah['qty_in'] ?> Liter</td>
+                <td class="text-end align-middle"><?= str_replace('.', ',', $fitrah['qty_in']) ?> L</td>
                 <td class="text-center align-middle"><?= $fitrah['remarks'] ?></td>
                 <td class="text-center align-middle"><?= $fitrah['username'] ?></td>
                 <td class="text-center align-middle">
@@ -77,7 +77,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="dateRangeReportLabel">Laporan Penerimaan Zakat Fitrah (Uang)</h1>
+        <h1 class="modal-title fs-5" id="dateRangeReportLabel">Laporan Penerimaan Zakat Fitrah (Beras)</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -98,7 +98,7 @@
 </div>
 
 <script>
-  $('#captionTable').html(`<b>Total : <?= $totalUangMasuk ?> Liter</b>`);
+  $('#captionTable').html(`<b>Total : <?= str_replace('.', ',', $totalUangMasuk) ?> Liter</b>`);
 
   function confirmDelete(id, name) {
     if(confirm(`Yakin hapus data ${name} ?`)) {

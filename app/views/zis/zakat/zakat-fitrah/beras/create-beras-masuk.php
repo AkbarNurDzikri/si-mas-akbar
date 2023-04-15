@@ -3,35 +3,42 @@
     <div class="card">
       <div class="card-header">
         <a href="<?= BASEURL . '/zakat_fitrah/beras' ?>/" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+        <button type="button" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#kalkulatorModal"><i class="bi bi-calculator"></i> Kalkulator</button>
       </div>
       <div class="card-body">
         <form id="myForm">
           <input type="hidden" name="person_status" value="Muzakki">
 
-          <label for="besaran_zakat" class="form-label mt-3">Besaran Zakat / Jiwa</label>
-          <div class="input-group mb-3">
-            <input type="number" class="form-control" id="besaran_zakat" placeholder="Sesuaikan dengan pemerintah" value="3.5" step="any" autocomplete="off" required>
-            <span class="input-group-text" id="labelRupiah">Liter</span>
-          </div>
-
-          <label for="person_name" class="form-label" id="labelPersonName">Nama Muzakki</label>
+          <label for="person_name" class="form-label mt-3" id="labelPersonName">Nama Muzakki</label>
           <input type="text" class="form-control mb-3" name="person_name" id="person_name" autocomplete="off" required>
 
           <label for="person_address" class="form-label">Alamat</label>
           <textarea name="person_address" id="person_address" class="form-control mb-3" placeholder="Perum MAP Blok UU No. 20" required></textarea>
 
           <input type="hidden" name="zakat_type" value="Beras">
-          
-          <label for="qty" class="form-label" id="labelJumlahJiwa">Jumlah Jiwa</label>
+
+          <label for="nilai_zakat" class="form">Nilai Zakat</label>
+          <span class="spinner-grow spinner-grow-sm text-primary float-end" role="status"></span>
+          <small class="text-muted float-end me-1"><i class="bi bi-info-circle"></i> 1 Kg = 0.753 Liter</small>
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" id="nilai_zakat" step="any" autocomplete="off" required>
+            <span class="input-group-text" id="labelBeras">
+              <input class="form-check-input" type="radio" name="satuan" id="kilogram"> &nbsp;
+              <label class="form-check-label" for="kilogram">Kg</label>
+            </span>
+            <span class="input-group-text" id="labelBeras">
+              <input class="form-check-input" type="radio" name="satuan" id="liter"> &nbsp;
+              <label class="form-check-label" for="liter">Liter</label>
+            </span>
+          </div>
+
+          <!-- untuk menampung nilai dari input nilai_zakat -->
+          <input type="hidden" name="qty_in" id="qty_in">
+
+          <label for="jumlah_jiwa" class="form-label" id="labelJumlahJiwa">Jumlah Jiwa</label>
           <div class="input-group mb-3">
             <input type="number" class="form-control" id="jumlah_jiwa" autocomplete="off" required>
             <span class="input-group-text" id="jumlah_jiwa">Orang</span>
-          </div>
-
-          <label for="qty_in" class="form-label" id="labelRupiah">Nilai Zakat Standar</label>
-          <div class="input-group mb-3">
-            <input type="number" class="form-control" id="qty_in" name="qty_in" step="any" autocomplete="off" required>
-            <span class="input-group-text" id="labelRupiah">Liter</span>
           </div>
 
           <label for="remarks" class="form-label">Keterangan</label>
@@ -44,11 +51,61 @@
   </div>
 </div>
 
+<!-- Modal Kalkulator -->
+<div class="modal fade bg-dark" id="kalkulatorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="kalkulatorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="kalkulatorModalLabel">Kalkulator Zakat Fitrah (Beras)</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-header text-center bg-dark text-white countResult"></div>
+          <div class="card-body bg-dark text-white">
+            <label for="besaranZakatKalkulator" class="form-label mt-3">Besaran Zakat</label>
+            <div class="input-group mb-3">
+              <input type="number" class="form-control" id="besaranZakatKalkulator" step="any" autocomplete="off" placeholder="Sesuaikan dengan pemerintah" required>
+              <span class="input-group-text" id="labelBeras">Liter</span>
+          </div>
+
+          <label for="jumlah_jiwa_kalkulator" class="form-label">Jumlah Jiwa</label>
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" id="jumlah_jiwa_kalkulator" autocomplete="off" required>
+            <span class="input-group-text" id="labelBeras">Orang</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   $('#jumlah_jiwa').on('keyup', () => {
-    const nilaiZakat = $('#besaran_zakat').val() * $('#jumlah_jiwa').val();
-    $('#qty_in').val(nilaiZakat);
     $('#jumlah_jiwa').val() == '' ? $('#remarks').val('') : $('#remarks').val($('#jumlah_jiwa').val() + ' Orang');
+  });
+
+  $('input[name="satuan"]').on('change', () => {
+    if($('#kilogram').is(':checked')) {
+      $('#qty_in').val($('#nilai_zakat').val() * 0.753);
+    } else {
+      $('#qty_in').val($('#nilai_zakat').val());
+    }
+  });
+
+  $('#nilai_zakat').on('keyup', () => {
+    if($('#kilogram').is(':checked')) {
+      $('#qty_in').val($('#nilai_zakat').val() * 0.753);
+    } else {
+      $('#qty_in').val($('#nilai_zakat').val());
+    }
+  });
+
+  $('#jumlah_jiwa_kalkulator').on('keyup', () => {
+    $('.countResult').html('<h3>' + $('#jumlah_jiwa_kalkulator').val() * $('#besaranZakatKalkulator').val() + ' Liter</h3>');
   });
 
   $('#myForm').on('submit', (e) => {

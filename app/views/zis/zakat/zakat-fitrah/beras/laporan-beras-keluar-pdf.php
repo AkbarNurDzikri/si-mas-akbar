@@ -38,7 +38,7 @@ $html = '<!DOCTYPE html>
                   <th>Nama Mustahik</th>
                   <th>Status</th>
                   <th>Alamat</th>
-                  <th>Rupiah</th>
+                  <th>Qty</th>
                   <th>Keterangan</th>
                 </tr>
               </thead>
@@ -53,7 +53,7 @@ $html = '<!DOCTYPE html>
                     $html .= '<td style="text-align: center;">'. $berasKeluar['person_name'] .'</td>';
                     $html .= '<td style="text-align: center;">'. $berasKeluar['person_status'] .'</td>';
                     $html .= '<td style="text-align: center;">'. $berasKeluar['person_address'] .'</td>';
-                    $html .= '<td style="text-align: right;">'. $berasKeluar['qty_out'] .' Liter</td>';
+                    $html .= '<td style="text-align: right;">'. str_replace('.', ',', $berasKeluar['qty_out']) .' L</td>';
                     $html .= '<td style="text-align: center;">'. $berasKeluar['remarks'] .'</td>';
                   $html .= '</tr>';
                 endforeach;
@@ -64,13 +64,13 @@ $html = '<!DOCTYPE html>
                 endforeach;
     $html .= '<tr>
                 <td colspan="5" style="border: none; border-left: 1px solid black; border-bottom: 1px solid black; text-align: center;"><b>Total</b></td>
-                <td style="border: none; border-bottom: 1px solid black; text-align: right;"><b>'. $totalBerasKeluar .' Liter</b></td>
+                <td style="border: none; border-bottom: 1px solid black; text-align: right;"><b>'. str_replace('.', ',', $totalBerasKeluar) .' L</b></td>
                 <td style="border: none; border-right: 1px solid black; border-bottom: 1px solid black;"></td>
               </tr>
               </tbody>
             </table>
-          <p><b>Total Penerimaan : '. $totalBerasMasuk .' Liter</b></p>
-          <p style="padding-top: -15px;"><b>Sisa Saldo :</b> <b style="color: green;">'. ($totalBerasMasuk - $totalBerasKeluar) .' Liter</b></p>
+          <p><b>Total Penerimaan : '. str_replace('.', ',', $totalBerasMasuk) .' L</b></p>
+          <p style="padding-top: -15px;"><b>Sisa Saldo :</b> <b style="color: green;">'. str_replace('.', ',', $totalBerasMasuk - $totalBerasKeluar) .' L</b></p>
           <p style="text-align: right; color:grey;">Karawang, '. date('d-M-Y H:i') .' WIB</p>
           <p style="text-align: right; color:grey;">'. $_SESSION['userInfo']['username'] . ' ('. $_SESSION['userInfo']['role_name'] .')' .'</p>
           </body>
