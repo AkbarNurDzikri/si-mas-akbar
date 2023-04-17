@@ -1,6 +1,6 @@
 <?php
 
-class Zakat_model
+class Zakat_fitrah_model
 {
 	private $db;
 

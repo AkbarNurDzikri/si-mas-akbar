@@ -5,7 +5,7 @@ class Zakat_fitrah extends Controller {
   public function uang() {
     $data = [
       'title' => 'Zakat Fitrah | Uang Masuk',
-      'zakat_fitrah_uang_masuk' => $this->model('zakat_model')->getUangMasuk(),
+      'zakat_fitrah_uang_masuk' => $this->model('zakat_fitrah_model')->getUangMasuk(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -25,7 +25,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_masuk_store() {
     try {
-      $result  = $this->model('zakat_model')->createZakat($_POST);
+      $result  = $this->model('zakat_fitrah_model')->createZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -37,7 +37,7 @@ class Zakat_fitrah extends Controller {
   public function uang_masuk_edit($id) {
     $data = [
       'title' => 'Zakat Fitrah | Edit Uang Masuk',
-      'muzakki' => $this->model('zakat_model')->getDataById($id),
+      'muzakki' => $this->model('zakat_fitrah_model')->getDataById($id),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -47,7 +47,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_masuk_update() {
     try {
-      $result  = $this->model('zakat_model')->updateZakat($_POST);
+      $result  = $this->model('zakat_fitrah_model')->updateZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -58,7 +58,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_masuk_delete($id) {
     try {
-      $result  = $this->model('zakat_model')->deleteZakat($id);
+      $result  = $this->model('zakat_fitrah_model')->deleteZakat($id);
       if($result > 0) {
         echo 'success';
       }
@@ -70,7 +70,7 @@ class Zakat_fitrah extends Controller {
   public function uang_keluar() {
     $data = [
       'title' => 'Zakat Fitrah | Uang Keluar',
-      'zakat_fitrah_uang_keluar' => $this->model('zakat_model')->getUangKeluar(),
+      'zakat_fitrah_uang_keluar' => $this->model('zakat_fitrah_model')->getUangKeluar(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -81,8 +81,8 @@ class Zakat_fitrah extends Controller {
   public function catat_uang_keluar() {
     $data = [
       'title' => 'Zakat Fitrah | Input Uang Keluar',
-      'totalUangMasuk' => $this->model('zakat_model')->getUangMasuk(),
-      'totalUangKeluar' => $this->model('zakat_model')->getUangKeluar(),
+      'totalUangMasuk' => $this->model('zakat_fitrah_model')->getUangMasuk(),
+      'totalUangKeluar' => $this->model('zakat_fitrah_model')->getUangKeluar(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -92,7 +92,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_keluar_store() {
     try {
-      $result  = $this->model('zakat_model')->createZakat($_POST);
+      $result  = $this->model('zakat_fitrah_model')->createZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -104,9 +104,9 @@ class Zakat_fitrah extends Controller {
   public function uang_keluar_edit($id) {
     $data = [
       'title' => 'Zakat Fitrah | Edit Uang Keluar',
-      'muzakki' => $this->model('zakat_model')->getDataById($id),
-      'totalUangMasuk' => $this->model('zakat_model')->getUangMasuk(),
-      'totalUangKeluar' => $this->model('zakat_model')->getUangKeluar(),
+      'muzakki' => $this->model('zakat_fitrah_model')->getDataById($id),
+      'totalUangMasuk' => $this->model('zakat_fitrah_model')->getUangMasuk(),
+      'totalUangKeluar' => $this->model('zakat_fitrah_model')->getUangKeluar(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -116,7 +116,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_keluar_update() {
     try {
-      $result  = $this->model('zakat_model')->updateZakat($_POST);
+      $result  = $this->model('zakat_fitrah_model')->updateZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -127,7 +127,7 @@ class Zakat_fitrah extends Controller {
 
   public function uang_keluar_delete($id) {
     try {
-      $result  = $this->model('zakat_model')->deleteZakat($id);
+      $result  = $this->model('zakat_fitrah_model')->deleteZakat($id);
       if($result > 0) {
         echo 'success';
       }
@@ -138,8 +138,8 @@ class Zakat_fitrah extends Controller {
 
   public function laporan_uang_masuk() {
     $data = [
-      'totalUangMasuk' => $this->model('zakat_model')->getUangMasukBetweenDate($_POST),
-      'totalUangKeluar' => $this->model('zakat_model')->getUangKeluarBetweenDate($_POST),
+      'totalUangMasuk' => $this->model('zakat_fitrah_model')->getUangMasukBetweenDate($_POST),
+      'totalUangKeluar' => $this->model('zakat_fitrah_model')->getUangKeluarBetweenDate($_POST),
       'start_period' => $_POST['start_date'],
       'end_period' => $_POST['end_date'],
     ];
@@ -149,8 +149,8 @@ class Zakat_fitrah extends Controller {
 
   public function laporan_uang_keluar() {
     $data = [
-      'totalUangMasuk' => $this->model('zakat_model')->getUangMasukBetweenDate($_POST),
-      'totalUangKeluar' => $this->model('zakat_model')->getUangKeluarBetweenDate($_POST),
+      'totalUangMasuk' => $this->model('zakat_fitrah_model')->getUangMasukBetweenDate($_POST),
+      'totalUangKeluar' => $this->model('zakat_fitrah_model')->getUangKeluarBetweenDate($_POST),
       'start_period' => $_POST['start_date'],
       'end_period' => $_POST['end_date'],
     ];
@@ -163,7 +163,7 @@ class Zakat_fitrah extends Controller {
   public function beras() {
     $data = [
       'title' => 'Zakat Fitrah | Beras Masuk',
-      'zakat_fitrah_beras_masuk' => $this->model('zakat_model')->getBerasMasuk(),
+      'zakat_fitrah_beras_masuk' => $this->model('zakat_fitrah_model')->getBerasMasuk(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -183,7 +183,7 @@ class Zakat_fitrah extends Controller {
 
   public function beras_masuk_store() {
     try {
-      $result  = $this->model('zakat_model')->createZakat($_POST);
+      $result  = $this->model('zakat_fitrah_model')->createZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -195,7 +195,7 @@ class Zakat_fitrah extends Controller {
   public function beras_masuk_edit($id) {
     $data = [
       'title' => 'Zakat Fitrah | Edit Beras Masuk',
-      'muzakki' => $this->model('zakat_model')->getDataById($id),
+      'muzakki' => $this->model('zakat_fitrah_model')->getDataById($id),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -205,7 +205,7 @@ class Zakat_fitrah extends Controller {
 
   public function beras_masuk_update() {
     try {
-      $result  = $this->model('zakat_model')->updateZakat($_POST);
+      $result  = $this->model('zakat_fitrah_model')->updateZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -216,7 +216,7 @@ class Zakat_fitrah extends Controller {
 
   public function beras_masuk_delete($id) {
     try {
-      $result  = $this->model('zakat_model')->deleteZakat($id);
+      $result  = $this->model('zakat_fitrah_model')->deleteZakat($id);
       if($result > 0) {
         echo 'success';
       }
@@ -228,7 +228,7 @@ class Zakat_fitrah extends Controller {
   public function beras_keluar() {
     $data = [
       'title' => 'Zakat Fitrah | Beras Keluar',
-      'zakat_fitrah_beras_keluar' => $this->model('zakat_model')->getBerasKeluar(),
+      'zakat_fitrah_beras_keluar' => $this->model('zakat_fitrah_model')->getBerasKeluar(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -239,8 +239,8 @@ class Zakat_fitrah extends Controller {
   public function catat_beras_keluar() {
     $data = [
       'title' => 'Zakat Fitrah | Input Beras Keluar',
-      'totalBerasMasuk' => $this->model('zakat_model')->getBerasMasuk(),
-      'totalBerasKeluar' => $this->model('zakat_model')->getBerasKeluar(),
+      'totalBerasMasuk' => $this->model('zakat_fitrah_model')->getBerasMasuk(),
+      'totalBerasKeluar' => $this->model('zakat_fitrah_model')->getBerasKeluar(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -250,7 +250,7 @@ class Zakat_fitrah extends Controller {
 
   public function beras_keluar_store() {
     try {
-      $result  = $this->model('zakat_model')->createZakat($_POST);
+      $result  = $this->model('zakat_fitrah_model')->createZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -262,9 +262,9 @@ class Zakat_fitrah extends Controller {
   public function beras_keluar_edit($id) {
     $data = [
       'title' => 'Zakat Fitrah | Edit Beras Keluar',
-      'muzakki' => $this->model('zakat_model')->getDataById($id),
-      'totalBerasMasuk' => $this->model('zakat_model')->getBerasMasuk(),
-      'totalBerasKeluar' => $this->model('zakat_model')->getBerasKeluar(),
+      'muzakki' => $this->model('zakat_fitrah_model')->getDataById($id),
+      'totalBerasMasuk' => $this->model('zakat_fitrah_model')->getBerasMasuk(),
+      'totalBerasKeluar' => $this->model('zakat_fitrah_model')->getBerasKeluar(),
     ];
 
     $this->view('layouts/dashboard/header', $data);
@@ -274,7 +274,7 @@ class Zakat_fitrah extends Controller {
 
   public function beras_keluar_update() {
     try {
-      $result  = $this->model('zakat_model')->updateZakat($_POST);
+      $result  = $this->model('zakat_fitrah_model')->updateZakat($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -285,7 +285,7 @@ class Zakat_fitrah extends Controller {
 
   public function beras_keluar_delete($id) {
     try {
-      $result  = $this->model('zakat_model')->deleteZakat($id);
+      $result  = $this->model('zakat_fitrah_model')->deleteZakat($id);
       if($result > 0) {
         echo 'success';
       }
@@ -296,8 +296,8 @@ class Zakat_fitrah extends Controller {
 
   public function laporan_beras_masuk() {
     $data = [
-      'totalBerasMasuk' => $this->model('zakat_model')->getBerasMasukBetweenDate($_POST),
-      'totalBerasKeluar' => $this->model('zakat_model')->getBerasKeluarBetweenDate($_POST),
+      'totalBerasMasuk' => $this->model('zakat_fitrah_model')->getBerasMasukBetweenDate($_POST),
+      'totalBerasKeluar' => $this->model('zakat_fitrah_model')->getBerasKeluarBetweenDate($_POST),
       'start_period' => $_POST['start_date'],
       'end_period' => $_POST['end_date'],
     ];
@@ -307,8 +307,8 @@ class Zakat_fitrah extends Controller {
 
   public function laporan_beras_keluar() {
     $data = [
-      'totalBerasMasuk' => $this->model('zakat_model')->getBerasMasukBetweenDate($_POST),
-      'totalBerasKeluar' => $this->model('zakat_model')->getBerasKeluarBetweenDate($_POST),
+      'totalBerasMasuk' => $this->model('zakat_fitrah_model')->getBerasMasukBetweenDate($_POST),
+      'totalBerasKeluar' => $this->model('zakat_fitrah_model')->getBerasKeluarBetweenDate($_POST),
       'start_period' => $_POST['start_date'],
       'end_period' => $_POST['end_date'],
     ];

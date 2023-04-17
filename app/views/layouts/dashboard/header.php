@@ -283,21 +283,21 @@
 
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Dashboard' ? '' : 'collapsed' ?>" href="#">
-          <i class="bi bi-grid"></i>
+          <i class="bi bi-speedometer2"></i>
           <span>Dashboard</span>
         </a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Daftar Notulen' || $data['title'] == 'Buat Notulen' ? '' : 'collapsed' ?>" href="<?= BASEURL . '/mom' ?>">
-          <i class="bi bi-grid"></i>
+          <i class="bi bi-chat-right-quote"></i>
           <span>Notulen</span>
         </a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? '' : 'collapsed' ?>" data-bs-target="#agenda-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Acara</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-collection-play"></i><span>Acara</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="agenda-nav" class="nav-content collapse <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
           <li>
@@ -319,12 +319,12 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link <?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Zakat Fitrah | Input Uang Masuk' || $data['title'] == 'Zakat Fitrah | Edit Uang Masuk' || $data['title'] == 'Zakat Fitrah | Uang Keluar' || $data['title'] == 'Zakat Fitrah | Input Uang Keluar' || $data['title'] == 'Zakat Fitrah | Edit Uang Keluar' || $data['title'] == 'Zakat Fitrah | Beras Masuk' || $data['title'] == 'Zakat Fitrah | Input Beras Masuk' || $data['title'] == 'Zakat Fitrah | Edit Beras Masuk' || $data['title'] == 'Zakat Fitrah | Beras Keluar' || $data['title'] == 'Zakat Fitrah | Edit Beras Keluar' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? '' : 'collapsed' ?>" data-bs-target="#zis-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Z.I.S</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link <?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Zakat Fitrah | Input Uang Masuk' || $data['title'] == 'Zakat Fitrah | Edit Uang Masuk' || $data['title'] == 'Zakat Fitrah | Uang Keluar' || $data['title'] == 'Zakat Fitrah | Input Uang Keluar' || $data['title'] == 'Zakat Fitrah | Edit Uang Keluar' || $data['title'] == 'Zakat Fitrah | Beras Masuk' || $data['title'] == 'Zakat Fitrah | Input Beras Masuk' || $data['title'] == 'Zakat Fitrah | Edit Beras Masuk' || $data['title'] == 'Zakat Fitrah | Beras Keluar' || $data['title'] == 'Zakat Fitrah | Edit Beras Keluar' || $data['title'] == 'Zakat Maal | Penerimaan' || $data['title'] == 'Zakat Maal | Input Penerimaan' || $data['title'] == 'Zakat Maal | Edit Penerimaan' || $data['title'] == 'Zakat Maal | Pengeluaran' || $data['title'] == 'Zakat Maal | Edit Pengeluaran' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? '' : 'collapsed' ?>" data-bs-target="#zis-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-share-fill"></i><span>Z.I.S</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="zis-nav" class="nav-content collapse <?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Zakat Fitrah | Input Uang Masuk' || $data['title'] == 'Zakat Fitrah | Edit Uang Masuk' || $data['title'] == 'Zakat Fitrah | Uang Keluar' || $data['title'] == 'Zakat Fitrah | Input Uang Keluar' || $data['title'] == 'Zakat Fitrah | Edit Uang Keluar' || $data['title'] == 'Zakat Fitrah | Beras Masuk' || $data['title'] == 'Zakat Fitrah | Input Beras Masuk' || $data['title'] == 'Zakat Fitrah | Edit Beras Masuk' || $data['title'] == 'Zakat Fitrah | Beras Keluar' || $data['title'] == 'Zakat Fitrah | Edit Beras Keluar' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+        <ul id="zis-nav" class="nav-content collapse <?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Zakat Fitrah | Input Uang Masuk' || $data['title'] == 'Zakat Fitrah | Edit Uang Masuk' || $data['title'] == 'Zakat Fitrah | Uang Keluar' || $data['title'] == 'Zakat Fitrah | Input Uang Keluar' || $data['title'] == 'Zakat Fitrah | Edit Uang Keluar' || $data['title'] == 'Zakat Fitrah | Beras Masuk' || $data['title'] == 'Zakat Fitrah | Input Beras Masuk' || $data['title'] == 'Zakat Fitrah | Edit Beras Masuk' || $data['title'] == 'Zakat Fitrah | Beras Keluar' || $data['title'] == 'Zakat Fitrah | Edit Beras Keluar' || $data['title'] == 'Zakat Maal | Penerimaan' || $data['title'] == 'Zakat Maal | Input Penerimaan' || $data['title'] == 'Zakat Maal | Edit Penerimaan' || $data['title'] == 'Zakat Maal | Pengeluaran' || $data['title'] == 'Zakat Maal | Edit Pengeluaran' || $data['title'] == 'Infaq' || $data['title'] == 'Shadaqah' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<?= BASEURL . '/zakat_fitrah/uang' ?>" class="<?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Zakat Fitrah | Input Uang Masuk' || $data['title'] == 'Zakat Fitrah | Edit Uang Masuk' || $data['title'] == 'Zakat Fitrah | Uang Keluar' || $data['title'] == 'Zakat Fitrah | Input Uang Keluar' || $data['title'] == 'Zakat Fitrah | Edit Uang Keluar' || $data['title'] == 'Zakat Fitrah | Beras Masuk' || $data['title'] == 'Zakat Fitrah | Input Beras Masuk' || $data['title'] == 'Zakat Fitrah | Edit Beras Masuk' || $data['title'] == 'Zakat Fitrah | Beras Keluar' || $data['title'] == 'Zakat Fitrah | Edit Beras Keluar' ? 'active' : '' ?>">
+            <a href="<?= BASEURL . '/zakat_fitrah/uang' ?>" class="<?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Zakat Fitrah | Input Uang Masuk' || $data['title'] == 'Zakat Fitrah | Edit Uang Masuk' || $data['title'] == 'Zakat Fitrah | Uang Keluar' || $data['title'] == 'Zakat Fitrah | Input Uang Keluar' || $data['title'] == 'Zakat Fitrah | Edit Uang Keluar' || $data['title'] == 'Zakat Fitrah | Beras Masuk' || $data['title'] == 'Zakat Fitrah | Input Beras Masuk' || $data['title'] == 'Zakat Fitrah | Edit Beras Masuk' || $data['title'] == 'Zakat Fitrah | Beras Keluar' || $data['title'] == 'Zakat Fitrah | Edit Beras Keluar' || $data['title'] == 'Zakat Maal | Penerimaan' || $data['title'] == 'Zakat Maal | Input Penerimaan' || $data['title'] == 'Zakat Maal | Edit Penerimaan' || $data['title'] == 'Zakat Maal | Pengeluaran' || $data['title'] == 'Zakat Maal | Edit Pengeluaran' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Zakat</span>
             </a>
           </li>
@@ -343,7 +343,7 @@
 
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Struktur Organisasi DKM' || $data['title'] == 'Buat Struktur Organisasi DKM' || $data['title'] == 'Daftar Anggota DKM' || $data['title'] == 'Buat Anggota DKM' ? '' : 'collapsed' ?>" data-bs-target="#dkm-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>DKM</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-diagram-3"></i><span>DKM</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="dkm-nav" class="nav-content collapse <?= $data['title'] == 'Struktur Organisasi DKM' || $data['title'] == 'Buat Struktur Organisasi DKM' || $data['title'] == 'Daftar Anggota DKM' || $data['title'] == 'Buat Anggota DKM' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
           <li>
@@ -361,7 +361,7 @@
 
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'List of Users' || $data['title'] == 'Post Categories' || $data['title'] == 'List of Roles' ? '' : 'collapsed' ?>" data-bs-target="#master-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-database-lock"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="master-nav" class="nav-content collapse <?= $data['title'] == 'List of Users' || $data['title'] == 'Post Categories' || $data['title'] == 'List of Roles' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
           <li>

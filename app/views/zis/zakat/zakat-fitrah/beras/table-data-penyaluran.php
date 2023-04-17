@@ -2,7 +2,7 @@
   <div class="col-12 col-md-12">
     <!-- Navigasi Zakat Fitrah Zakat Mal -->
     <a href="<?= BASEURL . '/zakat_fitrah/uang' ?>" class="btn btn-primary mb-3">Zakat Fitrah</a>
-    <a href="<?= BASEURL . '/zakat_maal/uang' ?>" class="btn btn-light mb-3">Zakat Maal</a>
+    <a href="<?= BASEURL . '/zakat_maal' ?>" class="btn btn-light mb-3">Zakat Maal</a>
   </div>
 </div>
 
