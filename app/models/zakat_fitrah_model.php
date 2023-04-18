@@ -8,6 +8,30 @@ class Zakat_fitrah_model
 		$this->db = new Database;
 	}
 
+	public function getLengthFitrahUang() {
+		$this->db->query("SELECT COUNT(`id`) AS data_rows FROM zakat_fitrah WHERE qty_out IS NULL AND zakat_type = 'Uang'");
+		return $this->db->resultSet();
+	}
+
+	public function getUangMasukAjax($order, $dir, $limit, $start) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL AND zakat_type = 'Uang' ORDER BY $order $dir LIMIT $limit OFFSET $start");
+		return $this->db->resultSet();
+	}
+
+	public function getFitrahUangMasukSearch($keyword) {
+		$this->db->query("SELECT COUNT(`id`) AS data_rows FROM zakat_fitrah WHERE qty_out IS NULL AND zakat_type = 'Uang' AND person_name LIKE :keyword");
+
+		$this->db->bind('keyword', "%$keyword%");
+		return $this->db->resultSet();
+	}
+
+	public function getUangMasukAjaxSearch($order, $dir, $limit, $start, $keyword) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL AND zakat_type = 'Uang' AND z.person_name LIKE :keyword OR z.person_address LIKE :keyword OR z.created_at LIKE :keyword OR z.qty_in LIKE :keyword OR z.remarks LIKE :keyword OR u.username LIKE :keyword ORDER BY $order $dir LIMIT $limit OFFSET $start");
+
+		$this->db->bind('keyword', "%$keyword%");
+		return $this->db->resultSet();
+	}
+
 	// Zakat Uang
 	public function getUangMasuk() {
 		$this->db->query("SELECT z.*, u.username FROM zakat_fitrah AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL AND zakat_type = 'Uang' ORDER BY created_at DESC");

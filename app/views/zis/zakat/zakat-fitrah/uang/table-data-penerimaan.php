@@ -47,7 +47,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php $i = 1; ?>
+            <!-- <?php $i = 1; ?>
             <?php $totalUangMasuk = 0; ?>
             <?php foreach($data['zakat_fitrah_uang_masuk'] as $fitrah) : ?>
               <?php $totalUangMasuk += $fitrah['qty_in'] ?>
@@ -64,7 +64,7 @@
                   <a href="javascript:confirmDelete(<?= $fitrah['id'] ?>, '<?= $fitrah['person_name'] ?>')" class="btn btn-sm btn-danger btnDelete" data-id="<?= $fitrah['id'] ?>"><i class="bi bi-trash3"></i></a>
                 </td>
               </tr>
-            <?php endforeach; ?>
+            <?php endforeach; ?> -->
           </tbody>
         </table>
       </div>
@@ -127,4 +127,26 @@
       });
     }
   }
+
+  $(function() {
+    $('#myTable').dataTable({
+      'processing': true,
+      'serverSide': true,
+      'ajax': {
+        'url': '<?= BASEURL . "/zakat_fitrah/uangAjax" ?>',
+        'dataType': 'json',
+        'type': 'POST'
+      },
+      'columns': [
+        {'data': 'no'},
+        {'data': 'created_at'},
+        {'data': 'person_name'},
+        {'data': 'person_address'},
+        {'data': 'qty_in'},
+        {'data': 'remarks'},
+        {'data': 'username'},
+        {'data': 'action'},
+      ],
+    });
+  });
 </script>

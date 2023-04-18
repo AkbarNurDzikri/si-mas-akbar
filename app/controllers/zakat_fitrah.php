@@ -13,6 +13,62 @@ class Zakat_fitrah extends Controller {
     $this->view('layouts/dashboard/footer');
   }
 
+  public function uangAjax() {
+    $columns = [
+      0 => 'created_at',
+      1 => 'person_name',
+      2 => 'person_address',
+      3 => 'qty_in',
+      5 => 'remarks',
+      6 => 'username',
+    ];
+
+    $queryCount = $this->model('zakat_fitrah_model')->getLengthFitrahUang();
+    $dataCount = $queryCount[0];
+    $totalData = $dataCount['data_rows'];
+    $totalFiltered = $totalData;
+    
+    $limit = $_POST['length'];
+    $start = $_POST['start'];
+    $order = $columns[$_POST['order'][0]['column']];
+    $dir = $_POST['order'][0]['dir'];
+
+    if(empty($_POST['search']['value'])) {
+      $results = $this->model('zakat_fitrah_model')->getUangMasukAjax($order, $dir, $limit, $start);
+    } else {
+      $keyword = $_POST['search']['value'];
+      $results = $this->model('zakat_fitrah_model')->getUangMasukAjaxSearch($order, $dir, $limit, $start, $keyword);
+
+      $queryCount = $this->model('zakat_fitrah_model')->getFitrahUangMasukSearch($keyword);
+      $dataCount = $queryCount[0];
+      $totalFiltered = $dataCount['data_rows'];
+    }
+
+    $data = [];
+    $no = 1;
+    foreach($results as $result) {
+      $nestedData['no'] = $no++;
+      $nestedData['id'] = $result['id'];
+      $nestedData['created_at'] = date('d/M/y, H:i', strtotime($result['created_at']));
+      $nestedData['person_name'] = $result['person_name'];
+      $nestedData['person_address'] = $result['person_address'];
+      $nestedData['qty_in'] = "Rp. " . number_format($result['qty_in'], 2, ',', '.');
+      $nestedData['remarks'] = $result['remarks'];
+      $nestedData['username'] = $result['username'];
+      $nestedData['action'] = '<a href="'. BASEURL . "/zakat_fitrah/uang_masuk_edit/" . $result["id"] .'" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a> <a href="javascript:confirmDelete('. $result["id"] . ',' . "'" . $result["person_name"] . "'" .')" class="btn btn-sm btn-danger btnDelete" data-id="'. $result["id"] .'"><i class="bi bi-trash3"></i></a>';
+      $data[] = $nestedData;
+    }
+
+    $json_data = [
+      'draw' => intval($_POST['draw']),
+      'recordsTotal' => intval($totalData),
+      'recordsFiltered' => intval($totalFiltered),
+      'data' => $data,
+    ];
+
+    echo json_encode($json_data);
+  }
+
   public function catat_uang_masuk() {
     $data = [
       'title' => 'Zakat Fitrah | Input Uang Masuk',
