@@ -6,6 +6,12 @@
   </div>
 </div>
 
+<?php $i = 1; ?>
+<?php $totalUangMasuk = 0; ?>
+<?php foreach($data['zakat_fitrah_uang_keluar'] as $fitrah) : ?>
+  <?php $totalUangMasuk += $fitrah['qty_out'] ?>
+<?php endforeach; ?>
+
 <div class="row">
   <div class="col-12 col-md-12" id="colDataTable">
     <div class="card">
@@ -48,25 +54,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php $i = 1; ?>
-            <?php $totalUangMasuk = 0; ?>
-            <?php foreach($data['zakat_fitrah_uang_keluar'] as $fitrah) : ?>
-              <?php $totalUangMasuk += $fitrah['qty_out'] ?>
-              <tr>
-                <td class="text-center align-middle"><?= $i++ ?></td>
-                <td class="text-center align-middle"><?= date('d-M-y, H:i', strtotime($fitrah['created_at'])) ?></td>
-                <td class="text-center align-middle"><?= $fitrah['person_name'] ?></td>
-                <td class="text-center align-middle"><?= $fitrah['person_status'] ?></td>
-                <td class="text-center align-middle"><?= $fitrah['person_address'] ?></td>
-                <td class="text-end align-middle">Rp. <?= number_format($fitrah['qty_out'], 2,',', '.') ?></td>
-                <td class="text-center align-middle"><?= $fitrah['remarks'] ?></td>
-                <td class="text-center align-middle"><?= $fitrah['username'] ?></td>
-                <td class="text-center align-middle">
-                  <a href="<?= BASEURL . "/zakat_fitrah/uang_keluar_edit/" . $fitrah['id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
-                  <a href="javascript:confirmDelete(<?= $fitrah['id'] ?>, '<?= $fitrah['person_name'] ?>')" class="btn btn-sm btn-danger btnDelete" data-id="<?= $fitrah['id'] ?>"><i class="bi bi-trash3"></i></a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
+            <!-- List data diisi oleh datatable serverside -->
           </tbody>
         </table>
       </div>
@@ -129,4 +117,58 @@
       });
     }
   }
+
+  // datatable serverside
+  $(function() {
+    $('#myTable').dataTable({
+      'processing': true,
+      'serverSide': true,
+      'ajax': {
+        'url': '<?= BASEURL . "/zakat_fitrah/uangKeluarAjax" ?>',
+        'dataType': 'json',
+        'type': 'POST'
+      },
+      'columns': [
+        {
+          'data': 'no',
+          'class': 'text-center align-middle',
+        },
+        {
+          'data': 'created_at',
+          'class': 'text-center align-middle',
+        },
+        {
+          'data': 'person_name',
+          'class': 'text-center align-middle',
+        },
+        {
+          'data': 'person_status',
+          'class': 'text-center align-middle',
+        },
+        {
+          'data': 'person_address',
+          'class': 'text-center align-middle',
+        },
+        {
+          'data': 'qty_out',
+          'class': 'text-end align-middle',
+        },
+        {
+          'data': 'remarks',
+          'class': 'text-center align-middle',
+        },
+        {
+          'data': 'username',
+          'class': 'text-center align-middle',
+        },
+        {
+          'data': 'action',
+          'class': 'text-center align-middle',
+        },
+      ],
+      'language': {
+        'searchPlaceholder': 'Ketik nama Mustahik'
+      },
+    });
+  });
 </script>

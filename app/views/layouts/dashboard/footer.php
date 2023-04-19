@@ -17,9 +17,9 @@
   <!-- <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script> -->
 
   <script>
-    $(document).ready(() => {
-      $('#myTable').dataTable();
-    });
+    // $(document).ready(() => {
+    //   $('#myTable').dataTable();
+    // });
   </script>
 
 </body>
