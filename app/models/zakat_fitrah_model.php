@@ -88,7 +88,7 @@ class Zakat_fitrah_model
 
 	// Zakat CRUD
 	public function createZakat($data) {
-		$query = "INSERT INTO zakat_fitrah VALUES ('', :created_by, :updated_by, :person_name, :person_address, :person_status, :zakat_type, :qty_in, :qty_out, :remarks, :created_at, :updated_at)";
+		$query = "INSERT INTO zakat_fitrah VALUES (NULL, :created_by, :updated_by, :person_name, :person_address, :person_status, :zakat_type, :qty_in, :qty_out, :remarks, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('created_by',  $_SESSION['userInfo']['id']);

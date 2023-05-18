@@ -2,24 +2,32 @@
 
 class Roles extends Controller {  
   public function index() {
-    $data = [
-      'title' => 'List of Roles',
-      'roles' => $this->model('roles_model')->getRoles(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'List of Roles',
+        'roles' => $this->model('roles_model')->getRoles(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('roles/table-data', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('roles/table-data', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function new() {
-    $data = [
-      'title' => 'Create Role',
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Create Role',
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('roles/create');
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('roles/create');
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function create() {
@@ -35,14 +43,18 @@ class Roles extends Controller {
   }
 
   public function edit($id) {
-    $data = [
-      'title' => 'Edit Role',
-      'role' => $this->model('roles_model')->getDataById($id),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Edit Role',
+        'role' => $this->model('roles_model')->getDataById($id),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('roles/edit', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('roles/edit', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function update() {

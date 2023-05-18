@@ -2,24 +2,32 @@
 
 class Categories extends Controller {
   public function index() {
-    $data = [
-      'title' => 'Post Categories',
-      'categories' => $this->model('categories_model')->getAll(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Post Categories',
+        'categories' => $this->model('categories_model')->getAll(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('blog/categories/table-data', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('blog/categories/table-data', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function new() {
-    $data = [
-      'title' => 'Create Category',
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Create Category',
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('blog/categories/create');
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('blog/categories/create');
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function create() {
@@ -34,14 +42,18 @@ class Categories extends Controller {
   }
 
   public function edit($id) {
-    $data = [
-      'title' => 'Edit Category',
-      'category' => $this->model('categories_model')->getDataById($id),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Edit Category',
+        'category' => $this->model('categories_model')->getDataById($id),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('blog/categories/edit', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('blog/categories/edit', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function update() {

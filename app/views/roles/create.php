@@ -32,9 +32,9 @@
             title: $('#role_name').val() + ' sudah terdaftar !',
             showConfirmButton: true,
           });
-          $('#btnSave').prop('disabled', true);
+          $('.btnSave').prop('disabled', true);
         } else {
-          $('#btnSave').prop('disabled', false);
+          $('.btnSave').prop('disabled', false);
         }
       }
     });
@@ -51,7 +51,7 @@
         if(res == 'success') {
           Swal.fire({
             icon: 'success',
-            title: 'Berhasil membuat user',
+            title: 'Berhasil membuat role',
             showConfirmButton: true,
           }).then(() => {
             window.location = '<?= BASEURL . "/roles" ?>'

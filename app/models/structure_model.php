@@ -14,7 +14,7 @@ class Structure_model
 	}
 
 	public function createStructure($data) {
-		$query = "INSERT INTO dkm_structure VALUES ('', :child_id, :parent_id, :created_at, :updated_at)";
+		$query = "INSERT INTO dkm_structure VALUES (NULL, :child_id, :parent_id, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('child_id', $data['child_id']);

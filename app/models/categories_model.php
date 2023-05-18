@@ -14,7 +14,7 @@ class Categories_model
 	}
 
 	public function create($data) {
-		$query = "INSERT INTO postcategories VALUES ('', :category_name, :created_at, :updated_at)";
+		$query = "INSERT INTO postcategories VALUES (NULL, :category_name, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('category_name', $data['category_name']);

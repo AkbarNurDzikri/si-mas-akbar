@@ -2,7 +2,11 @@
 
 class Auth extends Controller {
   public function index() {
-    $this->view('auth/login');
+    if(isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/mom');
+    } else {
+      $this->view('auth/login');
+    }
   }
 
   public function checkCredentials() {
@@ -21,5 +25,12 @@ class Auth extends Controller {
     } else {
       echo 'failed';
     }
+  }
+
+  public function logout() {
+    session_unset();
+    session_destroy();
+
+    header('Location: ' . BASEURL . '/auth');
   }
 }

@@ -14,7 +14,7 @@ class Roles_model
 	}
 
 	public function createRole($data) {
-		$query = "INSERT INTO roles VALUES ('', :role_name, :remarks, :created_at, :updated_at)";
+		$query = "INSERT INTO roles VALUES (NULL, :role_name, :remarks, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('role_name', $data['role_name']);

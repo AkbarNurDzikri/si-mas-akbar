@@ -2,26 +2,34 @@
 
 class Committees extends Controller {
   public function index() {
-    $data = [
-      'title' => 'Kepanitiaan',
-      'committees' => $this->model('committees_model')->getCommittees(),
-      'events' => $this->model('events_model')->getEventsOpen(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Kepanitiaan',
+        'committees' => $this->model('committees_model')->getCommittees(),
+        'events' => $this->model('events_model')->getEventsOpen(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('event-committees/table-data', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('event-committees/table-data', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function new($eventId) {
-    $data = [
-      'title' => 'Buat Panitia Acara',
-      'eventId' => $eventId,
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Buat Panitia Acara',
+        'eventId' => $eventId,
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('event-committees/create', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('event-committees/create', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function create($eventId) {
@@ -36,14 +44,18 @@ class Committees extends Controller {
   }
 
   public function edit($eventId) {
-    $data = [
-      'title' => 'Edit Panitia Acara',
-      'committee' => $this->model('committees_model')->getDataById($eventId),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Edit Panitia Acara',
+        'committee' => $this->model('committees_model')->getDataById($eventId),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('event-committees/edit', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('event-committees/edit', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function update() {

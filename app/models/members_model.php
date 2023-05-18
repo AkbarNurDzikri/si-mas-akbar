@@ -14,7 +14,7 @@ class Members_model
 	}
 
 	public function createMember($data, $filename) {
-		$query = "INSERT INTO dkm_members VALUES ('', :member_name, :member_position, :member_job, :member_image, :created_at, :updated_at)";
+		$query = "INSERT INTO dkm_members VALUES (NULL, :member_name, :member_position, :member_job, :member_image, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('member_name', $data['member_name']);

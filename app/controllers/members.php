@@ -2,24 +2,32 @@
 
 class Members extends Controller {  
   public function index() {
-    $data = [
-      'title' => 'Daftar Anggota DKM',
-      'members' => $this->model('members_model')->getMembers(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Daftar Anggota DKM',
+        'members' => $this->model('members_model')->getMembers(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('dkm/members/table-data', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('dkm/members/table-data', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function new() {
-    $data = [
-      'title' => 'Buat Anggota DKM',
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Buat Anggota DKM',
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('dkm/members/create');
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('dkm/members/create');
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function create() {
@@ -38,14 +46,18 @@ class Members extends Controller {
   }
 
   public function edit($id) {
-    $data = [
-      'title' => 'Edit Anggota DKM',
-      'member' => $this->model('members_model')->getDataById($id),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Edit Anggota DKM',
+        'member' => $this->model('members_model')->getDataById($id),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('dkm/members/edit', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('dkm/members/edit', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function update() {

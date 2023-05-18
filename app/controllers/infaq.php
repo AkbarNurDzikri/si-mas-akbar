@@ -1,22 +1,22 @@
 <?php
 
-class Zakat_maal extends Controller {
+class Infaq extends Controller {
   public function index() {
     if(!isset($_SESSION['userInfo'])) {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'title' => 'Zakat Maal | Penerimaan',
-        'zakat_masuk' => $this->model('zakat_maal_model')->getUangMasuk(),
+        'title' => 'Infaq | Penerimaan',
+        'infaq_masuk' => $this->model('infaq_model')->getInfaqMasuk(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
-      $this->view('zis/zakat/zakat-maal/table-data-penerimaan', $data);
+      $this->view('zis/infaq/table-data-penerimaan', $data);
       $this->view('layouts/dashboard/footer');
     }
   }
 
-  public function zakatMaalMasukAjax() {
+  public function infaqMasukAjax() {
     $columns = [
       0 => 'created_at',
       1 => 'person_name',
@@ -26,7 +26,7 @@ class Zakat_maal extends Controller {
       5 => 'username',
     ];
 
-    $queryCount = $this->model('zakat_maal_model')->getUangMasukAjaxLength();
+    $queryCount = $this->model('infaq_model')->getInfaqMasukAjaxLength();
     $dataCount = $queryCount[0];
     $totalData = $dataCount['data_rows'];
     $totalFiltered = $totalData;
@@ -37,12 +37,12 @@ class Zakat_maal extends Controller {
     $dir = $_POST['order'][0]['dir'];
 
     if(empty($_POST['search']['value'])) {
-      $results = $this->model('zakat_maal_model')->getUangMasukAjax($order, $dir, $limit, $start);
+      $results = $this->model('infaq_model')->getInfaqMasukAjax($order, $dir, $limit, $start);
     } else {
       $keyword = $_POST['search']['value'];
-      $results = $this->model('zakat_maal_model')->getUangMasukAjaxSearch($order, $dir, $limit, $start, $keyword);
+      $results = $this->model('infaq_model')->getInfaqMasukAjaxSearch($order, $dir, $limit, $start, $keyword);
 
-      $queryCount = $this->model('zakat_maal_model')->getUangMasukAjaxSearchLength($keyword);
+      $queryCount = $this->model('infaq_model')->getInfaqMasukAjaxSearchLength($keyword);
       $dataCount = $queryCount[0];
       $totalFiltered = $dataCount['data_rows'];
     }
@@ -58,7 +58,7 @@ class Zakat_maal extends Controller {
       $nestedData['qty_in'] = 'Rp. ' . number_format($result['qty_in'], 2, ',', '.');
       $nestedData['remarks'] = $result['remarks'];
       $nestedData['username'] = $result['username'];
-      $nestedData['action'] = '<a href="'. BASEURL . "/zakat_maal/penerimaan_edit/" . $result["id"] .'" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a> <a href="javascript:confirmDelete('. $result["id"] . ',' . "'" . $result["person_name"] . "'" .')" class="btn btn-sm btn-danger btnDelete" data-id="'. $result["id"] .'"><i class="bi bi-trash3"></i></a>';
+      $nestedData['action'] = '<a href="'. BASEURL . "/infaq/penerimaan_edit/" . $result["id"] .'" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a> <a href="javascript:confirmDelete('. $result["id"] . ',' . "'" . $result["person_name"] . "'" .')" class="btn btn-sm btn-danger btnDelete" data-id="'. $result["id"] .'"><i class="bi bi-trash3"></i></a>';
       $data[] = $nestedData;
     }
 
@@ -77,18 +77,18 @@ class Zakat_maal extends Controller {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'title' => 'Zakat Maal | Input Penerimaan',
+        'title' => 'Infaq | Input Penerimaan',
       ];
 
       $this->view('layouts/dashboard/header', $data);
-      $this->view('zis/zakat/zakat-maal/create-penerimaan', $data);
+      $this->view('zis/infaq/create-penerimaan', $data);
       $this->view('layouts/dashboard/footer');
     }
   }
 
   public function penerimaan_store() {
     try {
-      $result  = $this->model('zakat_maal_model')->createZakat($_POST);
+      $result  = $this->model('infaq_model')->createInfaq($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -102,19 +102,19 @@ class Zakat_maal extends Controller {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'title' => 'Zakat Maal | Edit Penerimaan',
-        'muzakki' => $this->model('zakat_maal_model')->getDataById($id),
+        'title' => 'Infaq | Edit Penerimaan',
+        'muslim' => $this->model('infaq_model')->getDataById($id),
       ];
 
       $this->view('layouts/dashboard/header', $data);
-      $this->view('zis/zakat/zakat-maal/edit-penerimaan', $data);
+      $this->view('zis/infaq/edit-penerimaan', $data);
       $this->view('layouts/dashboard/footer');
     }
   }
 
   public function penerimaan_update() {
     try {
-      $result  = $this->model('zakat_maal_model')->updateZakat($_POST);
+      $result  = $this->model('infaq_model')->updateInfaq($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -125,7 +125,7 @@ class Zakat_maal extends Controller {
 
   public function penerimaan_delete($id) {
     try {
-      $result  = $this->model('zakat_maal_model')->deleteZakat($id);
+      $result  = $this->model('infaq_model')->deleteInfaq($id);
       if($result > 0) {
         echo 'success';
       }
@@ -139,17 +139,17 @@ class Zakat_maal extends Controller {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'title' => 'Zakat Maal | Pengeluaran',
-        'zakat_keluar' => $this->model('zakat_maal_model')->getUangKeluar(),
+        'title' => 'Infaq | Pengeluaran',
+        'infaq_keluar' => $this->model('infaq_model')->getInfaqKeluar(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
-      $this->view('zis/zakat/zakat-maal/table-data-penyaluran', $data);
+      $this->view('zis/infaq/table-data-penyaluran', $data);
       $this->view('layouts/dashboard/footer');
     }
   }
 
-  public function zakatMaalKeluarAjax() {
+  public function infaqKeluarAjax() {
     $columns = [
       0 => 'created_at',
       1 => 'person_name',
@@ -159,7 +159,7 @@ class Zakat_maal extends Controller {
       5 => 'username',
     ];
 
-    $queryCount = $this->model('zakat_maal_model')->getUangKeluarAjaxLength();
+    $queryCount = $this->model('infaq_model')->getInfaqKeluarAjaxLength();
     $dataCount = $queryCount[0];
     $totalData = $dataCount['data_rows'];
     $totalFiltered = $totalData;
@@ -170,12 +170,12 @@ class Zakat_maal extends Controller {
     $dir = $_POST['order'][0]['dir'];
 
     if(empty($_POST['search']['value'])) {
-      $results = $this->model('zakat_maal_model')->getUangKeluarAjax($order, $dir, $limit, $start);
+      $results = $this->model('infaq_model')->getInfaqKeluarAjax($order, $dir, $limit, $start);
     } else {
       $keyword = $_POST['search']['value'];
-      $results = $this->model('zakat_maal_model')->getUangKeluarAjaxSearch($order, $dir, $limit, $start, $keyword);
+      $results = $this->model('infaq_model')->getInfaqKeluarAjaxSearch($order, $dir, $limit, $start, $keyword);
 
-      $queryCount = $this->model('zakat_maal_model')->getUangKeluarAjaxSearchLength($keyword);
+      $queryCount = $this->model('infaq_model')->getInfaqKeluarAjaxSearchLength($keyword);
       $dataCount = $queryCount[0];
       $totalFiltered = $dataCount['data_rows'];
     }
@@ -191,7 +191,7 @@ class Zakat_maal extends Controller {
       $nestedData['qty_out'] = 'Rp. ' . number_format($result['qty_out'], 2, ',', '.');
       $nestedData['remarks'] = $result['remarks'];
       $nestedData['username'] = $result['username'];
-      $nestedData['action'] = '<a href="'. BASEURL . "/zakat_maal/pengeluaran_edit/" . $result["id"] .'" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a> <a href="javascript:confirmDelete('. $result["id"] . ',' . "'" . $result["person_name"] . "'" .')" class="btn btn-sm btn-danger btnDelete" data-id="'. $result["id"] .'"><i class="bi bi-trash3"></i></a>';
+      $nestedData['action'] = '<a href="'. BASEURL . "/infaq/pengeluaran_edit/" . $result["id"] .'" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a> <a href="javascript:confirmDelete('. $result["id"] . ',' . "'" . $result["person_name"] . "'" .')" class="btn btn-sm btn-danger btnDelete" data-id="'. $result["id"] .'"><i class="bi bi-trash3"></i></a>';
       $data[] = $nestedData;
     }
 
@@ -210,20 +210,20 @@ class Zakat_maal extends Controller {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'title' => 'Zakat Maal | Input Pengeluaran',
-        'totalUangMasuk' => $this->model('zakat_maal_model')->getUangMasuk(),
-        'totalUangKeluar' => $this->model('zakat_maal_model')->getUangKeluar(),
+        'title' => 'Infaq | Input Pengeluaran',
+        'totalUangMasuk' => $this->model('infaq_model')->getInfaqMasuk(),
+        'totalUangKeluar' => $this->model('infaq_model')->getInfaqKeluar(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
-      $this->view('zis/zakat/zakat-maal/create-pengeluaran', $data);
+      $this->view('zis/infaq/create-pengeluaran', $data);
       $this->view('layouts/dashboard/footer');
     }
   }
 
   public function pengeluaran_store() {
     try {
-      $result  = $this->model('zakat_maal_model')->createZakat($_POST);
+      $result  = $this->model('infaq_model')->createInfaq($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -237,21 +237,21 @@ class Zakat_maal extends Controller {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'title' => 'Zakat Maal | Edit Pengeluaran',
-        'muzakki' => $this->model('zakat_maal_model')->getDataById($id),
-        'totalUangMasuk' => $this->model('zakat_maal_model')->getUangMasuk(),
-        'totalUangKeluar' => $this->model('zakat_maal_model')->getUangKeluar(),
+        'title' => 'Infaq | Edit Pengeluaran',
+        'muslim' => $this->model('infaq_model')->getDataById($id),
+        'totalUangMasuk' => $this->model('infaq_model')->getInfaqMasuk(),
+        'totalUangKeluar' => $this->model('infaq_model')->getInfaqKeluar(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
-      $this->view('zis/zakat/zakat-maal/edit-pengeluaran', $data);
+      $this->view('zis/infaq/edit-pengeluaran', $data);
       $this->view('layouts/dashboard/footer');
     }
   }
 
   public function pengeluaran_update() {
     try {
-      $result  = $this->model('zakat_maal_model')->updateZakat($_POST);
+      $result  = $this->model('infaq_model')->updateInfaq($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -262,7 +262,7 @@ class Zakat_maal extends Controller {
 
   public function pengeluaran_delete($id) {
     try {
-      $result  = $this->model('zakat_maal_model')->deleteZakat($id);
+      $result  = $this->model('infaq_model')->deleteInfaq($id);
       if($result > 0) {
         echo 'success';
       }
@@ -276,13 +276,13 @@ class Zakat_maal extends Controller {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'totalUangMasuk' => $this->model('zakat_maal_model')->getUangMasukBetweenDate($_POST),
-        'totalUangKeluar' => $this->model('zakat_maal_model')->getUangKeluarBetweenDate($_POST),
+        'totalUangMasuk' => $this->model('infaq_model')->getInfaqMasukBetweenDate($_POST),
+        'totalUangKeluar' => $this->model('infaq_model')->getInfaqKeluarBetweenDate($_POST),
         'start_period' => $_POST['start_date'],
         'end_period' => $_POST['end_date'],
       ];
 
-      $this->view('zis/zakat/zakat-maal/laporan-penerimaan-pdf', $data);
+      $this->view('zis/infaq/laporan-penerimaan-pdf', $data);
     }
   }
 
@@ -291,13 +291,13 @@ class Zakat_maal extends Controller {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'totalUangMasuk' => $this->model('zakat_maal_model')->getUangMasukBetweenDate($_POST),
-        'totalUangKeluar' => $this->model('zakat_maal_model')->getUangKeluarBetweenDate($_POST),
+        'totalUangMasuk' => $this->model('infaq_model')->getInfaqMasukBetweenDate($_POST),
+        'totalUangKeluar' => $this->model('infaq_model')->getInfaqKeluarBetweenDate($_POST),
         'start_period' => $_POST['start_date'],
         'end_period' => $_POST['end_date'],
       ];
 
-      $this->view('zis/zakat/zakat-maal/laporan-pengeluaran-pdf', $data);
+      $this->view('zis/infaq/laporan-pengeluaran-pdf', $data);
     }
   }
 }

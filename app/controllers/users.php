@@ -2,26 +2,34 @@
 
 class Users extends Controller {  
   public function index() {
-    $data = [
-      'title' => 'List of Users',
-      'users' => $this->model('users_model')->getUsers(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'List of Users',
+        'users' => $this->model('users_model')->getUsers(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('users/table-data', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('users/table-data', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function new() {
-    $data = [
-      'title' => 'Create User',
-      'roles' => $this->model('roles_model')->getRoles(),
-      'members' => $this->model('members_model')->getMembers(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Create User',
+        'roles' => $this->model('roles_model')->getRoles(),
+        'members' => $this->model('members_model')->getMembers(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('users/create', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('users/create', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function create() {
@@ -37,28 +45,20 @@ class Users extends Controller {
   }
 
   public function edit($id) {
-    $data = [
-      'title' => 'Edit User',
-      'user' => $this->model('users_model')->getDataById($id),
-      'roles' => $this->model('roles_model')->getRoles(),
-      'members' => $this->model('members_model')->getMembers(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Edit User',
+        'user' => $this->model('users_model')->getDataById($id),
+        'roles' => $this->model('roles_model')->getRoles(),
+        'members' => $this->model('members_model')->getMembers(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('users/edit', $data);
-    $this->view('layouts/dashboard/footer');
-  }
-
-  public function update() {
-    var_dump($_POST);
-    // try {
-    //   $result  = $this->model('users_model')->update($_POST);
-    //   if($result > 0) {
-    //     echo 'success';
-    //   }
-    // } catch(Exception $e) {
-    //   echo $e->getMessage();
-    // }
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('users/edit', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function delete() {

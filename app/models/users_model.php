@@ -14,7 +14,7 @@ class Users_model
 	}
 
 	public function createUser($data) {
-		$query = "INSERT INTO users VALUES ('', :role_id, :member_id, :username, :email, :password, :created_at, :updated_at)";
+		$query = "INSERT INTO users VALUES (NULL, :role_id, :member_id, :username, :email, :password, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('role_id', $data['role_id']);

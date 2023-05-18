@@ -1,14 +1,7 @@
-<div class="row">
-  <div class="col-12 col-md-12">
-    <a href="<?= BASEURL . '/zakat_fitrah/uang' ?>" class="btn btn-light mb-3">Zakat Fitrah</a>
-    <a href="<?= BASEURL . '/zakat_maal' ?>" class="btn btn-primary mb-3">Zakat Maal</a>
-  </div>
-</div>
-
 <?php $i = 1; ?>
 <?php $totalUangMasuk = 0; ?>
-<?php foreach($data['zakat_masuk'] as $maal) : ?>
-  <?php $totalUangMasuk += $maal['qty_in'] ?>
+<?php foreach($data['infaq_keluar'] as $maal) : ?>
+  <?php $totalUangMasuk += $maal['qty_out'] ?>
 <?php endforeach; ?>
 
 <div class="row">
@@ -16,17 +9,17 @@
     <div class="card">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" href="<?= BASEURL . '/zakat_maal' ?>"><i class="bi bi-download"></i> Penerimaan</a>
+          <a class="nav-link" href="<?= BASEURL . '/infaq' ?>"><i class="bi bi-download"></i> Penerimaan</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASEURL . '/zakat_maal/pengeluaran' ?>"><i class="bi bi-upload"></i> Pengeluaran</a>
+          <a class="nav-link active" href="<?= BASEURL . '/infaq/pengeluaran' ?>"><i class="bi bi-upload"></i> Pengeluaran</a>
         </li>
       </ul>
     
       <div class="card-body table-responsive mt-3">
         <div class="row mb-3">
           <div class="col">
-            <a href="<?= BASEURL . '/zakat_maal/catat_penerimaan' ?>" class="btn btn-success btn-sm"><i class="bi bi-plus-circle"></i> Penerimaan</a>
+            <a href="<?= BASEURL . '/infaq/catat_pengeluaran' ?>" class="btn btn-success btn-sm"><i class="bi bi-plus-circle"></i> Pengeluaran</a>
             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#dateRangeReport"><i class="bi bi-filetype-pdf"></i> Laporan</button>
           </div>
         </div>
@@ -36,7 +29,7 @@
             <tr>
               <th class="text-center align-middle">No</th>
               <th class="text-center align-middle">Tanggal, Jam</th>
-              <th class="text-center align-middle">Nama Muzakki</th>
+              <th class="text-center align-middle">Nama Penerima</th>
               <th class="text-center align-middle">Alamat</th>
               <th class="text-center align-middle">Nominal</th>
               <th class="text-center align-middle">Keterangan</th>
@@ -58,11 +51,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="dateRangeReportLabel">Laporan Penerimaan Zakat Maal</h1>
+        <h1 class="modal-title fs-5" id="dateRangeReportLabel">Laporan Pengeluaran Infaq</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<?= BASEURL . '/zakat_maal/laporan_penerimaan' ?>" method="POST">
+        <form action="<?= BASEURL . '/infaq/laporan_pengeluaran' ?>" method="POST">
           <label for="start_date" class="form-label">Mulai tanggal</label>
           <input type="date" class="form-control mb-3" name="start_date">
 
@@ -84,22 +77,22 @@
   function confirmDelete(id, name) {
     if(confirm(`Yakin hapus data ${name} ?`)) {
       $.ajax({
-        url: '<?= BASEURL . "/zakat_maal/penerimaan_delete/" ?>' + id,
+        url: '<?= BASEURL . "/infaq/pengeluaran_delete/" ?>' + id,
         type: 'POST',
         data: 'id=' + id,
         success: function(res) {
           if(res == 'success') {
             Swal.fire({
               icon: 'success',
-              title: 'Berhasil menghapus data zakat ' + name,
+              title: 'Berhasil menghapus data infaq ' + name,
               showConfirmButton: true,
             }).then(() => {
-              window.location = '<?= BASEURL . "/zakat_maal" ?>'
+              window.location = '<?= BASEURL . "/infaq/pengeluaran" ?>'
             });
           } else {
             Swal.fire({
               icon: 'error',
-              title: 'Gagal menghapus data zakat ' + name + ' !',
+              title: 'Gagal menghapus data infaq ' + name + ' !',
               text: res,
               showConfirmButton: true,
             })
@@ -115,7 +108,7 @@
       'processing': true,
       'serverSide': true,
       'ajax': {
-        'url': '<?= BASEURL . "/zakat_maal/zakatMaalMasukAjax" ?>',
+        'url': '<?= BASEURL . "/infaq/infaqKeluarAjax" ?>',
         'dataType': 'json',
         'type': 'POST'
       },
@@ -137,7 +130,7 @@
           'class': 'text-center align-middle',
         },
         {
-          'data': 'qty_in',
+          'data': 'qty_out',
           'class': 'text-end align-middle',
         },
         {
@@ -154,7 +147,7 @@
         },
       ],
       'language': {
-        'searchPlaceholder': 'Ketik nama Muzakki'
+        'searchPlaceholder': 'Ketik nama Penerima'
       },
     });
   });

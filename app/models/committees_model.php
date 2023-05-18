@@ -35,7 +35,7 @@ class Committees_model
 
 	// Execute Multiple Insert
 	public function runCreate($data) {
-		$query = "INSERT INTO event_committees VALUES ('', :event_id, :created_by, :updated_by, :person_name, :position, :main_duties_and_functions, :created_at, :updated_at)";
+		$query = "INSERT INTO event_committees VALUES (NULL, :event_id, :created_by, :updated_by, :person_name, :position, :main_duties_and_functions, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('event_id', $data['event_id']);

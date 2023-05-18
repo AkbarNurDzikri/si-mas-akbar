@@ -2,26 +2,34 @@
 
 class Budgeting extends Controller {
   public function index() {
-    $data = [
-      'title' => 'Anggaran Biaya',
-      'budgets' => $this->model('budgeting_model')->getBadgets(),
-      'events' => $this->model('events_model')->getEventsOpen(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Anggaran Biaya',
+        'budgets' => $this->model('budgeting_model')->getBadgets(),
+        'events' => $this->model('events_model')->getEventsOpen(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('event-budgeting/table-data', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('event-budgeting/table-data', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function new($eventId) {
-    $data = [
-      'title' => 'Buat Anggaran Acara',
-      'eventId' => $eventId,
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Buat Anggaran Acara',
+        'eventId' => $eventId,
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('event-budgeting/create', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('event-budgeting/create', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function create($eventId) {
@@ -36,14 +44,18 @@ class Budgeting extends Controller {
   }
 
   public function edit($eventId) {
-    $data = [
-      'title' => 'Edit Anggaran Acara',
-      'budgets' => $this->model('budgeting_model')->getDataById($eventId),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Edit Anggaran Acara',
+        'budgets' => $this->model('budgeting_model')->getDataById($eventId),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('event-budgeting/edit', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('event-budgeting/edit', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function update() {

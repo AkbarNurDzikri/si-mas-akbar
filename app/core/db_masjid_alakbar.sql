@@ -149,3 +149,19 @@ CREATE TABLE zakat_maal(
   FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
   FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
 );
+
+CREATE TABLE infaq(
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `created_by` INT NOT NULL,
+  `updated_by` INT NULL,
+  `person_name` VARCHAR(255) NOT NULL,
+  `person_address` VARCHAR(255) NOT NULL,
+  `qty_in` DECIMAL(10,2) NULL,
+  `qty_out` DECIMAL(10,2) NULL,
+  `remarks` VARCHAR(255) NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+
+  FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
+  FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
+);

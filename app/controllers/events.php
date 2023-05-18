@@ -2,25 +2,33 @@
 
 class Events extends Controller {
   public function index() {
-    $data = [
-      'title' => 'Daftar Acara',
-      'events' => $this->model('events_model')->getEvents(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Daftar Acara',
+        'events' => $this->model('events_model')->getEvents(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('events/table-data', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('events/table-data', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function new() {
-    $data = [
-      'title' => 'Buat Acara',
-      'ref_meeting' => $this->model('mom_model')->getMomsOpen(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Buat Acara',
+        'ref_meeting' => $this->model('mom_model')->getMomsOpen(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('events/create', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('events/create', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function create() {
@@ -35,15 +43,19 @@ class Events extends Controller {
   }
 
   public function edit($id) {
-    $data = [
-      'title' => 'Edit Acara',
-      'event' => $this->model('events_model')->getDataById($id),
-      'ref_meeting' => $this->model('mom_model')->getMoms(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Edit Acara',
+        'event' => $this->model('events_model')->getDataById($id),
+        'ref_meeting' => $this->model('mom_model')->getMoms(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('events/edit', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('events/edit', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function update() {

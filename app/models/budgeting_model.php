@@ -35,7 +35,7 @@ class Budgeting_model
 
 	// Execute Multiple Insert
 	public function runCreate($data) {
-		$query = "INSERT INTO event_budgeting VALUES ('', :event_id, :created_by, :updated_by, :budget_name, :budget_price, :remarks, :created_at, :updated_at)";
+		$query = "INSERT INTO event_budgeting VALUES (NULL, :event_id, :created_by, :updated_by, :budget_name, :budget_price, :remarks, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('event_id', $data['event_id']);

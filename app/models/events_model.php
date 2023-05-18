@@ -19,7 +19,7 @@ class Events_model
 	}
 
 	public function create($data) {
-		$query = "INSERT INTO events VALUES ('', :ref_meeting, :created_by, :updated_by, :event_name, :event_date, :event_time, :event_location, :remarks, :status, :created_at, :updated_at)";
+		$query = "INSERT INTO events VALUES (NULL, :ref_meeting, :created_by, :updated_by, :event_name, :event_date, :event_time, :event_location, :remarks, :status, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('ref_meeting', $data['ref_meeting']);

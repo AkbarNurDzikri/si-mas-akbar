@@ -2,25 +2,33 @@
 
 class Structure extends Controller {  
   public function index() {
-    $data = [
-      'title' => 'Struktur Organisasi DKM',
-      'members' => $this->model('structure_model')->getStructure(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Struktur Organisasi DKM',
+        'members' => $this->model('structure_model')->getStructure(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('dkm/structure/table-data', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('dkm/structure/table-data', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function new() {
-    $data = [
-      'title' => 'Buat Struktur Organisasi DKM',
-      'members' => $this->model('members_model')->getMembers(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Buat Struktur Organisasi DKM',
+        'members' => $this->model('members_model')->getMembers(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('dkm/structure/create', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('dkm/structure/create', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function create() {
@@ -36,15 +44,19 @@ class Structure extends Controller {
   }
 
   public function edit($id) {
-    $data = [
-      'title' => 'Edit Struktur Organisasi DKM',
-      'member' => $this->model('structure_model')->getDataById($id),
-      'members' => $this->model('members_model')->getMembers(),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Edit Struktur Organisasi DKM',
+        'member' => $this->model('structure_model')->getDataById($id),
+        'members' => $this->model('members_model')->getMembers(),
+      ];
 
-    $this->view('layouts/dashboard/header', $data);
-    $this->view('dkm/structure/edit', $data);
-    $this->view('layouts/dashboard/footer');
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('dkm/structure/edit', $data);
+      $this->view('layouts/dashboard/footer');
+    }
   }
 
   public function update() {

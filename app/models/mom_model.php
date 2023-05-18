@@ -19,7 +19,7 @@ class Mom_model
 	}
 
 	public function create($data) {
-		$query = "INSERT INTO minutes_of_meetings VALUES ('', :created_by, :updated_by, :meeting_date, :meeting_time, :meeting_room, :meeting_participants, :title, :body, :status, :created_at, :updated_at)";
+		$query = "INSERT INTO minutes_of_meetings VALUES (NULL, :created_by, :updated_by, :meeting_date, :meeting_time, :meeting_room, :meeting_participants, :title, :body, :status, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('created_by',  $_SESSION['userInfo']['id']);

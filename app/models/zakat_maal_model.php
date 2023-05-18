@@ -21,6 +21,30 @@ class Zakat_maal_model
 		return $this->db->resultSet();
 	}
 
+	public function getUangMasukAjaxLength() {
+		$this->db->query("SELECT COUNT(`id`) AS data_rows FROM zakat_maal WHERE qty_out IS NULL");
+		return $this->db->resultSet();
+	}
+
+	public function getUangMasukAjax($order, $dir, $limit, $start) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_maal AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL ORDER BY $order $dir LIMIT $limit OFFSET $start");
+		return $this->db->resultSet();
+	}
+
+	public function getUangMasukAjaxSearchLength($keyword) {
+		$this->db->query("SELECT COUNT(z.id) AS data_rows, z.*, u.username FROM zakat_maal AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL AND z.person_name LIKE :keyword");
+
+		$this->db->bind('keyword', "%$keyword%");
+		return $this->db->resultSet();
+	}
+
+	public function getUangMasukAjaxSearch($order, $dir, $limit, $start, $keyword) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_maal AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_out IS NULL AND z.person_name LIKE :keyword ORDER BY $order $dir LIMIT $limit OFFSET $start");
+
+		$this->db->bind('keyword', "%$keyword%");
+		return $this->db->resultSet();
+	}
+
 	public function getUangKeluar() {
 		$this->db->query("SELECT z.*, u.username FROM zakat_maal AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_in IS NULL ORDER BY created_at DESC");
 		return $this->db->resultSet();
@@ -34,8 +58,32 @@ class Zakat_maal_model
 		return $this->db->resultSet();
 	}
 
+	public function getUangKeluarAjaxLength() {
+		$this->db->query("SELECT COUNT(`id`) AS data_rows FROM zakat_maal WHERE qty_in IS NULL");
+		return $this->db->resultSet();
+	}
+
+	public function getUangKeluarAjax($order, $dir, $limit, $start) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_maal AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_in IS NULL ORDER BY $order $dir LIMIT $limit OFFSET $start");
+		return $this->db->resultSet();
+	}
+
+	public function getUangKeluarAjaxSearchLength($keyword) {
+		$this->db->query("SELECT COUNT(z.id) AS data_rows, z.*, u.username FROM zakat_maal AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_in IS NULL AND z.person_name LIKE :keyword");
+
+		$this->db->bind('keyword', "%$keyword%");
+		return $this->db->resultSet();
+	}
+
+	public function getUangKeluarAjaxSearch($order, $dir, $limit, $start, $keyword) {
+		$this->db->query("SELECT z.*, u.username FROM zakat_maal AS z INNER JOIN users AS u ON u.id = z.created_by WHERE z.qty_in IS NULL AND z.person_name LIKE :keyword ORDER BY $order $dir LIMIT $limit OFFSET $start");
+
+		$this->db->bind('keyword', "%$keyword%");
+		return $this->db->resultSet();
+	}
+
 	public function createZakat($data) {
-		$query = "INSERT INTO zakat_maal VALUES ('', :created_by, :updated_by, :person_name, :person_address, :person_status, :qty_in, :qty_out, :remarks, :created_at, :updated_at)";
+		$query = "INSERT INTO zakat_maal VALUES (NULL, :created_by, :updated_by, :person_name, :person_address, :person_status, :qty_in, :qty_out, :remarks, :created_at, :updated_at)";
 
 		$this->db->query($query);
 		$this->db->bind('created_by',  $_SESSION['userInfo']['id']);
