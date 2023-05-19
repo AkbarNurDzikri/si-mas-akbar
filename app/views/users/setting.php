@@ -1,23 +1,12 @@
 <div class="row">
   <div class="col-12 col-md-6" id="colForm">
     <div class="card">
-      <div class="card-header">
-        <a href="<?= BASEURL ?>/users" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
-      </div>
       <div class="card-body">
         <form id="formEdit">
           <input type="hidden" name="id" value="<?= $data['user']['id'] ?>">
+          <input type="hidden" name="member_id" value="<?= $data['user']['member_id'] ?>">
           
-          <label for="member_id" class="form-label mt-3">Anggota DKM</label>
-          <select name="member_id" id="member_id" class="form-select mb-3">
-            <option value="<?= $data['user']['member_id'] ?>"><?= $data['user']['member_name'] ?></option>
-            <option value="" disabled>Pilih Anggota</option>
-            <?php foreach($data['members'] as $member) : ?>
-              <option value="<?= $member['id'] ?>"><?= $member['member_name'] ?></option>
-            <?php endforeach; ?>
-          </select>
-          
-          <label for="username" class="form-label">Username</label>
+          <label for="username" class="form-label mt-3">Username</label>
           <input type="text" class="form-control mb-3" id="username" name="username" value="<?= $data['user']['username'] ?>" autocomplete="off">
 
           <label for="email" class="form-label">Email</label>
@@ -100,7 +89,7 @@
               title: 'Berhasil merubah users',
               showConfirmButton: true,
             }).then(() => {
-              window.location = '<?= BASEURL . "/users" ?>'
+              window.location = '<?= BASEURL . "/users/setting/" . $data['user']['id'] ?>'
             });
           } else {
             Swal.fire({

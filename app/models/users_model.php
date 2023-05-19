@@ -79,7 +79,6 @@ class Users_model
 	// function ini tidak boleh bisa merubah role_id karena dibuat untuk user hanya untuk ganti password dan username saja, sementara belum fix. setelah semua module dashboard selesai baru akan diperuntukkan kesana.
 	public function changeCredentials($data) {
 		$query = "UPDATE users SET
-			-- role_id = :role_id,
 			member_id = :member_id,
 			username = :username,
 			email = :email,
@@ -88,7 +87,6 @@ class Users_model
 		WHERE id = :id";
 
 		$this->db->query($query);
-		// $this->db->bind('role_id', $data['role_id']);
 		$this->db->bind('member_id', $data['member_id']);
 		$this->db->bind('username', $data['username']);
 		$this->db->bind('email', $data['email']);

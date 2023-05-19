@@ -51,7 +51,6 @@ class Users extends Controller {
       $data = [
         'title' => 'Edit User',
         'user' => $this->model('users_model')->getDataById($id),
-        'roles' => $this->model('roles_model')->getRoles(),
         'members' => $this->model('members_model')->getMembers(),
       ];
 
@@ -88,6 +87,37 @@ class Users extends Controller {
       }
     } catch (Exception $e) {
       echo $e->getMessage();
+    }
+  }
+
+  public function profile($memberId) {
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'My Profile',
+        'member' => $this->model('members_model')->getDataById($memberId),
+      ];
+
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('users/profile', $data);
+      $this->view('layouts/dashboard/footer');
+    }
+  }
+
+  public function setting($userId) {
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/auth');
+    } else {
+      $data = [
+        'title' => 'Account Setting',
+        'member' => $this->model('members_model')->getDataById($userId),
+        'user' => $this->model('users_model')->getDataById($userId),
+      ];
+
+      $this->view('layouts/dashboard/header', $data);
+      $this->view('users/setting', $data);
+      $this->view('layouts/dashboard/footer');
     }
   }
 }

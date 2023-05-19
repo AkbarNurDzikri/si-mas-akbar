@@ -32,7 +32,7 @@ class Members extends Controller {
 
   public function create() {
     try {
-      $filename = $_FILES['member_image']['name'];
+      $filename = uniqid() . '-' . $_FILES['member_image']['name'];
       $destinationFile = __DIR__ . '/../../assets/images/dkm/members/';
       $result  = $this->model('members_model')->createMember($_POST, $filename);
 
@@ -65,7 +65,7 @@ class Members extends Controller {
       // jika image diganti
       if(isset($_POST['member_imageOld'])) {
         // tangkap image baru yg dikirim oleh user melalui form
-        $filename = $_FILES['member_image']['name'];
+        $filename = uniqid() . '-' . $_FILES['member_image']['name'];
         // tentukan direktori dimana image akan disimpan
         $destinationFile = __DIR__ . '/../../assets/images/dkm/members/';
         // update data baru ke database
