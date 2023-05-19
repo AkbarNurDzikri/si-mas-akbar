@@ -165,3 +165,19 @@ CREATE TABLE infaq(
   FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
   FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
 );
+
+CREATE TABLE event_cash(
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `ref_event` INT NOT NULL,
+  `created_by` INT NOT NULL,
+  `updated_by` INT NULL,
+  `remarks` VARCHAR(255),
+  `qty_in` DECIMAL(10,2) NULL,
+  `qty_out` DECIMAL(10,2) NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+
+  FOREIGN KEY(`ref_event`) REFERENCES `events`(`id`),
+  FOREIGN KEY(`created_by`) REFERENCES `users`(`id`),
+  FOREIGN KEY(`updated_by`) REFERENCES `users`(`id`)
+);

@@ -10,9 +10,6 @@
             <tr>
               <th class="text-center align-middle">No</th>
               <th class="text-center align-middle">Nama Acara</th>
-              <th class="text-center align-middle">Item Anggaran</th>
-              <th class="text-center align-middle">Dana Anggaran</th>
-              <th class="text-center align-middle">Keterangan</th>
               <th class="text-center align-middle">Dibuat Oleh</th>
               <th class="text-center align-middle">Opsi</th>
             </tr>
@@ -23,12 +20,9 @@
               <tr>
                 <td class="text-center align-middle"><?= $i++ ?></td>
                 <td class="text-center align-middle"><?= $budget['event_name'] ?></td>
-                <td class="text-center align-middle"><?= $budget['budget_name'] ?></td>
-                <td class="text-end align-middle">Rp. <?= number_format($budget['budget_price'], 2,',', '.') ?></td>
-                <td class="text-center align-middle"><?= $budget['remarks'] ?></td>
                 <td class="text-center align-middle"><?= $budget['creator'] ?> <?= $budget['updated_by'] != NULL ? '(updated by <b>' . $budget['editor'] . '</b>)'  : '' ?></td>
                 <td class="text-center align-middle">
-                  <a href="<?= BASEURL . "/budgeting/edit/" . $budget['event_id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a>
+                  <a href="<?= BASEURL . "/budgeting/edit/" . $budget['event_id'] ?>" class="btn btn-sm btn-success mb-1"><i class="bi bi-eye"></i> Detail</a>
                 </td>
               </tr>
             <?php endforeach; ?>

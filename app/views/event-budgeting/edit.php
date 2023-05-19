@@ -27,7 +27,7 @@
               </div>
 
               <label for="remarks" class="form-label" id="labelremarks">Keterangan</label>
-              <textarea class="form-control mb-3 remarks" name="remarks" placeholder="Opsional" required><?= $budget['remarks'] ?></textarea>
+              <textarea class="form-control mb-3 remarks" name="remarks" placeholder="Opsional"><?= $budget['remarks'] ?></textarea>
             <?php endforeach; ?>
           </div>
         </div>

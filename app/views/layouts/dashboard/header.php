@@ -289,10 +289,10 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? '' : 'collapsed' ?>" data-bs-target="#agenda-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' || $data['title'] == 'Kas Acara | Pemasukan' || $data['title'] == 'Kas Acara | Input Pemasukan' || $data['title'] == 'Kas Acara | Edit Pemasukan' ? '' : 'collapsed' ?>" data-bs-target="#agenda-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-collection-play"></i><span>Acara</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="agenda-nav" class="nav-content collapse <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+        <ul id="agenda-nav" class="nav-content collapse <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' || $data['title'] == 'Kas Acara | Pemasukan' || $data['title'] == 'Kas Acara | Input Pemasukan' || $data['title'] == 'Kas Acara | Edit Pemasukan' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
           <li>
             <a href="<?= BASEURL . '/events' ?>" class="<?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Daftar Acara</span>
@@ -306,6 +306,11 @@
           <li>
             <a href="<?= BASEURL . '/budgeting' ?>" class="<?= $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Anggaran Biaya</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= BASEURL . '/event_cash' ?>" class="<?= $data['title'] == 'Kas Acara | Pemasukan' || $data['title'] == 'Kas Acara | Input Pemasukan' || $data['title'] == 'Kas Acara | Edit Pemasukan' ? 'active' : '' ?>">
+              <i class="bi bi-circle"></i><span>Kas Acara</span>
             </a>
           </li>
         </ul>

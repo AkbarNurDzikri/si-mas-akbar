@@ -20,7 +20,7 @@
               </div>
 
               <label for="remarks1" class="form-label" id="labelremarks1">Keterangan</label>
-              <textarea class="form-control mb-3" name="budgets[remarks][1]" id="remarks1" placeholder="Opsional" required></textarea>
+              <textarea class="form-control mb-3" name="budgets[remarks][1]" id="remarks1" placeholder="Opsional"></textarea>
             </div>
           </div>
 
@@ -57,7 +57,7 @@
       </div>
 
       <label for="remarks${itemNum}" class="form-label" id="labelremarks${itemNum}">Keterangan</label>
-      <textarea class="form-control mb-3" name="budgets[remarks][${itemNum}]" id="remarks${itemNum}" placeholder="Opsional" required></textarea>
+      <textarea class="form-control mb-3" name="budgets[remarks][${itemNum}]" id="remarks${itemNum}" placeholder="Opsional"></textarea>
     </div>
     `;
     $('#boxBudget').append(html);
