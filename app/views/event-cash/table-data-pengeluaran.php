@@ -18,7 +18,7 @@
           </div>
         </div>
         <table class="table table-striped display caption-top" id="myTable">
-          <caption id="captionTable"></caption>
+          <caption id="captionTable">Pengeluaran Semua Acara</caption>
           <thead>
             <tr>
               <th class="text-center align-middle">No</th>

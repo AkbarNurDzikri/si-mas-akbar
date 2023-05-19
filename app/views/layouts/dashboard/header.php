@@ -11,7 +11,6 @@
 
   <!-- Favicons -->
   <link href="<?= BASEURL . '/assets/images/icons/Foto-Masjid-Depan.ico' ?>" rel="icon">
-  <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -27,9 +26,6 @@
   <link href="<?= BASEURL ?>/assets/dashboard/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="<?= BASEURL ?>/assets/dashboard/vendor/quill/quill.bubble.css" rel="stylesheet">
   <script src="<?= BASEURL ?>/assets/dashboard/vendor/quill/quill.min.js"></script>
-  <!-- <link href="<?= BASEURL ?>/assets/dashboard/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="<?= BASEURL ?>/assets/dashboard/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="<?= BASEURL ?>/assets/dashboard/vendor/simple-datatables/style.css" rel="stylesheet"> -->
 
   <!-- Template Main CSS File -->
   <link href="<?= BASEURL ?>/assets/dashboard/css/style.css" rel="stylesheet">
@@ -41,8 +37,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-
-  <!-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css"> -->
 </head>
 
 <body>
@@ -76,7 +70,8 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <!-- <a class="nav-link nav-icon" href="javascript:noteRelease()" data-bs-toggle="dropdown"> -->
+          <a class="nav-link nav-icon" href="javascript:noteRelease()">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
           </a><!-- End Notification Icon -->
@@ -151,7 +146,8 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <!-- <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> -->
+          <a class="nav-link nav-icon" href="javascript:noteRelease()">
             <i class="bi bi-chat-left-text"></i>
             <span class="badge bg-success badge-number">3</span>
           </a><!-- End Messages Icon -->
@@ -270,10 +266,12 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
+  <?php
+    $roleName = $_SESSION['userInfo']['role_name'];
+  ?>
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Dashboard' ? '' : 'collapsed' ?>" href="#">
           <i class="bi bi-speedometer2"></i>
@@ -288,6 +286,7 @@
         </a>
       </li>
 
+      <?php if( $roleName == 'Super Admin' || $roleName == 'Ketua' || $roleName == 'Wakil Ketua' || $roleName == 'Sekretaris' || $roleName == 'Bendahara' || $roleName == 'Anggota Khusus') : ?>
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Daftar Acara' || $data['title'] == 'Buat Acara' || $data['title'] == 'Edit Acara' || $data['title'] == 'Kepanitiaan' || $data['title'] == 'Buat Panitia Acara' || $data['title'] == 'Edit Panitia Acara' || $data['title'] == 'Anggaran Biaya' || $data['title'] == 'Buat Anggaran Acara' || $data['title'] == 'Edit Anggaran Acara' || $data['title'] == 'Kas Acara | Pemasukan' || $data['title'] == 'Kas Acara | Input Pemasukan' || $data['title'] == 'Kas Acara | Edit Pemasukan' || $data['title'] == 'Kas Acara | Pengeluaran' || $data['title'] == 'Kas Acara | Input Pengeluaran' || $data['title'] == 'Kas Acara | Edit Pengeluaran' ? '' : 'collapsed' ?>" data-bs-target="#agenda-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-collection-play"></i><span>Acara</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -315,7 +314,9 @@
           </li>
         </ul>
       </li>
+      <?php endif; ?>
 
+      <?php if( $roleName == 'Super Admin' || $roleName == 'Ketua' || $roleName == 'Wakil Ketua' || $roleName == 'Sekretaris' || $roleName == 'Bendahara' || $roleName == 'Anggota Khusus') : ?>
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Zakat Fitrah | Uang Masuk' || $data['title'] == 'Zakat Fitrah | Input Uang Masuk' || $data['title'] == 'Zakat Fitrah | Edit Uang Masuk' || $data['title'] == 'Zakat Fitrah | Uang Keluar' || $data['title'] == 'Zakat Fitrah | Input Uang Keluar' || $data['title'] == 'Zakat Fitrah | Edit Uang Keluar' || $data['title'] == 'Zakat Fitrah | Beras Masuk' || $data['title'] == 'Zakat Fitrah | Input Beras Masuk' || $data['title'] == 'Zakat Fitrah | Edit Beras Masuk' || $data['title'] == 'Zakat Fitrah | Beras Keluar' || $data['title'] == 'Zakat Fitrah | Edit Beras Keluar' || $data['title'] == 'Zakat Maal | Penerimaan' || $data['title'] == 'Zakat Maal | Input Penerimaan' || $data['title'] == 'Zakat Maal | Edit Penerimaan' || $data['title'] == 'Zakat Maal | Pengeluaran' || $data['title'] == 'Zakat Maal | Edit Pengeluaran' || $data['title'] == 'Infaq | Penerimaan' || $data['title'] == 'Infaq | Input Penerimaan' || $data['title'] == 'Infaq | Edit Penerimaan' || $data['title'] == 'Infaq | Pengeluaran' || $data['title'] == 'Infaq | Input Pengeluaran' || $data['title'] == 'Infaq | Edit Pengeluaran' || $data['title'] == 'Shadaqah' ? '' : 'collapsed' ?>" data-bs-target="#zis-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-share-fill"></i><span>Z.I.S</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -332,13 +333,15 @@
             </a>
           </li>
           <li>
-            <a href="<?= BASEURL . '/shadaqah' ?>" class="<?= $data['title'] == 'Shadaqah' ? 'active' : '' ?>">
+            <a href="javascript:noteRelease()" class="<?= $data['title'] == 'Shadaqah' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Shadaqah</span>
             </a>
           </li>
         </ul>
       </li>
+      <?php endif; ?>
 
+      <?php if( $roleName == 'Super Admin' || $roleName == 'Ketua' || $roleName == 'Wakil Ketua' || $roleName == 'Sekretaris') : ?>
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'Struktur Organisasi DKM' || $data['title'] == 'Buat Struktur Organisasi DKM' || $data['title'] == 'Daftar Anggota DKM' || $data['title'] == 'Buat Anggota DKM' ? '' : 'collapsed' ?>" data-bs-target="#dkm-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-diagram-3"></i><span>DKM</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -356,27 +359,34 @@
           </li>
         </ul>
       </li>
+      <?php endif; ?>
 
       <li class="nav-item">
         <a class="nav-link <?= $data['title'] == 'List of Users' || $data['title'] == 'Post Categories' || $data['title'] == 'List of Roles' ? '' : 'collapsed' ?>" data-bs-target="#master-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-database-lock"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="master-nav" class="nav-content collapse <?= $data['title'] == 'List of Users' || $data['title'] == 'Post Categories' || $data['title'] == 'List of Roles' ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+        <?php if( $roleName == 'Super Admin') : ?>
           <li>
             <a href="<?= BASEURL . '/roles' ?>" class="<?= $data['title'] == 'List of Roles' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Roles</span>
             </a>
           </li>
+        <?php endif; ?>
+        <?php if( $roleName == 'Super Admin' || $roleName == 'Ketua' || $roleName == 'Wakil Ketua' || $roleName == 'Sekretaris') : ?>
           <li>
             <a href="<?= BASEURL . '/users' ?>" class="<?= $data['title'] == 'List of Users' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Users</span>
             </a>
           </li>
+        <?php endif; ?>
+        <?php if( $roleName == 'Super Admin') : ?>
           <li>
             <a href="<?= BASEURL . '/categories' ?>" class="<?= $data['title'] == 'Post Categories' ? 'active' : '' ?>">
               <i class="bi bi-circle"></i><span>Categories</span>
             </a>
           </li>
+        <?php endif; ?>
         </ul>
       </li>
     </ul>
