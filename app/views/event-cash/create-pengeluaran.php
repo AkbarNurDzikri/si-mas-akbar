@@ -1,44 +1,21 @@
-<?php
-  // define saldo
-  $totalUangMasuk = 0;
-  foreach($data['totalUangMasuk'] as $uangMasuk) :
-    $totalUangMasuk += $uangMasuk['qty_in'];
-  endforeach;
-
-  $totalUangKeluar = 0;
-  foreach($data['totalUangKeluar'] as $uangKeluar) :
-    $totalUangKeluar += $uangKeluar['qty_out'];
-  endforeach;
-
-  $saldo = $totalUangMasuk - $totalUangKeluar;
-?>
-
 <div class="row">
   <div class="col-12 col-md-12" id="colForm">
     <div class="card">
       <div class="card-header">
-        <a href="<?= BASEURL . '/zakat_maal/pengeluaran' ?>/" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+        <a href="<?= BASEURL . '/event_cash/pengeluaran' ?>/" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
       </div>
       <div class="card-body">
         <form id="myForm">
-          <label for="person_name" class="form-label mt-3 " id="labelPersonName">Nama Mustahik</label>
-          <input type="text" class="form-control mb-3" name="person_name" id="person_name" autocomplete="off" required>
-
-          <label for="person_status" class="form-label">Status Asnaf</label>
-          <select name="person_status" id="person_status" class="form-select mb-3" required>
-            <option value="" disabled selected>Pilih Status</option>
-            <option value="Fakir">1. Fakir [Hampir tidak punya apa-apa]</option>
-            <option value="Miskin">2. Miskin [Punya harta tapi tidak cukup untuk kebutuhan hidup]</option>
-            <option value="Amil">3. Amil [Panitia penerima & penyalur zakat]</option>
-            <option value="Mualaf">4. Mu'alaf [Orang yang baru masuk Islam]</option>
-            <option value="Riqab">5. Hamba Sahaya [Budak yang ingin memerdekakan dirinya]</option>
-            <option value="Gharimin">6. Gharimin [Orang yang berhutang untuk kebutuhan hidupnya]</option>
-            <option value="Fisabilillah">7. Fisabilillah [Orang yang berjuang dijalan Allah: Dakwah, Jihad, dsb.]</option>
-            <option value="Ibnu Sabil">8. Ibnus Sabil [Orang kehabisan biaya di perjalanan dalam ketaatan Allah]</option>
+          <label for="ref_event" class="form-label mt-3">Referensi Acara</label>
+          <select name="ref_event" id="ref_event" class="form-select mb-3" required>
+            <option value="" disabled selected>Pilih Acara</option>
+            <?php foreach($data['ref_events'] as $ref) : ?>
+              <option value="<?= $ref['id'] ?>" data-eventName="<?= $ref['event_name'] ?>"><?= $ref['event_name'] ?></option>
+            <?php endforeach; ?>
           </select>
 
-          <label for="person_address" class="form-label">Alamat</label>
-          <textarea name="person_address" id="person_address" class="form-control mb-3" placeholder="Perum MAP Blok UU No. 20" required></textarea>
+          <label for="remarks" class="form-label">Keterangan</label>
+          <textarea name="remarks" id="remarks" class="form-control mb-3" placeholder="Misal: Dari Hamba Allah" required></textarea>
 
           <label for="qty_out" class="form-label" id="labelRupiah">Nominal</label>
           <div class="input-group mb-3">
@@ -46,10 +23,7 @@
             <input type="number" class="form-control" id="qty_out" name="qty_out" autocomplete="off" required>
           </div>
 
-          <label for="remarks" class="form-label">Keterangan</label>
-          <textarea name="remarks" id="remarks" class="form-control mb-3" placeholder="Misal: Dititipkan ke Bapak/Ibu fulan"></textarea>
-
-          <button type="submit" class="btn btn-primary btn-sm float-end">Save</button>
+          <button type="submit" class="btn btn-primary btn-sm float-end btnSave">Save</button>
         </form>
       </div>
     </div>
@@ -58,18 +32,41 @@
 
 <script>
   $('#qty_out').on('keyup', () => {
-    const saldo = <?= $saldo ?>;
-    if($('#qty_out').val() > saldo) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Saldo zakat maal tidak cukup !',
-        html: 'Sisa saldo : <b style="color: green;">Rp. ' + saldo.toLocaleString('id-ID') + '</b>',
-        showConfirmButton: true,
-      });
-      $('.btnSave').prop('disabled', true);
-    } else {
-      $('.btnSave').prop('disabled', false);
-    }
+    const formData = $('#myForm').serialize();
+    let totalKasMasuk = 0;
+    let totalKasKeluar = 0;
+    let saldo = 0;
+    
+    $.ajax({
+      url: '<?= BASEURL . "/event_cash/getKasMasuk/" ?>' + $('#ref_event').val(),
+      type: 'POST',
+      data: formData,
+      success: function(res) {
+        totalKasMasuk = Number(JSON.parse(res)[0].totalKasMasuk);
+
+        $.ajax({
+          url: '<?= BASEURL . "/event_cash/getKasKeluar/" ?>' + $('#ref_event').val(),
+          type: 'POST',
+          data: formData,
+          success: function(res) {
+            totalKasKeluar = Number(JSON.parse(res)[0].totalKasKeluar);
+            saldo = totalKasMasuk - totalKasKeluar;
+
+            if($('#qty_out').val() > saldo) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Saldo Kas tidak cukup !',
+                html: 'Nama Kas : ' + $('#ref_event').find(':selected').text() + ' <br> Sisa saldo : <b style="color: green;">Rp. ' + saldo.toLocaleString('id-ID') + '</b>',
+                showConfirmButton: true,
+              });
+              $('.btnSave').prop('disabled', true);
+            } else {
+              $('.btnSave').prop('disabled', false);
+            }
+          }
+        });
+      }
+    });
   });
 
   $('#myForm').on('submit', (e) => {
@@ -78,22 +75,22 @@
     const formData = $('#myForm').serialize();
     
     $.ajax({
-      url: '<?= BASEURL . "/zakat_maal/pengeluaran_store" ?>',
+      url: '<?= BASEURL . "/event_cash/pengeluaran_store" ?>',
       type: 'POST',
       data: formData,
       success: function(res) {
         if(res == 'success') {
           Swal.fire({
             icon: 'success',
-            title: 'Berhasil menyalurkan zakat maal kepada Bapak/Ibu <b>' + $('#person_name').val() + '</b>',
+            title: 'Berhasil mencatat kas keluar',
             showConfirmButton: true,
           }).then(() => {
-            window.location = '<?= BASEURL . "/zakat_maal/pengeluaran" ?>'
+            window.location = '<?= BASEURL . "/event_cash/pengeluaran" ?>'
           });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Gagal menerima amanah zakat !',
+            title: 'Gagal mencatat kas keluar !',
             text: res,
             showConfirmButton: true,
           })

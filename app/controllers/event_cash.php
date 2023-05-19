@@ -8,7 +8,7 @@ class Event_cash extends Controller {
       $data = [
         'title' => 'Kas Acara | Pemasukan',
         'kas_masuk' => $this->model('event_cash_model')->getUangMasuk(),
-        'ref_events' => $this->model('events_model')->getEventsOpen(),
+        'ref_events' => $this->model('events_model')->getEvents(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
@@ -141,23 +141,23 @@ class Event_cash extends Controller {
     } else {
       $data = [
         'title' => 'Kas Acara | Pengeluaran',
-        'zakat_keluar' => $this->model('event_cash_model')->getUangKeluar(),
+        'kas_keluar' => $this->model('event_cash_model')->getUangKeluar(),
+        'ref_events' => $this->model('events_model')->getEventsOpen(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
-      $this->view('event-cash/table-data-penyaluran', $data);
+      $this->view('event-cash/table-data-pengeluaran', $data);
       $this->view('layouts/dashboard/footer');
     }
   }
 
-  public function zakatMaalKeluarAjax() {
+  public function kasKeluarAjax() {
     $columns = [
       0 => 'created_at',
-      1 => 'person_name',
-      2 => 'person_address',
+      1 => 'event_name',
+      2 => 'remarks',
       3 => 'qty_out',
-      4 => 'remarks',
-      5 => 'username',
+      4 => 'username',
     ];
 
     $queryCount = $this->model('event_cash_model')->getUangKeluarAjaxLength();
@@ -187,12 +187,11 @@ class Event_cash extends Controller {
       $nestedData['no'] = $no++ ;
       $nestedData['id'] = $result['id'];
       $nestedData['created_at'] = date('d/M/y, H:i', strtotime($result['created_at']));
-      $nestedData['person_name'] = $result['person_name'];
-      $nestedData['person_address'] = $result['person_address'];
-      $nestedData['qty_out'] = 'Rp. ' . number_format($result['qty_out'], 2, ',', '.');
+      $nestedData['event_name'] = $result['event_name'];
       $nestedData['remarks'] = $result['remarks'];
+      $nestedData['qty_out'] = 'Rp. ' . number_format($result['qty_out'], 2, ',', '.');
       $nestedData['username'] = $result['username'];
-      $nestedData['action'] = '<a href="'. BASEURL . "/zakat_maal/pengeluaran_edit/" . $result["id"] .'" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a> <a href="javascript:confirmDelete('. $result["id"] . ',' . "'" . $result["person_name"] . "'" .')" class="btn btn-sm btn-danger btnDelete" data-id="'. $result["id"] .'"><i class="bi bi-trash3"></i></a>';
+      $nestedData['action'] = '<a href="'. BASEURL . "/event_cash/pengeluaran_edit/" . $result["id"] .'" class="btn btn-sm btn-success mb-1"><i class="bi bi-pencil-square"></i></a> <a href="javascript:confirmDelete('. $result["id"]  .')" class="btn btn-sm btn-danger btnDelete" data-id="'. $result["id"] .'"><i class="bi bi-trash3"></i></a>';
       $data[] = $nestedData;
     }
 
@@ -206,6 +205,18 @@ class Event_cash extends Controller {
     echo json_encode($json_data);
   }
 
+  public function getKasMasuk($refEvent) {
+    $uangMasukAcara = $this->model('event_cash_model')->getKasMasuk($refEvent);
+
+    echo json_encode($uangMasukAcara);
+  }
+
+  public function getKasKeluar($refEvent) {
+    $uangKeluarAcara = $this->model('event_cash_model')->getKasKeluar($refEvent);
+
+    echo json_encode($uangKeluarAcara);
+  }
+
   public function catat_pengeluaran() {
     if(!isset($_SESSION['userInfo'])) {
       header('Location: ' . BASEURL . '/auth');
@@ -214,6 +225,7 @@ class Event_cash extends Controller {
         'title' => 'Kas Acara | Input Pengeluaran',
         'totalUangMasuk' => $this->model('event_cash_model')->getUangMasuk(),
         'totalUangKeluar' => $this->model('event_cash_model')->getUangKeluar(),
+        'ref_events' => $this->model('events_model')->getEventsOpen(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
@@ -224,7 +236,7 @@ class Event_cash extends Controller {
 
   public function pengeluaran_store() {
     try {
-      $result  = $this->model('event_cash_model')->createZakat($_POST);
+      $result  = $this->model('event_cash_model')->createKasAcara($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -239,9 +251,8 @@ class Event_cash extends Controller {
     } else {
       $data = [
         'title' => 'Kas Acara | Edit Pengeluaran',
-        'muzakki' => $this->model('event_cash_model')->getDataById($id),
-        'totalUangMasuk' => $this->model('event_cash_model')->getUangMasuk(),
-        'totalUangKeluar' => $this->model('event_cash_model')->getUangKeluar(),
+        'kas_keluar' => $this->model('event_cash_model')->getDataById($id),
+        'ref_events' => $this->model('events_model')->getEventsOpen(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
@@ -252,7 +263,7 @@ class Event_cash extends Controller {
 
   public function pengeluaran_update() {
     try {
-      $result  = $this->model('event_cash_model')->updateZakat($_POST);
+      $result  = $this->model('event_cash_model')->updateKasAcara($_POST);
       if($result > 0) {
         echo 'success';
       }
@@ -263,7 +274,7 @@ class Event_cash extends Controller {
 
   public function pengeluaran_delete($id) {
     try {
-      $result  = $this->model('event_cash_model')->deleteZakat($id);
+      $result  = $this->model('event_cash_model')->deleteKasAcara($id);
       if($result > 0) {
         echo 'success';
       }
@@ -287,13 +298,13 @@ class Event_cash extends Controller {
     }
   }
 
-  public function laporan_pengeluaran() {
+  public function laporan_pengeluaran($refEvent) {
     if(!isset($_SESSION['userInfo'])) {
       header('Location: ' . BASEURL . '/auth');
     } else {
       $data = [
-        'totalUangMasuk' => $this->model('event_cash_model')->getUangMasukBetweenDate($_POST),
-        'totalUangKeluar' => $this->model('event_cash_model')->getUangKeluarBetweenDate($_POST),
+        'totalUangMasuk' => $this->model('event_cash_model')->getUangMasukBetweenDate($_POST, $refEvent),
+        'totalUangKeluar' => $this->model('event_cash_model')->getUangKeluarBetweenDate($_POST, $refEvent),
         'start_period' => $_POST['start_date'],
         'end_period' => $_POST['end_date'],
       ];

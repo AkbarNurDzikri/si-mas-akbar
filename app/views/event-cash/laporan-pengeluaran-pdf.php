@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__, 5) . '/assets/dashboard/vendor/mpdf/autoload.php';
+require_once dirname(__DIR__, 3) . '/assets/dashboard/vendor/mpdf/autoload.php';
 
 $mpdf = new \Mpdf\Mpdf();
 $mpdf->SetFooter('{PAGENO}');
@@ -9,7 +9,7 @@ $html = '<!DOCTYPE html>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Laporan Distribusi Zakat Maal</title>
+            <title>Laporan Kas Keluar</title>
           </head>
           <body>
             <table style="margin-left: auto; margin-right: auto;">
@@ -27,7 +27,7 @@ $html = '<!DOCTYPE html>
 
             <hr> <hr style="margin-top: -11px;">
             
-            <h4 style="text-align: center;">Laporan Distribusi Zakat Maal</h4>
+            <h4 style="text-align: center;">Laporan Kas Keluar "' . $data['totalUangKeluar'][0]['event_name'] . '"</h4>
             <h4 style="text-align: center; padding-top: -15px;">Periode '. date('d M Y', strtotime($data['start_period'])) . ' s.d ' . date('d M Y', strtotime($data['end_period'])) .'</h4>
 
             <table border="1" style="border-collapse: collapse; margin-left: auto; margin-right: auto; margin: 20px 0 30px 0; width: 700px;">
@@ -35,12 +35,9 @@ $html = '<!DOCTYPE html>
                 <tr>
                   <th>No.</th>
                   <th>Tgl, Jam</th>
-                  <th>PIC</th>
-                  <th>Nama Mustahik</th>
-                  <th>Status</th>
-                  <th>Alamat</th>
-                  <th>Rupiah</th>
                   <th>Keterangan</th>
+                  <th>Rupiah</th>
+                  <th>Diinput Oleh</th>
                 </tr>
               </thead>
               <tbody>';
@@ -51,12 +48,9 @@ $html = '<!DOCTYPE html>
                   $html .= '<tr>';
                     $html .= '<td style="text-align: center;">'. $i++ .'</td>';
                     $html .= '<td style="text-align: center;">'. date('d/M/y, H:i', strtotime($uangKeluar['created_at'])) .'</td>';
-                    $html .= '<td style="text-align: center;">'. $uangKeluar['username'] .'</td>';
-                    $html .= '<td style="text-align: center;">'. $uangKeluar['person_name'] .'</td>';
-                    $html .= '<td style="text-align: center;">'. $uangKeluar['person_status'] .'</td>';
-                    $html .= '<td style="text-align: center;">'. $uangKeluar['person_address'] .'</td>';
-                    $html .= '<td style="text-align: right;">Rp. '. number_format($uangKeluar['qty_out'], 2, ',', '.') .'</td>';
                     $html .= '<td style="text-align: center;">'. $uangKeluar['remarks'] .'</td>';
+                    $html .= '<td style="text-align: right;">Rp. '. number_format($uangKeluar['qty_out'], 2, ',', '.') .'</td>';
+                    $html .= '<td style="text-align: center;">'. $uangKeluar['username'] .'</td>';
                   $html .= '</tr>';
                 endforeach;
 
@@ -65,18 +59,18 @@ $html = '<!DOCTYPE html>
                   $totalUangMasuk += $uangMasuk['qty_in'];
                 endforeach;
     $html .= '<tr>
-                <td colspan="6" style="border: none; border-left: 1px solid black; border-bottom: 1px solid black; text-align: center;"><b>Total</b></td>
+                <td colspan="3" style="border: none; border-left: 1px solid black; border-bottom: 1px solid black; text-align: center;"><b>Total</b></td>
                 <td style="border: none; border-bottom: 1px solid black; text-align: right;"><b>Rp.'. number_format($totalUangKeluar, 2, ',', '.') .'</b></td>
                 <td style="border: none; border-right: 1px solid black; border-bottom: 1px solid black;"></td>
               </tr>
               </tbody>
             </table>
-          <p><b>Total Penerimaan : Rp. '. number_format($totalUangMasuk, 2, ',', '.') .'</b></p>
+          <p><b>Pemasukan : Rp. '. number_format($totalUangMasuk, 2, ',', '.') .'</b></p>
           <p style="padding-top: -15px;"><b>Sisa Saldo :</b> <b style="color: green;">Rp. '. number_format(($totalUangMasuk - $totalUangKeluar), 2, ',', '.') .'</b></p>
           <p style="text-align: right; color:grey;">Karawang, '. date('d-M-Y H:i') .' WIB</p>
           <p style="text-align: right; color:grey;">'. $_SESSION['userInfo']['username'] . ' ('. $_SESSION['userInfo']['role_name'] .')' .'</p>
           </body>
         </html>';
 $mpdf->WriteHTML($html);
-$mpdf->Output('Laporan Distribusi Zakat Fitrah (Uang) Periode ' . date('d/M/Y', strtotime($data['start_period'])) . ' s.d ' . date('d/M/Y', strtotime($data['end_period'])) . '.pdf', 'I');
+$mpdf->Output('Laporan Kas Keluar "' . $data['totalUangKeluar'][0]['event_name'] . '" Periode ' . date('d/M/Y', strtotime($data['start_period'])) . ' s.d ' . date('d/M/Y', strtotime($data['end_period'])) . '.pdf', 'I');
 ?>

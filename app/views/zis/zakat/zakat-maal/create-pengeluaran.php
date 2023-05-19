@@ -49,7 +49,7 @@
           <label for="remarks" class="form-label">Keterangan</label>
           <textarea name="remarks" id="remarks" class="form-control mb-3" placeholder="Misal: Dititipkan ke Bapak/Ibu fulan"></textarea>
 
-          <button type="submit" class="btn btn-primary btn-sm float-end">Save</button>
+          <button type="submit" class="btn btn-primary btn-sm float-end btnSave">Save</button>
         </form>
       </div>
     </div>

@@ -9,7 +9,7 @@ $html = '<!DOCTYPE html>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Laporan Penerimaan Zakat Maal</title>
+            <title>Laporan Kas Masuk</title>
           </head>
           <body>
             <table style="margin-left: auto; margin-right: auto;">
@@ -27,7 +27,7 @@ $html = '<!DOCTYPE html>
 
             <hr> <hr style="margin-top: -11px;">
             
-            <h4 style="text-align: center;">Laporan Kas Masuk Acara ' . $data['totalUangMasuk'][0]['event_name'] . '</h4>
+            <h4 style="text-align: center;">Laporan Kas Masuk "' . $data['totalUangMasuk'][0]['event_name'] . '"</h4>
             <h4 style="text-align: center; padding-top: -15px;">Periode '. date('d M Y', strtotime($data['start_period'])) . ' s.d ' . date('d M Y', strtotime($data['end_period'])) .'</h4>
 
             <table border="1" style="border-collapse: collapse; margin-left: auto; margin-right: auto; margin: 20px 0 30px 0; width: 700px;">
@@ -65,7 +65,7 @@ $html = '<!DOCTYPE html>
               </tr>
               </tbody>
             </table>
-          <p><b>Total Pengeluaran : Rp. '. number_format($totalUangKeluar, 2, ',', '.') .'</b></p>
+          <p><b>Pengeluaran : Rp. '. number_format($totalUangKeluar, 2, ',', '.') .'</b></p>
           <p style="padding-top: -15px;"><b>Sisa Saldo :</b> <b style="color: green;">Rp. '. number_format(($totalUangMasuk - $totalUangKeluar), 2, ',', '.') .'</b></p>
           <p style="text-align: right; color:grey;">Karawang, '. date('d-M-Y H:i') .' WIB</p>
           <p style="text-align: right; color:grey;">'. $_SESSION['userInfo']['username'] . ' ('. $_SESSION['userInfo']['role_name'] .')' .'</p>

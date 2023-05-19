@@ -44,7 +44,7 @@
         if(res == 'success') {
           Swal.fire({
             icon: 'success',
-            title: 'Berhasil mencatat pemasukan kas acara',
+            title: 'Berhasil mencatat kas masuk',
             showConfirmButton: true,
           }).then(() => {
             window.location = '<?= BASEURL . "/event_cash" ?>'
@@ -52,7 +52,7 @@
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Gagal mencatat pemasukan kas acara !',
+            title: 'Gagal mencatat kas masuk !',
             text: res,
             showConfirmButton: true,
           })
