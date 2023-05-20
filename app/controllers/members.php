@@ -32,13 +32,17 @@ class Members extends Controller {
 
   public function create() {
     try {
-      $filename = uniqid() . '-' . $_FILES['member_image']['name'];
-      $destinationFile = __DIR__ . '/../../assets/images/dkm/members/';
-      $result  = $this->model('members_model')->createMember($_POST, $filename);
+      if(count($_FILES) == 0) {
+        echo 'Silahkan unggah foto untuk Profil Anggota';
+      } else {
+        $filename = uniqid() . '-' . $_FILES['member_image']['name'];
+        $destinationFile = __DIR__ . '/../../assets/images/dkm/members/';
+        $result  = $this->model('members_model')->createMember($_POST, $filename);
 
-      if($result > 0) {
-        echo 'success';
-        move_uploaded_file($_FILES['member_image']['tmp_name'], $destinationFile . $filename);
+        if($result > 0) {
+          echo 'success';
+          move_uploaded_file($_FILES['member_image']['tmp_name'], $destinationFile . $filename);
+        }
       }
     } catch(Exception $e) {
       echo $e->getMessage();
