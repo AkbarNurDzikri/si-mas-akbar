@@ -44,6 +44,7 @@
           Swal.fire({
             icon: 'error',
             title: 'Password salah !',
+            text: 'Masukkan password lama Anda',
             showConfirmButton: true,
           });
         } else {
@@ -86,15 +87,16 @@
           if(res == 'success') {
             Swal.fire({
               icon: 'success',
-              title: 'Berhasil merubah users',
+              title: 'Berhasil merubah kredensial Anda',
+              text: 'Silahkan login kembali',
               showConfirmButton: true,
             }).then(() => {
-              window.location = '<?= BASEURL . "/users/setting/" . $data['user']['id'] ?>'
+              window.location = '<?= BASEURL . "/auth/logout" ?>'
             });
           } else {
             Swal.fire({
               icon: 'error',
-              title: 'Gagal merubah users',
+              title: 'Gagal merubah kredensial',
               text: res,
               showConfirmButton: true,
             })

@@ -64,10 +64,10 @@
           </script>
 
           <label for="start_date" class="form-label">Mulai tanggal</label>
-          <input type="date" class="form-control mb-3" name="start_date">
+          <input type="date" class="form-control mb-3" name="start_date" required>
 
           <label for="end_date" class="form-label">Sampai tanggal</label>
-          <input type="date" class="form-control mb-3" name="end_date">
+          <input type="date" class="form-control mb-3" name="end_date" required>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary"><i class="bi bi-cloud-arrow-down"></i> Download</button>

@@ -51,7 +51,7 @@ class Users extends Controller {
       $data = [
         'title' => 'Edit User',
         'user' => $this->model('users_model')->getDataById($id),
-        'members' => $this->model('members_model')->getMembers(),
+        'roles' => $this->model('roles_model')->getRoles(),
       ];
 
       $this->view('layouts/dashboard/header', $data);
@@ -82,6 +82,17 @@ class Users extends Controller {
   public function changeCredentials() {
     try {
       $result = $this->model('users_model')->changeCredentials($_POST);
+      if($result > 0) {
+        echo 'success';
+      }
+    } catch (Exception $e) {
+      echo $e->getMessage();
+    }
+  }
+
+  public function changeAccessDoor() {
+    try {
+      $result = $this->model('users_model')->changeAccessDoor($_POST);
       if($result > 0) {
         echo 'success';
       }

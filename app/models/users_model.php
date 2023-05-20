@@ -31,7 +31,7 @@ class Users_model
 	}
 
 	public function getDataById($id) {
-		$this->db->query("SELECT u.*, m.member_name, r.role_name FROM users AS u INNER JOIN dkm_members AS m ON m.id = u.member_id INNER JOIN roles AS r ON r.id = u.role_id WHERE u.id = :id");
+		$this->db->query("SELECT u.*, m.member_name, r.id AS role_id, r.role_name FROM users AS u INNER JOIN dkm_members AS m ON m.id = u.member_id INNER JOIN roles AS r ON r.id = u.role_id WHERE u.id = :id");
 		$this->db->bind('id', $id);
 		return $this->db->single();
 	}
@@ -76,7 +76,7 @@ class Users_model
 		return $this->db->rowCount();
 	}
 
-	// function ini tidak boleh bisa merubah role_id karena dibuat untuk user hanya untuk ganti password dan username saja, sementara belum fix. setelah semua module dashboard selesai baru akan diperuntukkan kesana.
+	// function ini tidak boleh bisa merubah role_id karena dibuat untuk user hanya untuk ganti password dan username saja.
 	public function changeCredentials($data) {
 		$query = "UPDATE users SET
 			member_id = :member_id,
@@ -91,6 +91,28 @@ class Users_model
 		$this->db->bind('username', $data['username']);
 		$this->db->bind('email', $data['email']);
 		$this->db->bind('password', password_hash($data['newPassword'], PASSWORD_DEFAULT));
+		$this->db->bind('updated_at', date('Y-m-d H:i:s'));
+		$this->db->bind('id', $data['id']);
+
+		$this->db->execute();
+
+		return $this->db->rowCount();
+	}
+
+	public function changeAccessDoor($data) {
+		$query = "UPDATE users SET
+			member_id = :member_id,
+			username = :username,
+			email = :email,
+			role_id = :role_id,
+			updated_at = :updated_at
+		WHERE id = :id";
+
+		$this->db->query($query);
+		$this->db->bind('member_id', $data['member_id']);
+		$this->db->bind('username', $data['username']);
+		$this->db->bind('email', $data['email']);
+		$this->db->bind('role_id', $data['role_id']);
 		$this->db->bind('updated_at', date('Y-m-d H:i:s'));
 		$this->db->bind('id', $data['id']);
 
